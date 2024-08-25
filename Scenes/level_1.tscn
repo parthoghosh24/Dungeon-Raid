@@ -1,0 +1,122 @@
+[gd_scene load_steps=11 format=3 uid="uid://bulxnp4x8sd8t"]
+
+[ext_resource type="MeshLibrary" uid="uid://cc6j2i1aew2no" path="res://Resources/library.tres" id="1_3ynqx"]
+[ext_resource type="PackedScene" uid="uid://c0wvap84wmias" path="res://Scenes/player.tscn" id="2_v3sdm"]
+[ext_resource type="PackedScene" uid="uid://gxuuvrm45qed" path="res://Scenes/Monsters/skelly_rogue.tscn" id="3_abq3k"]
+[ext_resource type="PackedScene" uid="uid://bc37bk0w8er2y" path="res://Scenes/Monsters/skelly_warrior.tscn" id="3_hhp14"]
+[ext_resource type="PackedScene" uid="uid://miy8cyxnatij" path="res://Scenes/Monsters/skelly_minion.tscn" id="4_8mxtb"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_6qugg"]
+vertices = PackedVector3Array(3.4469, 5.5, -22, 3.6969, 5.5, -18.25, 4.1969, 5.5, -21.75, 11.4469, 5.5, -22, 11.6969, 5.5, -18.5, 12.1969, 5.5, -21.75, -7.0531, 1.5, 3, -7.0531, 1.5, 1, -8.5531, 1.5, 1, -13.3031, 1.5, 3, -8.8031, 1.5, -18.5, -8.0531, 1.5, -18.5, -8.0531, 1.5, -21, -9.3031, 1.5, -17.75, -8.8031, 1.5, -18.5, -8.0531, 1.5, -21, -13.3031, 1.5, -21, -9.3031, 1.5, -17.75, -13.3031, 1.5, -21, -13.3031, 1.5, 3, -9.3031, 1.5, 0, -13.3031, 1.5, 3, -8.5531, 1.5, 1, -9.3031, 1.5, 0, 3.6969, 1.5, -15, 3.6969, 1.5, -17.25, 2.9469, 1.5, -17.5, -8.0531, 1.5, -21, -8.0531, 1.5, -18.5, -7.3031, 1.5, -18.25, 3.6969, 1.5, -15, 2.9469, 1.5, -17.5, 2.6969, 1.5, -18.25, -0.303101, 1.5, -15, -7.3031, 1.5, -13.75, -1.3031, 1.5, -13.75, -0.303101, 1.5, -15, -7.3031, 1.5, -18.25, -0.303101, 1.5, -15, 2.6969, 1.5, -18.25, 2.6969, 1.5, -21, -8.0531, 1.5, -21, -7.3031, 1.5, -18.25, 11.9469, 1.5, -15, 11.9469, 1.5, -17.25, 11.1969, 1.5, -17.25, 4.6969, 1.5, -17.5, 3.6969, 1.5, -17.25, 3.6969, 1.5, -15, 11.9469, 1.5, -15, 11.1969, 1.5, -17.25, 10.6969, 1.5, -18.25, 10.6969, 1.5, -18.25, 10.6969, 1.5, -21, 4.6969, 1.5, -21, 4.6969, 1.5, -17.5, 12.6969, 1.5, -17.5, 11.9469, 1.5, -17.25, 11.9469, 1.5, -15, 17.6969, 1.5, -15, 17.6969, 1.5, -15, 18.6969, 1.5, -14, 20.6969, 1.5, -14, 17.6969, 1.5, -15, 20.6969, 1.5, -14, 20.6969, 1.5, -21, 12.6969, 1.5, -21, 12.6969, 1.5, -17.5, -0.303101, 5.5, -14, -0.303101, 5.5, -0.25, 0.196899, 5.5, -13.75, 18.6969, 1.5, 3.5, 20.6969, 1.5, 3.5, 20.6969, 1.5, -14, 18.6969, 1.5, -14, -0.553101, 1.5, 3, -0.0531006, 1.5, 0.75, -0.803101, 1.5, 0.75, -5.5531, 1.5, 0.75, -7.0531, 1.5, 1, -7.0531, 1.5, 3, -0.553101, 1.5, 3, -0.803101, 1.5, 0.75, -1.3031, 1.5, -0.25, -5.5531, 1.5, 0.75, -7.0531, 1.5, 3, -5.5531, 1.5, -0.75, -5.5531, 1.5, 0.75, -1.3031, 1.5, -0.25, -7.3031, 1.5, -1, -5.5531, 1.5, -0.75, -1.3031, 1.5, -0.25, -1.3031, 1.5, -13.75, -7.3031, 1.5, -13.75, -0.0531006, 1.5, 0.75, -0.553101, 1.5, 3, 0.196899, 1.5, 3, 0.696899, 1.5, 0.5, -0.0531006, 1.5, 0.75, 0.196899, 1.5, 3, 0.446899, 1.5, 4, 3.1969, 1.5, 4, 3.9469, 1.5, 3, 0.696899, 1.5, 0.5, 3.9469, 1.5, 3, 16.6969, 1.5, 3, 16.6969, 1.5, -13, 0.696899, 1.5, -13, 20.6969, 1.5, 3.5, 18.6969, 1.5, 3.5, 18.6969, 1.5, 4.25, 18.1969, 1.5, 9.25, 18.4469, 1.5, 10, 20.6969, 1.5, 10, 20.6969, 1.5, 3.5, 18.6969, 1.5, 4.25, 17.9469, 1.5, 5, 17.4469, 1.5, 9, 18.1969, 1.5, 9.25, 20.6969, 1.5, 10, 15.4469, 1.5, 5, 15.4469, 1.5, 9, 17.4469, 1.5, 9, 17.9469, 1.5, 5, -2.3031, 1.5, 5, -2.3031, 1.5, 7.5, -1.3031, 1.5, 7.75, 0.196899, 1.5, 5, 5.9469, 1.5, 9, 7.9469, 1.5, 5, 3.4469, 1.5, 5, 5.1969, 1.5, 9.5, 3.4469, 1.5, 5, 3.1969, 1.5, 4, 0.446899, 1.5, 4, 0.196899, 1.5, 5, 0.196899, 1.5, 5, -1.3031, 1.5, 7.75, -1.3031, 1.5, 10.25, 5.1969, 1.5, 10.25, 5.1969, 1.5, 9.5, 3.4469, 1.5, 5, 5.9469, 1.5, 9, 7.9469, 1.5, 9, 7.9469, 1.5, 5, -3.3031, 1.5, 8.25, -2.3031, 1.5, 7.5, -2.3031, 1.5, 5, -13.3031, 1.5, 5, -13.3031, 1.5, 17, -3.3031, 1.5, 17, -3.3031, 1.5, 8.25, -13.3031, 1.5, 5, 7.9469, 1.5, 9, 15.4469, 1.5, 9, 15.4469, 1.5, 5, 7.9469, 1.5, 5, -2.5531, 5.5, 17.75, -1.8031, 5.5, 18, -2.0531, 5.5, 8.5, 20.6969, 1.5, 10, 18.4469, 1.5, 10, 17.9469, 1.5, 11, 20.6969, 1.5, 17, 7.4469, 1.5, 17, 20.6969, 1.5, 17, 17.9469, 1.5, 11, 7.4469, 1.5, 11, 7.4469, 1.5, 17, 7.4469, 1.5, 11, 5.4469, 1.5, 11, 5.4469, 1.5, 11, 5.1969, 1.5, 10.25, -1.3031, 1.5, 10.25, 5.4469, 1.5, 11, -1.3031, 1.5, 10.25, -1.3031, 1.5, 17, 7.4469, 1.5, 17)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 9), PackedInt32Array(12, 11, 10), PackedInt32Array(14, 13, 15), PackedInt32Array(15, 13, 16), PackedInt32Array(20, 19, 17), PackedInt32Array(17, 19, 18), PackedInt32Array(23, 22, 21), PackedInt32Array(26, 25, 24), PackedInt32Array(29, 28, 27), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 33), PackedInt32Array(35, 34, 36), PackedInt32Array(36, 34, 37), PackedInt32Array(39, 38, 40), PackedInt32Array(40, 38, 42), PackedInt32Array(40, 42, 41), PackedInt32Array(45, 44, 43), PackedInt32Array(47, 46, 48), PackedInt32Array(48, 46, 51), PackedInt32Array(48, 51, 50), PackedInt32Array(48, 50, 49), PackedInt32Array(53, 52, 54), PackedInt32Array(54, 52, 55), PackedInt32Array(57, 56, 58), PackedInt32Array(58, 56, 59), PackedInt32Array(62, 61, 60), PackedInt32Array(64, 63, 65), PackedInt32Array(65, 63, 67), PackedInt32Array(65, 67, 66), PackedInt32Array(70, 69, 68), PackedInt32Array(74, 73, 71), PackedInt32Array(71, 73, 72), PackedInt32Array(77, 76, 75), PackedInt32Array(80, 79, 78), PackedInt32Array(82, 81, 83), PackedInt32Array(83, 81, 84), PackedInt32Array(84, 81, 85), PackedInt32Array(88, 87, 86), PackedInt32Array(90, 89, 91), PackedInt32Array(91, 89, 93), PackedInt32Array(91, 93, 92), PackedInt32Array(96, 95, 94), PackedInt32Array(98, 97, 99), PackedInt32Array(99, 97, 100), PackedInt32Array(100, 97, 101), PackedInt32Array(101, 97, 102), PackedInt32Array(104, 103, 105), PackedInt32Array(105, 103, 107), PackedInt32Array(105, 107, 106), PackedInt32Array(110, 109, 108), PackedInt32Array(113, 112, 111), PackedInt32Array(115, 114, 116), PackedInt32Array(116, 114, 117), PackedInt32Array(117, 114, 118), PackedInt32Array(118, 114, 119), PackedInt32Array(121, 120, 122), PackedInt32Array(122, 120, 123), PackedInt32Array(125, 124, 126), PackedInt32Array(126, 124, 127), PackedInt32Array(131, 130, 128), PackedInt32Array(128, 130, 129), PackedInt32Array(133, 132, 134), PackedInt32Array(134, 132, 135), PackedInt32Array(137, 136, 138), PackedInt32Array(138, 136, 141), PackedInt32Array(138, 141, 140), PackedInt32Array(138, 140, 139), PackedInt32Array(144, 143, 142), PackedInt32Array(146, 145, 147), PackedInt32Array(147, 145, 148), PackedInt32Array(150, 149, 151), PackedInt32Array(151, 149, 152), PackedInt32Array(156, 155, 153), PackedInt32Array(153, 155, 154), PackedInt32Array(159, 158, 157), PackedInt32Array(161, 160, 162), PackedInt32Array(162, 160, 163), PackedInt32Array(167, 166, 164), PackedInt32Array(164, 166, 165), PackedInt32Array(170, 169, 168), PackedInt32Array(173, 172, 171), PackedInt32Array(175, 174, 176), PackedInt32Array(176, 174, 177)]
+geometry_parsed_geometry_type = 2
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5amt2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dl68e"]
+
+[sub_resource type="Sky" id="Sky_wm67e"]
+sky_material = SubResource("ProceduralSkyMaterial_dl68e")
+
+[sub_resource type="Environment" id="Environment_qhpjn"]
+background_mode = 2
+sky = SubResource("Sky_wm67e")
+sdfgi_enabled = true
+glow_enabled = true
+volumetric_fog_density = 0.006
+volumetric_fog_detail_spread = 1.0
+
+[node name="Level1" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_v3sdm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.83937, 1, -16.4019)
+
+[node name="Monsters" type="Node" parent="."]
+
+[node name="Warrior" type="Node" parent="Monsters"]
+
+[node name="SkellyWarrior" parent="Monsters/Warrior" instance=ExtResource("3_hhp14")]
+transform = Transform3D(1, -4.02216e-24, 0, -4.02216e-24, 1, 0, 0, 0, 1, 4.4809, 1.08519, 12.486)
+player_path = NodePath("../../../Player")
+
+[node name="MarkersToVisit" type="Node" parent="Monsters/Warrior"]
+
+[node name="Marker1" type="Marker3D" parent="Monsters/Warrior/MarkersToVisit"]
+transform = Transform3D(1, -4.02214e-24, 0, -4.02214e-24, 1, 0, 0, 0, 1, 15.55, -0.767482, 5.1373)
+
+[node name="Marker2" type="Marker3D" parent="Monsters/Warrior/MarkersToVisit"]
+transform = Transform3D(1, -4.02214e-24, 0, -4.02214e-24, 1, 0, 0, 0, 1, -1.60378, -0.270512, -4.22391)
+
+[node name="Marker3" type="Marker3D" parent="Monsters/Warrior/MarkersToVisit"]
+transform = Transform3D(1, -4.02214e-24, 0, -4.02214e-24, 1, 0, 0, 0, 1, -16.3766, -0.995664, 9.33807)
+
+[node name="PatrolTimer" type="Timer" parent="Monsters/Warrior"]
+wait_time = 5.0
+one_shot = true
+
+[node name="Rogue" type="Node" parent="Monsters"]
+
+[node name="SkellyRogue" parent="Monsters/Rogue" instance=ExtResource("3_abq3k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0775, 11.4695)
+player_path = NodePath("../../../Player")
+
+[node name="MarkersToVisit" type="Node" parent="Monsters/Rogue"]
+
+[node name="Marker1" type="Marker3D" parent="Monsters/Rogue/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8902, 0, 12.3001)
+
+[node name="Marker2" type="Marker3D" parent="Monsters/Rogue/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.81104, 0, 0)
+
+[node name="Marker3" type="Marker3D" parent="Monsters/Rogue/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.40117, 0, 16.1421)
+
+[node name="PatrolTimer" type="Timer" parent="Monsters/Rogue"]
+wait_time = 5.0
+one_shot = true
+
+[node name="Minion" type="Node" parent="Monsters"]
+
+[node name="SkellyMinion" parent="Monsters/Minion" instance=ExtResource("4_8mxtb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.03702, 1.17524, 0.0714645)
+player_path = NodePath("../../../Player")
+
+[node name="PatrolTimer" type="Timer" parent="Monsters/Minion"]
+wait_time = 5.0
+one_shot = true
+
+[node name="MarkersToVisit" type="Node" parent="Monsters/Minion"]
+
+[node name="Marker1" type="Marker3D" parent="Monsters/Minion/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.331, 0, -11.5794)
+
+[node name="Marker2" type="Marker3D" parent="Monsters/Minion/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74773, 0, -9.294)
+
+[node name="Marker3" type="Marker3D" parent="Monsters/Minion/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.844, 0, -2.74665)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_6qugg")
+
+[node name="Map" type="Node" parent="NavigationRegion3D"]
+
+[node name="GridMap" type="GridMap" parent="NavigationRegion3D/Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3031, 0, -1)
+mesh_library = ExtResource("1_3ynqx")
+physics_material = SubResource("PhysicsMaterial_5amt2")
+data = {
+"cells": PackedInt32Array(5, 4, 0, 9, 4, 0, 11, 4, 0, 13, 4, 0, 15, 4, 0, 15, 0, 0, 15, 65534, 0, 15, 65532, 0, 15, 65530, 0, 13, 65526, 0, 9, 65526, 0, 7, 65526, 1048577, 5, 65526, 0, 3, 65526, 0, 1, 0, 655362, 1, 65532, 1048577, 1, 65528, 1048577, 4, 65528, 0, 8, 65528, 0, 13, 65528, 0, 11, 65528, 0, 9, 65528, 0, 6, 65528, 0, 7, 65530, 0, 8, 65530, 0, 9, 65530, 0, 13, 65530, 0, 13, 65531, 0, 13, 65532, 0, 13, 65533, 0, 13, 65535, 0, 13, 1, 0, 13, 2, 0, 8, 2, 1, 7, 2, 0, 4, 2, 1, 3, 65535, 1048576, 3, 65534, 0, 2, 65533, 0, 2, 65531, 0, 3, 65529, 0, 3, 65530, 0, 4, 65530, 0, 4, 65531, 0, 5, 65531, 1048577, 5, 65535, 1048577, 5, 0, 1048576, 4, 65535, 0, 4, 65534, 0, 4, 65533, 0, 4, 65532, 0, 5, 65533, 1048577, 6, 2, 655360, 9, 2, 655360, 1, 65534, 1048577, 1, 4, 655360, 1, 65526, 655360, 15, 2, 655360, 15, 65526, 655360, 15, 65528, 655360, 7, 4, 655360, 1, 65530, 1048577, 5, 6, 655360, 6, 6, 655360, 7, 6, 655360, 8, 6, 655360, 9, 6, 655360, 10, 6, 655360, 11, 6, 655360, 12, 6, 655360, 14, 6, 655360, 5, 8, 655360, 7, 8, 655360, 9, 8, 655360, 10, 8, 655360, 11, 8, 655360, 12, 8, 655360, 13, 8, 655360, 14, 8, 655360, 15, 8, 655360, 65535, 65526, 0, 65535, 65528, 0, 65535, 65530, 0, 65535, 65532, 0, 65535, 65533, 0, 65535, 65534, 0, 65535, 65535, 0, 65535, 0, 0, 65535, 1, 0, 65535, 2, 1, 65535, 3, 0, 65535, 4, 0, 65535, 5, 0, 65535, 6, 0, 65535, 7, 0, 65535, 8, 0, 0, 2, 1, 2, 2, 1, 11, 2, 0, 11, 65530, 0, 11, 65526, 1048577, 3, 65527, 0, 15, 6, 655360, 11, 0, 4, 9, 0, 4, 7, 0, 4, 9, 65534, 3, 11, 65534, 4, 11, 65532, 4, 9, 65532, 4, 7, 65532, 3, 7, 65534, 4, 3, 4, 4, 3, 5, 4, 3, 6, 4, 3, 7, 4, 3, 8, 4, 1, 8, 3, 1, 6, 4, 16, 65525, 2, 65534, 65525, 1048578, 65534, 9, 655362, 16, 9, 1441794, 14, 65525, 655361, 12, 65525, 655361, 10, 65525, 655361, 8, 65525, 655361, 6, 65525, 655361, 4, 65525, 655361, 2, 65525, 655361, 0, 65525, 655361, 65534, 65527, 1048577, 65534, 65529, 1048577, 65534, 65531, 1048577, 65534, 65533, 1048577, 65534, 65535, 1048577, 65534, 1, 1048577, 65534, 3, 1048577, 65534, 5, 1048577, 65534, 7, 1048577, 0, 9, 1, 2, 9, 1, 4, 9, 1, 6, 9, 1, 8, 9, 1, 10, 9, 1, 12, 9, 1, 14, 9, 1, 16, 7, 1441793, 16, 5, 1441793, 16, 3, 1441793, 16, 1, 1441793, 16, 65535, 1441793, 16, 65533, 1441793, 16, 65531, 1441793, 16, 65529, 1441793, 16, 65527, 1441793, 13, 65529, 655361, 11, 65529, 655361, 9, 65529, 655361, 14, 65529, 2, 14, 65531, 1441793, 14, 65533, 1441793, 14, 65534, 1441793, 14, 65535, 1441793, 14, 0, 1441793, 14, 2, 1441794, -5636096, 65435, 1, 12, 2, 1, 10, 2, 1, 1, 1, 0, 2, 1, 0, 7, 65529, 1, 6, 65529, 1048576, 5, 65529, 1048578, 5, 65534, 1048576, 5, 65532, 1048576, 6, 65530, 1048576, 1, 2, 1048576, 4, 3, 0, 3, 3, 0, 13, 5, 1, 11, 5, 1, 9, 5, 1, 4, 8, 1441793, 4, 6, 1441793, 4, 5, 1441793, 1, 65527, 1048576, 1, 65529, 1048576, 2, 65535, 1048576, 0, 65535, 1048576, 1, 65533, 1048576, 0, 65531, 1048576, 3, 1, 1048576, 4, 1, 0, 8, 65526, 1048576, 6, 65526, 1048576, 10, 65526, 1048576, 12, 65526, 1048576)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qhpjn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 1, 28.0075, 0)
+
+[connection signal="timeout" from="Monsters/Warrior/PatrolTimer" to="Monsters/Warrior/SkellyWarrior" method="_on_patrol_timer_timeout"]
+[connection signal="timeout" from="Monsters/Rogue/PatrolTimer" to="Monsters/Rogue/SkellyRogue" method="_on_patrol_timer_timeout"]
+[connection signal="timeout" from="Monsters/Minion/PatrolTimer" to="Monsters/Minion/SkellyMinion" method="_on_patrol_timer_timeout"]
