@@ -15,11 +15,12 @@ var speed
 @onready var anim_tree = $AnimationTree
 @onready var player_detection = $PlayerDetection
 @onready var death_timer = $DeathTimer
-@onready var player_attack = $PlayerAttack
+@onready var attack_timer = $AttackTimer
 @onready var visual_cast = $VisualCast
 
 var waypoints = []
 var waypoint_index
+var player_body
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -99,7 +100,7 @@ func chase_player(delta):
 		velocity.y = velocity.y - (gravity * delta)
 		look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
 		
-		move_and_slide()
+	move_and_slide()
 
 func damaged():
 	hp -= 2
@@ -113,8 +114,8 @@ func damaged():
 
 func attack_player(delta):
 	look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
-	anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
-	anim_tree.set("parameters/death_attack/blend_amount", 1)
+	if attack_timer.is_stopped():
+		attack_timer.start()
 
 func knockback(dir):
 	var tween = create_tween()
@@ -153,39 +154,39 @@ func _on_patrol_timer_timeout():
 
 func _on_death_timer_timeout():
 	queue_free()
-
-
-func _on_player_attack_body_entered(body):
-	if body.is_in_group("player"):
-		current_state = States.attack
-		
-
-func _on_player_attack_body_exited(body):
-	if body.is_in_group("player"):
-		print("Exited in attack")
-		anim_tree.set("parameters/death_attack/blend_amount", 0)
-		current_state = States.chase
 		
 
 func _on_right_leg_hit_box_body_entered(body):
-	if body.is_in_group("player") and current_state == States.attack:
-		print("in leg")
-		body.damage()
+	if body.is_in_group("player"):
+		player = body
+		current_state = States.attack
 		anim_tree.set("parameters/attack_trans/transition_request", "kick")
 
 
 func _on_right_arm_hit_box_body_entered(body):
-	if body.is_in_group("player") and current_state == States.attack:
-		print("in arm")
-		body.damage()
+	if body.is_in_group("player"):
+		player_body = body
+		current_state = States.attack
 		anim_tree.set("parameters/attack_trans/transition_request", "punch1")
 
 
 func _on_right_arm_hit_box_body_exited(body):
 	if body.is_in_group("player"):
+		anim_tree.set("parameters/death_attack/blend_amount", 0)
 		anim_tree.set("parameters/attack_trans/transition_request", "")
+		current_state = States.chase
 
 
 func _on_right_leg_hit_box_body_exited(body):
 	if body.is_in_group("player"):
+		anim_tree.set("parameters/death_attack/blend_amount", 0)
 		anim_tree.set("parameters/attack_trans/transition_request", "")
+		current_state = States.chase
+
+
+func _on_attack_timer_timeout():
+	anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
+	anim_tree.set("parameters/death_attack/blend_amount", 1)
+	if player_body != null:
+		player_body.damage()
+		anim_tree.set("parameters/death_attack/blend_amount", 0)

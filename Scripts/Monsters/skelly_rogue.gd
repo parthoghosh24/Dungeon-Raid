@@ -16,6 +16,7 @@ var speed
 @onready var player_detection = $PlayerDetection
 @onready var death_timer = $DeathTimer
 @onready var player_attack = $PlayerAttack
+@onready var visual_cast = $VisualCast
 
 var waypoints = []
 var waypoint_index
@@ -84,19 +85,20 @@ func wait():
 	anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
 	
 func chase_player(delta):
-	if not is_on_floor():
-		velocity.y -=  gravity * delta
-	patrol_timer.stop()
-	speed = run_speed
-	anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 1)
-	
-	nav_agent.target_position = player.global_position
-	var next_nav_point = nav_agent.get_next_path_position()
-	dir = next_nav_point - global_position
-	velocity = dir.normalized() * speed * delta * gravity
-	velocity.y =  velocity.y - (gravity * delta)
-	look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
-	
+	if visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player"):
+		if not is_on_floor():
+			velocity.y -=  gravity * delta
+		patrol_timer.stop()
+		speed = run_speed
+		anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 1)
+		
+		nav_agent.target_position = player.global_position
+		var next_nav_point = nav_agent.get_next_path_position()
+		dir = next_nav_point - global_position
+		velocity = dir.normalized() * speed * delta * gravity
+		velocity.y =  velocity.y - (gravity * delta)
+		look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
+		
 	move_and_slide()
 	
 func damaged():
@@ -112,7 +114,9 @@ func damaged():
 	move_and_slide()
 
 func attack_player(delta):
+	look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
 	anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
+	anim_tree.set("parameters/death_attack/blend_amount", 1)
 
 func damage():
 	current_state = States.damaged	
@@ -151,12 +155,6 @@ func _on_patrol_timer_timeout():
 func _on_right_hand_hitbox_body_entered(body):
 	if body.is_in_group("player") and current_state == States.attack:
 		body.damage()
-		anim_tree.set("parameters/death_attack/blend_amount", 1)
-
-
-func _on_right_hand_hitbox_body_exited(body):
-	if body.is_in_group("player"):
-		anim_tree.set("parameters/death_attack/blend_amount", 0)
 
 
 func _on_death_timer_timeout():
