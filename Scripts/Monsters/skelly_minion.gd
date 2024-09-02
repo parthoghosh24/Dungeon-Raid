@@ -18,6 +18,8 @@ var speed
 @onready var attack_timer = $AttackTimer
 @onready var visual_cast = $VisualCast
 
+var player_in_attack_range = false
+
 var waypoints = []
 var waypoint_index
 var player_body
@@ -108,14 +110,18 @@ func damaged():
 	knockback(dir)
 
 	if (hp <= 0):
+		anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
 		dead()
-	current_state = States.chase	
-	move_and_slide()
+	if player_in_attack_range:	
+		current_state = States.attack  
+	else: 
+		current_state = States.chase
 
 func attack_player(delta):
 	look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
-	if attack_timer.is_stopped():
-		attack_timer.start()
+	anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
+	anim_tree.set("parameters/death_attack/blend_amount", 1)
+	
 
 func knockback(dir):
 	var tween = create_tween()
@@ -158,35 +164,21 @@ func _on_death_timer_timeout():
 
 func _on_right_leg_hit_box_body_entered(body):
 	if body.is_in_group("player"):
-		player = body
-		current_state = States.attack
-		anim_tree.set("parameters/attack_trans/transition_request", "kick")
+		body.damage()
 
 
 func _on_right_arm_hit_box_body_entered(body):
 	if body.is_in_group("player"):
-		player_body = body
+		body.damage()
+
+func _on_player_attack_body_entered(body):
+	if body.is_in_group("player"):
+		player_in_attack_range = true
 		current_state = States.attack
-		anim_tree.set("parameters/attack_trans/transition_request", "punch1")
 
 
-func _on_right_arm_hit_box_body_exited(body):
+func _on_player_attack_body_exited(body):
 	if body.is_in_group("player"):
+		player_in_attack_range = false
 		anim_tree.set("parameters/death_attack/blend_amount", 0)
-		anim_tree.set("parameters/attack_trans/transition_request", "")
 		current_state = States.chase
-
-
-func _on_right_leg_hit_box_body_exited(body):
-	if body.is_in_group("player"):
-		anim_tree.set("parameters/death_attack/blend_amount", 0)
-		anim_tree.set("parameters/attack_trans/transition_request", "")
-		current_state = States.chase
-
-
-func _on_attack_timer_timeout():
-	anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
-	anim_tree.set("parameters/death_attack/blend_amount", 1)
-	if player_body != null:
-		player_body.damage()
-		anim_tree.set("parameters/death_attack/blend_amount", 0)

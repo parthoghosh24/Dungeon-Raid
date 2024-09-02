@@ -1,0 +1,109 @@
+[gd_scene load_steps=9 format=3 uid="uid://5rgs0n6s4imr"]
+
+[ext_resource type="Script" path="res://Scripts/menu/main_menu.gd" id="1_tkmkc"]
+[ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="2_tu0t6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1kkq"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Theme" id="Theme_3a0fg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tk17a"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5p8ao"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbq4m"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n2xt"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_tkmkc")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+offset_top = 1.0
+offset_right = 1153.0
+offset_bottom = 647.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k1kkq")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_left = 256.0
+offset_top = 194.0
+offset_right = 839.0
+offset_bottom = 518.0
+theme = SubResource("Theme_3a0fg")
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_tu0t6")
+theme_override_font_sizes/font_size = 60
+text = "Dungeon Raider"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Main" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="Continue" type="Button" parent="MarginContainer/Main"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_tk17a")
+text = "Continue"
+
+[node name="StartGame" type="Button" parent="MarginContainer/Main"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_5p8ao")
+text = "Start Game"
+
+[node name="Options" type="Button" parent="MarginContainer/Main"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_qbq4m")
+text = "Options
+"
+
+[node name="Quit" type="Button" parent="MarginContainer/Main"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_3n2xt")
+text = "Quit"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Version 1.0.0"
+horizontal_alignment = 1
+
+[node name="copyright" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Copyrighted © PorthrisNaagu, 2024 "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/Main/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="MarginContainer/Main/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="MarginContainer/Main/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MarginContainer/Main/Quit" to="." method="_on_quit_pressed"]

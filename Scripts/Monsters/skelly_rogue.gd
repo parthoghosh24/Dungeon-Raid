@@ -20,6 +20,7 @@ var speed
 
 var waypoints = []
 var waypoint_index
+var player_in_attack_range = false
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -109,9 +110,10 @@ func damaged():
 	
 	if (hp <= 0):
 		dead()
-	current_state = States.chase
-	
-	move_and_slide()
+	if player_in_attack_range:	
+		current_state = States.attack  
+	else: 
+		current_state = States.chase
 
 func attack_player(delta):
 	look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
@@ -163,10 +165,12 @@ func _on_death_timer_timeout():
 
 func _on_player_attack_body_entered(body):
 	if body.is_in_group("player"):
+		player_in_attack_range = true
 		current_state = States.attack
 
 
 func _on_player_attack_body_exited(body):
 	if body.is_in_group("player"):
+		player_in_attack_range = false
 		anim_tree.set("parameters/death_attack/blend_amount", 0)
 		current_state = States.chase

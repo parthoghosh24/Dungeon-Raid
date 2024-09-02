@@ -12,7 +12,7 @@ enum ANIM_STATES {
 	ATTACK
 }
 
-@onready var player_mesh = $Barbarian
+@onready var player_mesh = $Rogue
 @onready var pivot = $CameraOrigin/CamH
 @export var sensitivity = 0.5
 

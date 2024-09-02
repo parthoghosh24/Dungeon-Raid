@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8k1np8icylaq"]
+
+[ext_resource type="Script" path="res://Scripts/menu/options_menu.gd" id="1_hdgri"]
+[ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="2_3ks0m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5nj7"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Theme" id="Theme_3a0fg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uum48"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dkvub"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tkebm"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_hdgri")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+offset_right = 1147.0
+offset_bottom = 646.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e5nj7")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 236.0
+offset_top = 178.0
+offset_right = 881.0
+offset_bottom = 520.0
+theme = SubResource("Theme_3a0fg")
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_3ks0m")
+theme_override_font_sizes/font_size = 60
+text = "Dungeon Raider"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/Options"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_uum48")
+text = "Turn on Joypad"
+
+[node name="Reset" type="Button" parent="MarginContainer/Options"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_dkvub")
+text = "Reset"
+
+[node name="Back" type="Button" parent="MarginContainer/Options"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.261722, 0.278138, 0.747978, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_tkebm")
+text = "Back
+"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Version 1.0.0"
+horizontal_alignment = 1
+
+[node name="copyright" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Copyrighted © PorthrisNaagu, 2024 "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="toggled" from="MarginContainer/Options/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="pressed" from="MarginContainer/Options/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="MarginContainer/Options/Back" to="." method="_on_back_pressed"]
