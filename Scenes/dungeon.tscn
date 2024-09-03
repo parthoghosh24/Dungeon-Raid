@@ -1,62 +1,85 @@
-[gd_scene load_steps=31 format=4 uid="uid://bc7jxaeg17rwe"]
+[gd_scene load_steps=31 format=4 uid="uid://dktts38kgpyko"]
 
-[ext_resource type="Texture2D" uid="uid://dd4bgvced7wgs" path="res://Scenes/castle/Castle_Builder_Atlas_3_Color.png" id="1_hberl"]
-[ext_resource type="Texture2D" uid="uid://xjmr8jfmwlh7" path="res://Scenes/castle/Castle_Builder_Atlas_3_Rough.png" id="2_38hhf"]
-[ext_resource type="Texture2D" uid="uid://cttugwvq60gno" path="res://Scenes/castle/Castle_Builder_Atlas_3_Norm.png" id="3_lan2y"]
-[ext_resource type="Texture2D" uid="uid://cgsy2s6g5k5as" path="res://Scenes/castle/Castle_Builder_Atlas_Color.png" id="4_faa22"]
-[ext_resource type="Texture2D" uid="uid://c8y84oeysaox5" path="res://Scenes/castle/Castle_Builder_Atlas_Rough.png" id="5_kofcq"]
-[ext_resource type="Texture2D" uid="uid://chxxjk1ih5n6u" path="res://Scenes/castle/Castle_Builder_Atlas_Norm.png" id="6_08r7k"]
-[ext_resource type="Texture2D" uid="uid://b08sgx54p5vh4" path="res://Scenes/castle/Castle_Builder_TCom_Wood_TavernDoor_1K_albedo.png" id="7_h0egn"]
-[ext_resource type="Texture2D" uid="uid://ct70al6gsfk86" path="res://Scenes/castle/Castle_Builder_TCom_Wood_TavernDoor_1K_roughness.png" id="8_ercnp"]
-[ext_resource type="Texture2D" uid="uid://bs6kay20uxsmi" path="res://Scenes/castle/Castle_Builder_TCom_Wood_TavernDoor_1K_normal.png" id="9_66qbs"]
-[ext_resource type="Texture2D" uid="uid://c3agunce3k625" path="res://Scenes/castle/Castle_Builder_TCom_MetalSheet_Aged_1K_albedo.png" id="10_v0q7p"]
-[ext_resource type="Texture2D" uid="uid://c5lge2f0v60e1" path="res://Scenes/castle/Castle_Builder_TCom_MetalSheet_Aged_1K_roughness.png" id="11_0cahm"]
-[ext_resource type="Texture2D" uid="uid://tea71guq1n1i" path="res://Scenes/castle/Castle_Builder_TCom_MetalSheet_Aged_1K_normal.png" id="12_3s3xq"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w2x3s"]
+load_path = "res://.godot/imported/Castle_Builder_Atlas_3_Color.png-aaee2074247f059e113a2c6b17d6ec34.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7rfxg"]
+load_path = "res://.godot/imported/Castle_Builder_Atlas_3_Rough.png-3d48a950ee25053751f1dc9d414860b5.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q52or"]
+load_path = "res://.godot/imported/Castle_Builder_Atlas_3_Norm.png-ad919289f9a578539d50cc9a6eb1d343.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yhk3r"]
 resource_name = "Atlas2.038"
 cull_mode = 2
-albedo_texture = ExtResource("1_hberl")
-metallic_texture = ExtResource("2_38hhf")
+albedo_texture = SubResource("CompressedTexture2D_w2x3s")
+metallic_texture = SubResource("CompressedTexture2D_7rfxg")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("2_38hhf")
+roughness_texture = SubResource("CompressedTexture2D_7rfxg")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("3_lan2y")
+normal_texture = SubResource("CompressedTexture2D_q52or")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_52bh4"]
+load_path = "res://.godot/imported/Castle_Builder_Atlas_Color.png-7b09a49612dccd23029d3e0b70e7c190.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nx5t5"]
+load_path = "res://.godot/imported/Castle_Builder_Atlas_Rough.png-ab6e470eb22b1f27c09466286d62e641.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_f2swv"]
+load_path = "res://.godot/imported/Castle_Builder_Atlas_Norm.png-566135859d2b4126f84c4197fd54100a.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5i2vl"]
 resource_name = "Atlas.018"
 cull_mode = 2
-albedo_texture = ExtResource("4_faa22")
-metallic_texture = ExtResource("5_kofcq")
+albedo_texture = SubResource("CompressedTexture2D_52bh4")
+metallic_texture = SubResource("CompressedTexture2D_nx5t5")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("5_kofcq")
+roughness_texture = SubResource("CompressedTexture2D_nx5t5")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("6_08r7k")
+normal_texture = SubResource("CompressedTexture2D_f2swv")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h7sry"]
+load_path = "res://.godot/imported/Castle_Builder_TCom_Wood_TavernDoor_1K_albedo.png-7d35e1598cf147acc105f83d89583173.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vlaxl"]
+load_path = "res://.godot/imported/Castle_Builder_TCom_Wood_TavernDoor_1K_roughness.png-74280e53c8186aaface42ef0a4b02b7d.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gwxnt"]
+load_path = "res://.godot/imported/Castle_Builder_TCom_Wood_TavernDoor_1K_normal.png-be3a1759962d3810f7971b45dcf82487.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v3oe7"]
 resource_name = "Wood.001"
 cull_mode = 2
-albedo_texture = ExtResource("7_h0egn")
-metallic_texture = ExtResource("8_ercnp")
+albedo_texture = SubResource("CompressedTexture2D_h7sry")
+metallic_texture = SubResource("CompressedTexture2D_vlaxl")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("8_ercnp")
+roughness_texture = SubResource("CompressedTexture2D_vlaxl")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("9_66qbs")
+normal_texture = SubResource("CompressedTexture2D_gwxnt")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0jhq4"]
+load_path = "res://.godot/imported/Castle_Builder_TCom_MetalSheet_Aged_1K_albedo.png-fb6091ef57bd65ec3dae28ac74a39759.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4v61j"]
+load_path = "res://.godot/imported/Castle_Builder_TCom_MetalSheet_Aged_1K_roughness.png-7daebd47abf57e08774ee54da1159f11.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1cow0"]
+load_path = "res://.godot/imported/Castle_Builder_TCom_MetalSheet_Aged_1K_normal.png-82dc1f09bc81f10c2a5460d370503e2e.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bfagn"]
 resource_name = "Metal.043"
 cull_mode = 2
-albedo_texture = ExtResource("10_v0q7p")
+albedo_texture = SubResource("CompressedTexture2D_0jhq4")
 metallic = 1.0
-metallic_texture = ExtResource("11_0cahm")
+metallic_texture = SubResource("CompressedTexture2D_4v61j")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("11_0cahm")
+roughness_texture = SubResource("CompressedTexture2D_4v61j")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("12_3s3xq")
+normal_texture = SubResource("CompressedTexture2D_1cow0")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_8mc8a"]
 _surfaces = [{
@@ -163,47 +186,47 @@ shadow_mesh = SubResource("ArrayMesh_8mc8a")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ttow2"]
 resource_name = "Atlas.017"
 cull_mode = 2
-albedo_texture = ExtResource("4_faa22")
-metallic_texture = ExtResource("5_kofcq")
+albedo_texture = SubResource("CompressedTexture2D_52bh4")
+metallic_texture = SubResource("CompressedTexture2D_nx5t5")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("5_kofcq")
+roughness_texture = SubResource("CompressedTexture2D_nx5t5")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("6_08r7k")
+normal_texture = SubResource("CompressedTexture2D_f2swv")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mfxf6"]
 resource_name = "Atlas2.037"
 cull_mode = 2
-albedo_texture = ExtResource("1_hberl")
-metallic_texture = ExtResource("2_38hhf")
+albedo_texture = SubResource("CompressedTexture2D_w2x3s")
+metallic_texture = SubResource("CompressedTexture2D_7rfxg")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("2_38hhf")
+roughness_texture = SubResource("CompressedTexture2D_7rfxg")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("3_lan2y")
+normal_texture = SubResource("CompressedTexture2D_q52or")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3x4xa"]
 resource_name = "Wood.004"
 cull_mode = 2
-albedo_texture = ExtResource("7_h0egn")
-metallic_texture = ExtResource("8_ercnp")
+albedo_texture = SubResource("CompressedTexture2D_h7sry")
+metallic_texture = SubResource("CompressedTexture2D_vlaxl")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("8_ercnp")
+roughness_texture = SubResource("CompressedTexture2D_vlaxl")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("9_66qbs")
+normal_texture = SubResource("CompressedTexture2D_gwxnt")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xpoeq"]
 resource_name = "Metal.042"
 cull_mode = 2
-albedo_texture = ExtResource("10_v0q7p")
+albedo_texture = SubResource("CompressedTexture2D_0jhq4")
 metallic = 1.0
-metallic_texture = ExtResource("11_0cahm")
+metallic_texture = SubResource("CompressedTexture2D_4v61j")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("11_0cahm")
+roughness_texture = SubResource("CompressedTexture2D_4v61j")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("12_3s3xq")
+normal_texture = SubResource("CompressedTexture2D_1cow0")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_3ldct"]
 _surfaces = [{
@@ -308,47 +331,47 @@ shadow_mesh = SubResource("ArrayMesh_3ldct")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gy0uo"]
 resource_name = "Atlas2.036"
 cull_mode = 2
-albedo_texture = ExtResource("1_hberl")
-metallic_texture = ExtResource("2_38hhf")
+albedo_texture = SubResource("CompressedTexture2D_w2x3s")
+metallic_texture = SubResource("CompressedTexture2D_7rfxg")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("2_38hhf")
+roughness_texture = SubResource("CompressedTexture2D_7rfxg")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("3_lan2y")
+normal_texture = SubResource("CompressedTexture2D_q52or")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h6dkl"]
 resource_name = "Atlas.016"
 cull_mode = 2
-albedo_texture = ExtResource("4_faa22")
-metallic_texture = ExtResource("5_kofcq")
+albedo_texture = SubResource("CompressedTexture2D_52bh4")
+metallic_texture = SubResource("CompressedTexture2D_nx5t5")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("5_kofcq")
+roughness_texture = SubResource("CompressedTexture2D_nx5t5")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("6_08r7k")
+normal_texture = SubResource("CompressedTexture2D_f2swv")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tq0os"]
 resource_name = "Wood.005"
 cull_mode = 2
-albedo_texture = ExtResource("7_h0egn")
-metallic_texture = ExtResource("8_ercnp")
+albedo_texture = SubResource("CompressedTexture2D_h7sry")
+metallic_texture = SubResource("CompressedTexture2D_vlaxl")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("8_ercnp")
+roughness_texture = SubResource("CompressedTexture2D_vlaxl")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("9_66qbs")
+normal_texture = SubResource("CompressedTexture2D_gwxnt")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rj708"]
 resource_name = "Metal.041"
 cull_mode = 2
-albedo_texture = ExtResource("10_v0q7p")
+albedo_texture = SubResource("CompressedTexture2D_0jhq4")
 metallic = 1.0
-metallic_texture = ExtResource("11_0cahm")
+metallic_texture = SubResource("CompressedTexture2D_4v61j")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("11_0cahm")
+roughness_texture = SubResource("CompressedTexture2D_4v61j")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("12_3s3xq")
+normal_texture = SubResource("CompressedTexture2D_1cow0")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yltr3"]
 _surfaces = [{
