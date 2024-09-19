@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://ce30frg0x6ggi"]
 
-[ext_resource type="PackedScene" uid="uid://c0wvap84wmias" path="res://Scenes/player.tscn" id="1_kc5f5"]
 [ext_resource type="PackedScene" uid="uid://bc37bk0w8er2y" path="res://Scenes/Monsters/skelly_warrior.tscn" id="2_rtfbe"]
 [ext_resource type="PackedScene" uid="uid://gxuuvrm45qed" path="res://Scenes/Monsters/skelly_rogue.tscn" id="3_gpmqu"]
 [ext_resource type="PackedScene" uid="uid://miy8cyxnatij" path="res://Scenes/Monsters/skelly_minion.tscn" id="4_7cheo"]
 [ext_resource type="MeshLibrary" uid="uid://cc6j2i1aew2no" path="res://Resources/library.tres" id="5_1bdns"]
+[ext_resource type="PackedScene" uid="uid://1paq7r7j4w71" path="res://Scenes/haiya.tscn" id="5_3ujgq"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_6qugg"]
 vertices = PackedVector3Array(3.4469, 5.5, -22, 3.6969, 5.5, -18.25, 4.1969, 5.5, -21.75, 11.4469, 5.5, -22, 11.6969, 5.5, -18.5, 12.1969, 5.5, -21.75, -7.0531, 1.5, 3, -7.0531, 1.5, 1, -8.5531, 1.5, 1, -13.3031, 1.5, 3, -8.8031, 1.5, -18.5, -8.0531, 1.5, -18.5, -8.0531, 1.5, -21, -9.3031, 1.5, -17.75, -8.8031, 1.5, -18.5, -8.0531, 1.5, -21, -13.3031, 1.5, -21, -9.3031, 1.5, -17.75, -13.3031, 1.5, -21, -13.3031, 1.5, 3, -9.3031, 1.5, 0, -13.3031, 1.5, 3, -8.5531, 1.5, 1, -9.3031, 1.5, 0, 3.6969, 1.5, -15, 3.6969, 1.5, -17.25, 2.9469, 1.5, -17.5, -8.0531, 1.5, -21, -8.0531, 1.5, -18.5, -7.3031, 1.5, -18.25, 3.6969, 1.5, -15, 2.9469, 1.5, -17.5, 2.6969, 1.5, -18.25, -0.303101, 1.5, -15, -7.3031, 1.5, -13.75, -1.3031, 1.5, -13.75, -0.303101, 1.5, -15, -7.3031, 1.5, -18.25, -0.303101, 1.5, -15, 2.6969, 1.5, -18.25, 2.6969, 1.5, -21, -8.0531, 1.5, -21, -7.3031, 1.5, -18.25, 11.9469, 1.5, -15, 11.9469, 1.5, -17.25, 11.1969, 1.5, -17.25, 4.6969, 1.5, -17.5, 3.6969, 1.5, -17.25, 3.6969, 1.5, -15, 11.9469, 1.5, -15, 11.1969, 1.5, -17.25, 10.6969, 1.5, -18.25, 10.6969, 1.5, -18.25, 10.6969, 1.5, -21, 4.6969, 1.5, -21, 4.6969, 1.5, -17.5, 12.6969, 1.5, -17.5, 11.9469, 1.5, -17.25, 11.9469, 1.5, -15, 17.6969, 1.5, -15, 17.6969, 1.5, -15, 18.6969, 1.5, -14, 20.6969, 1.5, -14, 17.6969, 1.5, -15, 20.6969, 1.5, -14, 20.6969, 1.5, -21, 12.6969, 1.5, -21, 12.6969, 1.5, -17.5, -0.303101, 5.5, -14, -0.303101, 5.5, -0.25, 0.196899, 5.5, -13.75, 18.6969, 1.5, 3.5, 20.6969, 1.5, 3.5, 20.6969, 1.5, -14, 18.6969, 1.5, -14, -0.553101, 1.5, 3, -0.0531006, 1.5, 0.75, -0.803101, 1.5, 0.75, -5.5531, 1.5, 0.75, -7.0531, 1.5, 1, -7.0531, 1.5, 3, -0.553101, 1.5, 3, -0.803101, 1.5, 0.75, -1.3031, 1.5, -0.25, -5.5531, 1.5, 0.75, -7.0531, 1.5, 3, -5.5531, 1.5, -0.75, -5.5531, 1.5, 0.75, -1.3031, 1.5, -0.25, -7.3031, 1.5, -1, -5.5531, 1.5, -0.75, -1.3031, 1.5, -0.25, -1.3031, 1.5, -13.75, -7.3031, 1.5, -13.75, -0.0531006, 1.5, 0.75, -0.553101, 1.5, 3, 0.196899, 1.5, 3, 0.696899, 1.5, 0.5, -0.0531006, 1.5, 0.75, 0.196899, 1.5, 3, 0.446899, 1.5, 4, 3.1969, 1.5, 4, 3.9469, 1.5, 3, 0.696899, 1.5, 0.5, 3.9469, 1.5, 3, 16.6969, 1.5, 3, 16.6969, 1.5, -13, 0.696899, 1.5, -13, 20.6969, 1.5, 3.5, 18.6969, 1.5, 3.5, 18.6969, 1.5, 4.25, 18.1969, 1.5, 9.25, 18.4469, 1.5, 10, 20.6969, 1.5, 10, 20.6969, 1.5, 3.5, 18.6969, 1.5, 4.25, 17.9469, 1.5, 5, 17.4469, 1.5, 9, 18.1969, 1.5, 9.25, 20.6969, 1.5, 10, 15.4469, 1.5, 5, 15.4469, 1.5, 9, 17.4469, 1.5, 9, 17.9469, 1.5, 5, -2.3031, 1.5, 5, -2.3031, 1.5, 7.5, -1.3031, 1.5, 7.75, 0.196899, 1.5, 5, 5.9469, 1.5, 9, 7.9469, 1.5, 5, 3.4469, 1.5, 5, 5.1969, 1.5, 9.5, 3.4469, 1.5, 5, 3.1969, 1.5, 4, 0.446899, 1.5, 4, 0.196899, 1.5, 5, 0.196899, 1.5, 5, -1.3031, 1.5, 7.75, -1.3031, 1.5, 10.25, 5.1969, 1.5, 10.25, 5.1969, 1.5, 9.5, 3.4469, 1.5, 5, 5.9469, 1.5, 9, 7.9469, 1.5, 9, 7.9469, 1.5, 5, -3.3031, 1.5, 8.25, -2.3031, 1.5, 7.5, -2.3031, 1.5, 5, -13.3031, 1.5, 5, -13.3031, 1.5, 17, -3.3031, 1.5, 17, -3.3031, 1.5, 8.25, -13.3031, 1.5, 5, 7.9469, 1.5, 9, 15.4469, 1.5, 9, 15.4469, 1.5, 5, 7.9469, 1.5, 5, -2.5531, 5.5, 17.75, -1.8031, 5.5, 18, -2.0531, 5.5, 8.5, 20.6969, 1.5, 10, 18.4469, 1.5, 10, 17.9469, 1.5, 11, 20.6969, 1.5, 17, 7.4469, 1.5, 17, 20.6969, 1.5, 17, 17.9469, 1.5, 11, 7.4469, 1.5, 11, 7.4469, 1.5, 17, 7.4469, 1.5, 11, 5.4469, 1.5, 11, 5.4469, 1.5, 11, 5.1969, 1.5, 10.25, -1.3031, 1.5, 10.25, 5.4469, 1.5, 11, -1.3031, 1.5, 10.25, -1.3031, 1.5, 17, 7.4469, 1.5, 17)
@@ -29,16 +29,13 @@ volumetric_fog_detail_spread = 1.0
 [node name="TestLevel" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
 
-[node name="Player" parent="." instance=ExtResource("1_kc5f5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.83937, 1, -16.4019)
-
 [node name="Monsters" type="Node" parent="."]
 
 [node name="Warrior" type="Node" parent="Monsters"]
 
 [node name="SkellyWarrior" parent="Monsters/Warrior" instance=ExtResource("2_rtfbe")]
 transform = Transform3D(1, -4.02216e-24, 0, -4.02216e-24, 1, 0, 0, 0, 1, 4.4809, 1.08519, 12.486)
-player_path = NodePath("../../../Player")
+player_path = NodePath("../../../Haiya")
 
 [node name="MarkersToVisit" type="Node" parent="Monsters/Warrior"]
 
@@ -59,7 +56,7 @@ one_shot = true
 
 [node name="SkellyRogue" parent="Monsters/Rogue" instance=ExtResource("3_gpmqu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0775, 11.4695)
-player_path = NodePath("../../../Player")
+player_path = NodePath("../../../Haiya")
 
 [node name="MarkersToVisit" type="Node" parent="Monsters/Rogue"]
 
@@ -80,7 +77,7 @@ one_shot = true
 
 [node name="SkellyMinion" parent="Monsters/Minion" instance=ExtResource("4_7cheo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.03702, 1.17524, 0.0714645)
-player_path = NodePath("../../../Player")
+player_path = NodePath("../../../Haiya")
 
 [node name="PatrolTimer" type="Timer" parent="Monsters/Minion"]
 wait_time = 5.0
@@ -116,6 +113,9 @@ environment = SubResource("Environment_qhpjn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 1, 28.0075, 0)
+
+[node name="Haiya" parent="." instance=ExtResource("5_3ujgq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.49177, 1.12793, -15.6619)
 
 [connection signal="timeout" from="Monsters/Warrior/PatrolTimer" to="Monsters/Warrior/SkellyWarrior" method="_on_patrol_timer_timeout"]
 [connection signal="timeout" from="Monsters/Rogue/PatrolTimer" to="Monsters/Rogue/SkellyRogue" method="_on_patrol_timer_timeout"]

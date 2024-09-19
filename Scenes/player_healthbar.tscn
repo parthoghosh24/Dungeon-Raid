@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://sbkrd7upjcwl"]
+
+[ext_resource type="Texture2D" uid="uid://dd6etugxcn47w" path="res://Resources/textures/life6.png" id="1_0lnrf"]
+[ext_resource type="Texture2D" uid="uid://g2ba8ldmp0ct" path="res://Resources/textures/life1.png" id="2_41yf5"]
+
+[node name="PlayerHealthbar" type="TextureProgressBar"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -310.0
+offset_top = 54.0
+offset_right = -8.0
+offset_bottom = 115.0
+grow_horizontal = 0
+value = 100.0
+texture_under = ExtResource("1_0lnrf")
+texture_progress = ExtResource("2_41yf5")

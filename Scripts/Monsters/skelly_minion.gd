@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
 var player = null
-var player_detected = false
 var walk_speed = 5
 var run_speed = 10
 var hp = 10
@@ -11,14 +10,17 @@ var speed
 @export var player_path : NodePath
 
 @onready var nav_agent = $NavigationAgent3D
-@onready var patrol_timer = $"../PatrolTimer"
+@onready var patrol_timer = $PatrolTimer
 @onready var anim_tree = $AnimationTree
 @onready var player_detection = $PlayerDetection
+@onready var attack_detection = $AttackDetection
 @onready var death_timer = $DeathTimer
 @onready var attack_timer = $AttackTimer
 @onready var visual_cast = $VisualCast
+@onready var health_bar = $SubViewport/EnemyHealthBar
 
 var player_in_attack_range = false
+var level
 
 var waypoints = []
 var waypoint_index
@@ -38,6 +40,7 @@ enum States {
 var current_state : States
 
 func _ready():
+	level = get_parent().get_parent().get_parent()
 	waypoint_index = 0
 	player = get_node(player_path)
 	current_state = States.patrol
@@ -88,7 +91,7 @@ func wait():
 	anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
 	
 func chase_player(delta):
-	if visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player"):
+	if level.player_detected == true or (visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")) :
 		if not is_on_floor():
 			velocity.y -=  gravity * delta
 		patrol_timer.stop()
@@ -105,11 +108,13 @@ func chase_player(delta):
 	move_and_slide()
 
 func damaged():
-	hp -= 2
+	#hp -= 2
+	health_bar.value -= 2
 	print(hp)
 	knockback(dir)
+	anim_tree.set("parameters/hit_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
-	if (hp <= 0):
+	if (health_bar.value <= 0):
 		anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
 		dead()
 	if player_in_attack_range:	
@@ -130,15 +135,14 @@ func knockback(dir):
 
 func _on_player_detection_body_entered(body):
 	if body.is_in_group("player"):
-		player_detected = true
-		current_state = States.chase
+		level.player_detected = true
+		signal_start_chase_player()
 		
 
 func _on_player_detection_body_exited(body):
 	if body.is_in_group("player"):
-		player_detected = false
-		nav_agent.target_position = waypoints[waypoint_index]
-		current_state = States.patrol
+		level.player_detected = false
+		signal_stop_chase_player()
 
 func damage():
 	current_state = States.damaged
@@ -171,14 +175,35 @@ func _on_right_arm_hit_box_body_entered(body):
 	if body.is_in_group("player"):
 		body.damage()
 
-func _on_player_attack_body_entered(body):
+func _on_player_attack_body_exited(body):
+	if body.is_in_group("player"):
+		player_in_attack_range = false
+		anim_tree.set("parameters/death_attack/blend_amount", 0)
+		current_state = States.chase
+
+func signal_start_chase_player():
+	get_tree().call_group("monster", "start_chase_player")
+
+func signal_stop_chase_player():
+	get_tree().call_group("monster", "stop_chase_player")	
+
+func start_chase_player():
+	current_state = States.chase	
+	
+func stop_chase_player():
+	nav_agent.target_position = waypoints[waypoint_index]
+	current_state = States.patrol
+
+
+func _on_attack_detection_body_entered(body):
 	if body.is_in_group("player"):
 		player_in_attack_range = true
 		current_state = States.attack
 
 
-func _on_player_attack_body_exited(body):
+func _on_attack_detection_body_exited(body):
 	if body.is_in_group("player"):
 		player_in_attack_range = false
+		anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 1)
 		anim_tree.set("parameters/death_attack/blend_amount", 0)
 		current_state = States.chase

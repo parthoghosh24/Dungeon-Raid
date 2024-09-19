@@ -19,7 +19,7 @@ enum ANIM_STATES {
 @onready var animation_tree = $AnimationTree
 @onready var attack_timer = $AttackTimer
 @onready var is_attacking = false
-var hp = 10
+@onready var hp_bar = $PlayerHealthbar
 
 
 var direction
@@ -101,16 +101,16 @@ func _physics_process(delta):
 
 
 func damage():
-	hp -= 2
-	print(hp)
-	
+	hp_bar.value -= 2
 	knockback(direction)
+	animation_tree.set("parameters/attack_hit/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
-	if (hp <= 0):
+	if (hp_bar.value <= 0):
 		print("dead")
 
 func knockback(dir):
 	#knocback
+	print("knockback called")
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", global_position - (dir / 1.5), 0.2)	
 	
