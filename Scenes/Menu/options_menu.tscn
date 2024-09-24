@@ -1,15 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8k1np8icylaq"]
+[gd_scene load_steps=12 format=3 uid="uid://b8k1np8icylaq"]
 
 [ext_resource type="Script" path="res://Scripts/menu/options_menu.gd" id="1_hdgri"]
 [ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="2_3ks0m"]
+[ext_resource type="Script" path="res://Scripts/menu/OptionsMenu/check_button.gd" id="3_cf3ea"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5nj7"]
 bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Theme" id="Theme_3a0fg"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uum48"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yq56j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btnpb"]
+bg_color = Color(0.262745, 0.278431, 0.74902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kv6ix"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v72cq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dkvub"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -55,22 +62,28 @@ size_flags_vertical = 4
 
 [node name="CheckButton" type="CheckButton" parent="MarginContainer/Options"]
 layout_mode = 2
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_uum48")
-text = "Turn on Joypad"
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_yq56j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btnpb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kv6ix")
+theme_override_styles/normal = SubResource("StyleBoxFlat_v72cq")
+text = "Play with Joypad"
+script = ExtResource("3_cf3ea")
 
 [node name="Reset" type="Button" parent="MarginContainer/Options"]
 layout_mode = 2
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_dkvub")
 text = "Reset"
 
 [node name="Back" type="Button" parent="MarginContainer/Options"]
 layout_mode = 2
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0.262745, 0.278431, 0.74902, 1)
 theme_override_colors/font_color = Color(0.261722, 0.278138, 0.747978, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_tkebm")
 text = "Back

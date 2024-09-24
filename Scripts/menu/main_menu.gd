@@ -1,5 +1,9 @@
 extends Control
 
+@onready var continue_button = $MarginContainer/Main/Continue
+
+func _ready():
+	continue_button.visible = false
 
 func _on_continue_pressed():
 	pass # Replace with function body.

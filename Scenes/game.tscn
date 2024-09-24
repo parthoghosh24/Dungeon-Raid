@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://cu8s26i8cnwbc"]
+
+[ext_resource type="PackedScene" uid="uid://5rgs0n6s4imr" path="res://Scenes/Menu/main_menu.tscn" id="1_j8tm6"]
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_qtfw2"]
+[ext_resource type="PackedScene" uid="uid://b8k1np8icylaq" path="res://Scenes/Menu/options_menu.tscn" id="2_24wgm"]
+[ext_resource type="PackedScene" uid="uid://bqu5klpl4tfr5" path="res://Scenes/Menu/game_over.tscn" id="3_6pm40"]
+[ext_resource type="PackedScene" uid="uid://c5b03pjogjo1k" path="res://Scenes/Levels/level_1.tscn" id="4_b8ed3"]
+[ext_resource type="PackedScene" uid="uid://dd6l5ohtbckha" path="res://Scenes/intro.tscn" id="5_2uabl"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_qtfw2")
+
+[node name="Menu" type="Node" parent="."]
+
+[node name="MainMenu" parent="Menu" instance=ExtResource("1_j8tm6")]
+
+[node name="OptionsMenu" parent="Menu" instance=ExtResource("2_24wgm")]
+
+[node name="GameOver" parent="Menu" instance=ExtResource("3_6pm40")]
+
+[node name="Levels" type="Node" parent="."]
+
+[node name="Level1" parent="Levels" instance=ExtResource("4_b8ed3")]
+
+[node name="Cutscenes" type="Node" parent="."]
+
+[node name="Intro" parent="Cutscenes" instance=ExtResource("5_2uabl")]

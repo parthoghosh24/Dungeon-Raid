@@ -20,6 +20,7 @@ enum ANIM_STATES {
 @onready var attack_timer = $AttackTimer
 @onready var is_attacking = false
 @onready var hp_bar = $PlayerHealthbar
+@onready var death_timer = $DeathTimer
 
 
 var direction
@@ -27,6 +28,9 @@ var movement_speed = 0
 var vertical_velocity = Vector3()
 var horizontal_velocity = Vector3()
 var combo_counter = 0
+var stealth_attacking = false
+
+signal player_dead
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -35,6 +39,7 @@ func _ready():
 	direction = Vector3.BACK.rotated(Vector3.UP, pivot.global_transform.basis.get_euler().y)
 	movement_speed = 0
 	animation_tree.set("parameters/idle_move/blend_amount", 0)
+	animation_tree.set("parameters/hit_death/blend_amount",0)
 		
 
 func _physics_process(delta):
@@ -73,7 +78,12 @@ func _physics_process(delta):
 		movement_speed = 0
 		animation_tree.set("parameters/idle_move/blend_amount", 0)
 		
-	
+	# Stealth attack
+	if Input.is_action_just_pressed("stealth_attack"):
+		stealth_attacking = true
+		animation_tree.set("parameters/Stealth_hit/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		attack_timer.start()
+		
 	# Attack combo system	
 	if Input.is_action_just_pressed("attack") and combo_counter < 3:
 		animation_tree.set("parameters/move_attack/blend_amount", 1)
@@ -107,6 +117,11 @@ func damage():
 	
 	if (hp_bar.value <= 0):
 		print("dead")
+		animation_tree.set("parameters/hit_death/blend_amount",1)
+		death_timer.start()
+		
+		
+		
 
 func knockback(dir):
 	#knocback
@@ -116,10 +131,19 @@ func knockback(dir):
 	
 func _on_attack_timer_timeout():
 	is_attacking = false
+	stealth_attacking = false
 	combo_counter = 0
 	animation_tree.set("parameters/move_attack/blend_amount", 0)
 
 
 func _on_hit_box_body_entered(body):
-	if body.is_in_group("monster") and is_attacking:
-		body.damage()
+	if body.is_in_group("monster"):
+		if body.stealth_prompt_visible() and stealth_attacking:
+			body.stealth_kill_damage()
+		else:
+			if is_attacking:	
+				body.damage()
+		
+
+func _on_death_timer_timeout():
+	emit_signal("player_dead")

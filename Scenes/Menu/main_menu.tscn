@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://5rgs0n6s4imr"]
+[gd_scene load_steps=11 format=3 uid="uid://5rgs0n6s4imr"]
 
 [ext_resource type="Script" path="res://Scripts/menu/main_menu.gd" id="1_tkmkc"]
 [ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="2_tu0t6"]
+[ext_resource type="Script" path="res://Scripts/menu/MainMenu/continue.gd" id="3_rho7t"]
+[ext_resource type="Script" path="res://Scripts/menu/MainMenu/start_game.gd" id="4_d6d1f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1kkq"]
 bg_color = Color(1, 1, 1, 1)
@@ -60,18 +62,26 @@ theme_override_constants/separation = 10
 
 [node name="Continue" type="Button" parent="MarginContainer/Main"]
 layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.905769, 0.905769, 0.905769, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_tk17a")
 text = "Continue"
+script = ExtResource("3_rho7t")
 
 [node name="StartGame" type="Button" parent="MarginContainer/Main"]
 layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.905882, 0.905882, 0.905882, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_5p8ao")
 text = "Start Game"
+script = ExtResource("4_d6d1f")
 
 [node name="Options" type="Button" parent="MarginContainer/Main"]
 layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.905882, 0.905882, 0.905882, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_qbq4m")
 text = "Options
@@ -79,6 +89,8 @@ text = "Options
 
 [node name="Quit" type="Button" parent="MarginContainer/Main"]
 layout_mode = 2
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_3n2xt")
 text = "Quit"

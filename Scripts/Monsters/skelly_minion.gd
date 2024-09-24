@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 var player = null
 var walk_speed = 5
-var run_speed = 10
+var run_speed = 20
 var hp = 10
 var dir
 var speed
@@ -18,8 +18,10 @@ var speed
 @onready var attack_timer = $AttackTimer
 @onready var visual_cast = $VisualCast
 @onready var health_bar = $SubViewport/EnemyHealthBar
+@onready var stealth_prompt = $StealthHit/StealthText
 
 var player_in_attack_range = false
+var looking_at_player = false
 var level
 
 var waypoints = []
@@ -40,6 +42,7 @@ enum States {
 var current_state : States
 
 func _ready():
+	stealth_prompt.visible = false
 	level = get_parent().get_parent().get_parent()
 	waypoint_index = 0
 	player = get_node(player_path)
@@ -51,6 +54,7 @@ func _ready():
 	anim_tree.set("parameters/death_attack/blend_amount", 0)
 	
 func _physics_process(delta):
+	show_stealth_prompt()
 	
 	match current_state:
 		States.patrol:
@@ -108,9 +112,7 @@ func chase_player(delta):
 	move_and_slide()
 
 func damaged():
-	#hp -= 2
 	health_bar.value -= 2
-	print(hp)
 	knockback(dir)
 	anim_tree.set("parameters/hit_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
@@ -144,8 +146,26 @@ func _on_player_detection_body_exited(body):
 		level.player_detected = false
 		signal_stop_chase_player()
 
+func is_waiting():
+	return current_state == States.wait
+	
+func show_stealth_prompt():
+	if !looking_at_player and 	is_waiting():
+		stealth_prompt.visible = true
+	else:
+		stealth_prompt.visible = false	
+
+func stealth_prompt_visible():
+	return stealth_prompt.visible		
+
 func damage():
 	current_state = States.damaged
+
+func stealth_kill_damage():
+	health_bar.value = 0
+	knockback(dir)
+	dead()
+		
 	
 func dead():
 	anim_tree.set("parameters/death_attack/blend_amount", 0)
@@ -167,12 +187,12 @@ func _on_death_timer_timeout():
 		
 
 func _on_right_leg_hit_box_body_entered(body):
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and current_state != States.damaged:
 		body.damage()
 
 
 func _on_right_arm_hit_box_body_entered(body):
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and current_state != States.damaged:
 		body.damage()
 
 func _on_player_attack_body_exited(body):
@@ -188,15 +208,17 @@ func signal_stop_chase_player():
 	get_tree().call_group("monster", "stop_chase_player")	
 
 func start_chase_player():
+	looking_at_player = true
 	current_state = States.chase	
 	
 func stop_chase_player():
+	looking_at_player = false
 	nav_agent.target_position = waypoints[waypoint_index]
 	current_state = States.patrol
 
 
 func _on_attack_detection_body_entered(body):
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and current_state != States.damaged:
 		player_in_attack_range = true
 		current_state = States.attack
 
