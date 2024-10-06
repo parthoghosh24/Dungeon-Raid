@@ -12,6 +12,7 @@ var levels = ["res://Scenes/Levels/level_1.tscn", "res://Scenes/Levels/level_2.t
 var player_inventory
 var current_level
 var file
+var game_started = false
 		
 		
 func set_level(level):
@@ -19,6 +20,12 @@ func set_level(level):
 	
 func get_level():
 	return current_level
+	
+func set_game_started():
+	game_started = true
+	
+func has_game_started():
+	return game_started	
 
 func set_player_inventory(item: PLAYER_INVENTORY_ITEMS):
 	player_inventory = item
@@ -38,8 +45,11 @@ func switch_to_next_level():
 	get_tree().change_scene_to_packed(level)
 	
 func load_level(index):
-	print(index)
-	var level = load(levels[index])
+	var level
+	if index == -1:
+		level = load("res://Scenes/Menu/main_menu.tscn")
+	else:	
+		level = load(levels[index])
 	get_tree().change_scene_to_packed(level)
 		
 

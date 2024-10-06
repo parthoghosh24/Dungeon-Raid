@@ -1,14 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://5rgs0n6s4imr"]
+[gd_scene load_steps=17 format=3 uid="uid://5rgs0n6s4imr"]
 
 [ext_resource type="Script" path="res://Scripts/menu/main_menu.gd" id="1_tkmkc"]
 [ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="2_tu0t6"]
+[ext_resource type="FontFile" uid="uid://plk2ssnqqgfy" path="res://Resources/font/MotionControl-Bold.otf" id="3_de8ff"]
 [ext_resource type="Script" path="res://Scripts/menu/MainMenu/continue.gd" id="3_rho7t"]
+[ext_resource type="Script" path="res://Scripts/menu/MainMenu/press_to_start.gd" id="4_57fqo"]
 [ext_resource type="Script" path="res://Scripts/menu/MainMenu/start_game.gd" id="4_d6d1f"]
+[ext_resource type="AudioStream" uid="uid://yhf2h45cockg" path="res://Resources/sound/menu_sfx/press_to_start.wav" id="7_ffmyn"]
+[ext_resource type="AudioStream" uid="uid://dapt6hwr4h0r2" path="res://Resources/sound/menu_sfx/menu_hover.wav" id="8_m7h5q"]
+[ext_resource type="AudioStream" uid="uid://15b2i6evx5yq" path="res://Resources/sound/menu_sfx/menu_select_2.wav" id="9_aefy2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1kkq"]
 bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Theme" id="Theme_3a0fg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ikess"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tk17a"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -60,11 +68,24 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 10
 
+[node name="PressToStart" type="Button" parent="MarginContainer/Main"]
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_de8ff")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_ikess")
+text = "Press Start"
+script = ExtResource("4_57fqo")
+
 [node name="Continue" type="Button" parent="MarginContainer/Main"]
 layout_mode = 2
 theme_override_colors/font_pressed_color = Color(0.905769, 0.905769, 0.905769, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_de8ff")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_tk17a")
 text = "Continue"
 script = ExtResource("3_rho7t")
@@ -74,6 +95,8 @@ layout_mode = 2
 theme_override_colors/font_pressed_color = Color(0.905882, 0.905882, 0.905882, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_de8ff")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_5p8ao")
 text = "Start Game"
 script = ExtResource("4_d6d1f")
@@ -83,6 +106,8 @@ layout_mode = 2
 theme_override_colors/font_pressed_color = Color(0.905882, 0.905882, 0.905882, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_de8ff")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_qbq4m")
 text = "Options
 "
@@ -92,6 +117,8 @@ layout_mode = 2
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_de8ff")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_3n2xt")
 text = "Quit"
 
@@ -115,7 +142,29 @@ text = "Copyrighted © PorthrisNaagu, 2024 "
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SFX" type="Node" parent="."]
+
+[node name="PressToStart" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("7_ffmyn")
+max_polyphony = 5
+
+[node name="Hover" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("8_m7h5q")
+max_polyphony = 5
+
+[node name="Select" type="AudioStreamPlayer" parent="SFX"]
+max_polyphony = 5
+
+[node name="Select2" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("9_aefy2")
+max_polyphony = 5
+
+[connection signal="pressed" from="MarginContainer/Main/PressToStart" to="." method="_on_press_to_start_pressed"]
 [connection signal="pressed" from="MarginContainer/Main/Continue" to="." method="_on_continue_pressed"]
+[connection signal="focus_entered" from="MarginContainer/Main/StartGame" to="." method="_on_start_game_focus_entered"]
+[connection signal="mouse_entered" from="MarginContainer/Main/StartGame" to="." method="_on_start_game_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/Main/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/Main/Options" to="." method="_on_options_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/Main/Options" to="." method="_on_options_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/Main/Quit" to="." method="_on_quit_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/Main/Quit" to="." method="_on_quit_pressed"]

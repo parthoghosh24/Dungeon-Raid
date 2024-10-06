@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8k1np8icylaq"]
+[gd_scene load_steps=14 format=3 uid="uid://b8k1np8icylaq"]
 
 [ext_resource type="Script" path="res://Scripts/menu/options_menu.gd" id="1_hdgri"]
 [ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="2_3ks0m"]
 [ext_resource type="Script" path="res://Scripts/menu/OptionsMenu/check_button.gd" id="3_cf3ea"]
+[ext_resource type="AudioStream" uid="uid://dc70rw3pj7ch6" path="res://Resources/sound/menu_sfx/menu_back.wav" id="4_21aai"]
+[ext_resource type="AudioStream" uid="uid://dapt6hwr4h0r2" path="res://Resources/sound/menu_sfx/menu_hover.wav" id="5_q8kdt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5nj7"]
 bg_color = Color(1, 1, 1, 1)
@@ -109,6 +111,19 @@ text = "Copyrighted © PorthrisNaagu, 2024 "
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SFX" type="Node" parent="."]
+
+[node name="Back" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_21aai")
+max_polyphony = 5
+
+[node name="Hover" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_q8kdt")
+max_polyphony = 5
+
+[connection signal="mouse_entered" from="MarginContainer/Options/CheckButton" to="." method="_on_check_button_mouse_entered"]
 [connection signal="toggled" from="MarginContainer/Options/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="mouse_entered" from="MarginContainer/Options/Reset" to="." method="_on_reset_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/Options/Reset" to="." method="_on_reset_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/Options/Back" to="." method="_on_back_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/Options/Back" to="." method="_on_back_pressed"]
