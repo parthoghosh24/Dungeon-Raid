@@ -1,14 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://84yq2tktg6lo"]
+[gd_scene load_steps=5 format=3 uid="uid://84yq2tktg6lo"]
 
 [ext_resource type="PackedScene" uid="uid://8dmiogfwvs2s" path="res://Assets/Environment/wall_doorway.gltf" id="1_gpous"]
+[ext_resource type="Script" path="res://Scripts/Environment/wall_with_door.gd" id="2_se2tt"]
+[ext_resource type="PackedScene" uid="uid://df1cwfqs3iyd1" path="res://Scenes/Menu/interaction_mode.tscn" id="3_hcout"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l5qc8"]
-size = Vector3(4.08228, 4.06323, 1)
+size = Vector3(4.08228, 4.06323, 1.3219)
 
 [node name="wall_with_door" instance=ExtResource("1_gpous")]
+script = ExtResource("2_se2tt")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+[node name="NextLevelDoor" type="StaticBody3D" parent="." index="1"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0435791, 2.01282, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NextLevelDoor" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0435791, 2.01282, 0.0150757)
 shape = SubResource("BoxShape3D_l5qc8")
+
+[node name="InteractionMode" parent="." index="2" instance=ExtResource("3_hcout")]

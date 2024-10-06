@@ -1,0 +1,38 @@
+extends Control
+
+@onready var message: Label = $Panel/Message
+@onready var message_timer: Timer = $MessageTimer
+@onready var action_button = $Panel/ActionButton
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	action_button.hide()
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+	
+
+func show_message(message_text, show_button=false):
+	if show_button:
+		action_button.show()
+	message.text = message_text
+	self.show()
+	get_tree().paused = true
+	message_timer.start()
+	
+	
+func _on_message_timer_timeout():
+	get_tree().paused = false
+	message.text = ''
+	self.hide()
+
+
+func _on_action_button_pressed():
+	get_tree().paused = false
+	message.text = ''
+	self.hide()
+	if owner.name == "keyring_hanging2":
+		Global.set_player_inventory(Global.PLAYER_INVENTORY_ITEMS.DOOR_KEY)
+		owner.queue_free()

@@ -19,11 +19,8 @@ func _ready():
 	await anim_player.animation_finished
 	anim_player.queue("FadeOut")
 
-func switch_to_level1():
-	var level1 = load("res://Scenes/Levels/level_1.tscn")
-	get_tree().change_scene_to_packed(level1)
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "FadeOut":
-		switch_to_level1()
+		Global.load_level(0)
 		

@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=4 uid="uid://d162r17obilx8"]
+[gd_scene load_steps=8 format=4 uid="uid://d162r17obilx8"]
 
-[ext_resource type="Texture2D" uid="uid://b2raxip5hj2f2" path="res://Assets/Environment/dungeon_texture.png" id="1_ogn2e"]
+[ext_resource type="Script" path="res://Scripts/Environment/table_long_tablecloth_decorated.gd" id="1_2ju7d"]
+[ext_resource type="Texture2D" uid="uid://b2raxip5hj2f2" path="res://Assets/Environment/dungeon_texture.png" id="1_jj0kx"]
+[ext_resource type="PackedScene" uid="uid://df1cwfqs3iyd1" path="res://Scenes/Menu/interaction_mode.tscn" id="3_h4fsp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rdthp"]
 resource_name = "texture"
-albedo_texture = ExtResource("1_ogn2e")
+albedo_texture = ExtResource("1_jj0kx")
 roughness = 0.45
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_vdphh"]
@@ -45,14 +47,16 @@ shadow_mesh = SubResource("ArrayMesh_vdphh")
 size = Vector3(1.97906, 1.6427, 4.61572)
 
 [node name="table_long_tablecloth_decorated_A2" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0889, 2.12256, 49.7453)
+script = ExtResource("1_2ju7d")
 
 [node name="table_long_tablecloth_decorated_A" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_4c67u")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="table_long_tablecloth_decorated_A"]
+[node name="FoodTable" type="StaticBody3D" parent="table_long_tablecloth_decorated_A"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="table_long_tablecloth_decorated_A/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="table_long_tablecloth_decorated_A/FoodTable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0867615, 0.626912, -0.017334)
 shape = SubResource("BoxShape3D_fh1u4")
+
+[node name="InteractionMode" parent="." instance=ExtResource("3_h4fsp")]

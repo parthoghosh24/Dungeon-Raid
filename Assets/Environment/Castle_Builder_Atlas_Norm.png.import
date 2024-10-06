@@ -1,0 +1,39 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://8dkwceqaykov"
+path.s3tc="res://.godot/imported/Castle_Builder_Atlas_Norm.png-0b8166a7676caeb0e0d32f6940de1d5d.s3tc.ctex"
+path.etc2="res://.godot/imported/Castle_Builder_Atlas_Norm.png-0b8166a7676caeb0e0d32f6940de1d5d.etc2.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "470f0054f4357c55365ba171a2bd6ed7"
+}
+
+[deps]
+
+source_file="res://Assets/Environment/Castle_Builder_Atlas_Norm.png"
+dest_files=["res://.godot/imported/Castle_Builder_Atlas_Norm.png-0b8166a7676caeb0e0d32f6940de1d5d.s3tc.ctex", "res://.godot/imported/Castle_Builder_Atlas_Norm.png-0b8166a7676caeb0e0d32f6940de1d5d.etc2.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://Assets/Environment/Castle_Builder_Atlas_Norm.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

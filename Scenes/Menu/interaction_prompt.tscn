@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpcvk2ti5e61j"]
+
+[ext_resource type="PackedScene" uid="uid://5v5bbauos20s" path="res://Scenes/Menu/press_to_interact.tscn" id="1_euipm"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_myb5q"]
+viewport_path = NodePath("SubViewport")
+
+[node name="InteractionPrompt" type="Node3D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="PressToInteract" parent="SubViewport" instance=ExtResource("1_euipm")]
+
+[node name="InteractionPrompt" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.774364, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_myb5q")

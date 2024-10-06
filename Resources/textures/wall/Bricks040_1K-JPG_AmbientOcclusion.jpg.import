@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://coin4cc0aga36"
 path.s3tc="res://.godot/imported/Bricks040_1K-JPG_AmbientOcclusion.jpg-f166f6df50b9e235808ca2e7c09f7cb8.s3tc.ctex"
+path.etc2="res://.godot/imported/Bricks040_1K-JPG_AmbientOcclusion.jpg-f166f6df50b9e235808ca2e7c09f7cb8.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Resources/textures/wall/Bricks040_1K-JPG_AmbientOcclusion.jpg"
-dest_files=["res://.godot/imported/Bricks040_1K-JPG_AmbientOcclusion.jpg-f166f6df50b9e235808ca2e7c09f7cb8.s3tc.ctex"]
+dest_files=["res://.godot/imported/Bricks040_1K-JPG_AmbientOcclusion.jpg-f166f6df50b9e235808ca2e7c09f7cb8.s3tc.ctex", "res://.godot/imported/Bricks040_1K-JPG_AmbientOcclusion.jpg-f166f6df50b9e235808ca2e7c09f7cb8.etc2.ctex"]
 
 [params]
 

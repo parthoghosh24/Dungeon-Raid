@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://df1cwfqs3iyd1"]
+
+[ext_resource type="Script" path="res://Scripts/menu/InteractionMode/interaction_mode.gd" id="1_j86x5"]
+[ext_resource type="FontFile" uid="uid://plk2ssnqqgfy" path="res://Resources/font/MotionControl-Bold.otf" id="2_ns4e1"]
+[ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="3_m6xjp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6qj5"]
+bg_color = Color(0, 0, 0, 0.313726)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uanc1"]
+font = ExtResource("2_ns4e1")
+font_size = 50
+
+[node name="InteractionMode" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1158.0
+offset_bottom = 653.0
+size_flags_horizontal = 4
+script = ExtResource("1_j86x5")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6qj5")
+
+[node name="Message" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -253.0
+offset_top = -80.5
+offset_right = 215.0
+offset_bottom = 78.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Woah that is lot of Gold! 
+But I have to save the knight first."
+label_settings = SubResource("LabelSettings_uanc1")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ActionButton" type="Button" parent="Panel"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -74.0
+offset_top = -178.0
+offset_right = 66.0
+offset_bottom = -147.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_m6xjp")
+theme_override_font_sizes/font_size = 25
+text = "Take it"
+
+[node name="MessageTimer" type="Timer" parent="."]
+process_mode = 3
+wait_time = 5.0
+one_shot = true
+
+[connection signal="pressed" from="Panel/ActionButton" to="." method="_on_action_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://udfovqb7j355"
 path.s3tc="res://.godot/imported/skeleton_texture.png-317189e0d2b3ac208cc384084c5c939a.s3tc.ctex"
+path.etc2="res://.godot/imported/skeleton_texture.png-317189e0d2b3ac208cc384084c5c939a.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Monsters/Assets/skeleton_texture.png"
-dest_files=["res://.godot/imported/skeleton_texture.png-317189e0d2b3ac208cc384084c5c939a.s3tc.ctex"]
+dest_files=["res://.godot/imported/skeleton_texture.png-317189e0d2b3ac208cc384084c5c939a.s3tc.ctex", "res://.godot/imported/skeleton_texture.png-317189e0d2b3ac208cc384084c5c939a.etc2.ctex"]
 
 [params]
 

@@ -19,6 +19,7 @@ var speed
 @onready var visual_cast = $VisualCast
 @onready var health_bar = $SubViewport/EnemyHealthBar
 @onready var stealth_prompt = $StealthHit/StealthText
+@onready var health_vial = preload("res://Scenes/Environment/health_vial.tscn")
 
 var player_in_attack_range = false
 var looking_at_player = false
@@ -37,9 +38,12 @@ enum States {
 	chase,
 	attack,
 	damaged,
+	die
 }
 
 var current_state : States
+
+signal skelly_dead
 
 func _ready():
 	stealth_prompt.visible = false
@@ -51,7 +55,7 @@ func _ready():
 		waypoints.append(node.global_position + Vector3.UP)
 	nav_agent.target_position = waypoints[waypoint_index]
 	anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
-	anim_tree.set("parameters/death_attack/blend_amount", 0)
+	anim_tree.set("parameters/move_attack/blend_amount", 0)
 	
 func _physics_process(delta):
 	show_stealth_prompt()
@@ -67,9 +71,12 @@ func _physics_process(delta):
 			attack_player(delta)
 		States.damaged:
 			damaged()
+		States.die:
+			pass	
 	
 	
 func patrol(delta):
+	anim_tree.set("parameters/move_attack/blend_amount", 0)
 	await get_tree().process_frame
 	if not is_on_floor():
 		velocity.y -=  gravity * delta
@@ -93,9 +100,11 @@ func patrol(delta):
 	
 func wait():
 	anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
+	anim_tree.set("parameters/move_attack/blend_amount", 0)
 	
 func chase_player(delta):
-	if level.player_detected == true or (visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")) :
+	anim_tree.set("parameters/move_attack/blend_amount", 0)
+	if (current_state != States.damaged or current_state != States.die) and level.player_detected == true or (visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")) :
 		if not is_on_floor():
 			velocity.y -=  gravity * delta
 		patrol_timer.stop()
@@ -112,22 +121,38 @@ func chase_player(delta):
 	move_and_slide()
 
 func damaged():
+	anim_tree.set("parameters/move_attack/blend_amount", 0)
 	health_bar.value -= 2
 	knockback(dir)
 	anim_tree.set("parameters/hit_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-
+	
 	if (health_bar.value <= 0):
-		anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
+		current_state = States.die
 		dead()
-	if player_in_attack_range:	
-		current_state = States.attack  
-	else: 
-		current_state = States.chase
+		
+	if current_state != States.die:	
+		if player_in_attack_range:	
+			current_state = States.attack  
+		else: 
+			current_state = States.chase
+	
+
+func stealth_kill():
+	knockback(dir)
+	dead()
+		
+	
+func dead():
+	health_bar.value = 0
+	anim_tree.set("parameters/death_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	death_timer.start()
 
 func attack_player(delta):
 	look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
-	anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
-	anim_tree.set("parameters/death_attack/blend_amount", 1)
+	
+	if current_state != States.damaged or current_state != States.die:
+		anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
+		anim_tree.set("parameters/move_attack/blend_amount", 1)
 	
 
 func knockback(dir):
@@ -160,18 +185,6 @@ func stealth_prompt_visible():
 
 func damage():
 	current_state = States.damaged
-
-func stealth_kill_damage():
-	health_bar.value = 0
-	knockback(dir)
-	dead()
-		
-	
-func dead():
-	anim_tree.set("parameters/death_attack/blend_amount", 0)
-	anim_tree.set("parameters/death_shot/active", true)
-	anim_tree.set("parameters/death_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	death_timer.start()
 	
 
 func _on_patrol_timer_timeout():
@@ -183,22 +196,21 @@ func _on_patrol_timer_timeout():
 
 
 func _on_death_timer_timeout():
+	#Spawn health
+	var small_health = health_vial.instantiate()
+	small_health.global_position = self.global_position
+	self.get_parent().add_child(small_health)
+	small_health.activate_vial("small_health")
+	
+	# Free memory
 	queue_free()
-		
-
-func _on_right_leg_hit_box_body_entered(body):
-	if body.is_in_group("player") and current_state != States.damaged:
-		body.damage()
-
-
-func _on_right_arm_hit_box_body_entered(body):
-	if body.is_in_group("player") and current_state != States.damaged:
-		body.damage()
+	
+	
 
 func _on_player_attack_body_exited(body):
 	if body.is_in_group("player"):
 		player_in_attack_range = false
-		anim_tree.set("parameters/death_attack/blend_amount", 0)
+		anim_tree.set("parameters/move_attack/blend_amount", 0)
 		current_state = States.chase
 
 func signal_start_chase_player():
@@ -218,7 +230,7 @@ func stop_chase_player():
 
 
 func _on_attack_detection_body_entered(body):
-	if body.is_in_group("player") and current_state != States.damaged:
+	if body.is_in_group("player"):
 		player_in_attack_range = true
 		current_state = States.attack
 
@@ -227,5 +239,5 @@ func _on_attack_detection_body_exited(body):
 	if body.is_in_group("player"):
 		player_in_attack_range = false
 		anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 1)
-		anim_tree.set("parameters/death_attack/blend_amount", 0)
+		anim_tree.set("parameters/move_attack/blend_amount", 0)
 		current_state = States.chase

@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=4 uid="uid://bsswgerqh8m31"]
+[gd_scene load_steps=10 format=4 uid="uid://bsswgerqh8m31"]
 
-[ext_resource type="Texture2D" uid="uid://b2raxip5hj2f2" path="res://Assets/Environment/dungeon_texture.png" id="1_khjpu"]
+[ext_resource type="Script" path="res://Scripts/Environment/chest_gold.gd" id="1_fu32d"]
+[ext_resource type="Texture2D" uid="uid://b2raxip5hj2f2" path="res://Assets/Environment/dungeon_texture.png" id="1_ipix1"]
+[ext_resource type="PackedScene" uid="uid://df1cwfqs3iyd1" path="res://Scenes/Menu/interaction_mode.tscn" id="4_3e7n6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4imhk"]
+size = Vector3(3.68664, 1.72375, 2.98529)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a04pj"]
 resource_name = "texture"
-albedo_texture = ExtResource("1_khjpu")
+albedo_texture = ExtResource("1_ipix1")
 roughness = 0.45
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jljl3"]
@@ -71,14 +76,23 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0qjvd")
 
-[node name="chest_gold2" type="Node3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13.4704, 2.12256, -36.9773)
+[node name="ChestGold" type="Node3D" groups=["chest_gold"]]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_fu32d")
 
-[node name="chest_gold" type="MeshInstance3D" parent="."]
+[node name="InteractionMode" parent="." instance=ExtResource("4_3e7n6")]
+
+[node name="ChestGoldArea" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChestGoldArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10053, 0.842106, -0.538683)
+shape = SubResource("BoxShape3D_4imhk")
+
+[node name="chest_gold" type="MeshInstance3D" parent="ChestGoldArea"]
 mesh = SubResource("ArrayMesh_2buox")
 skeleton = NodePath("")
 
-[node name="chest_gold_lid" type="MeshInstance3D" parent="chest_gold"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.564883)
+[node name="chest_gold_lid" type="MeshInstance3D" parent="ChestGoldArea/chest_gold"]
+transform = Transform3D(1, -3.46498e-08, -7.03587e-08, 3.46498e-08, -0.60962, 0.792694, -7.03587e-08, -0.792694, -0.60962, 0, 0.5, -0.564883)
 mesh = SubResource("ArrayMesh_ofe2i")
 skeleton = NodePath("")

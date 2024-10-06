@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cxxln4xwclgkp"
 path.s3tc="res://.godot/imported/knight_texture.png-729381ed4877d5d65d4f4aa8697de510.s3tc.ctex"
+path.etc2="res://.godot/imported/knight_texture.png-729381ed4877d5d65d4f4aa8697de510.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/CharacterAssets/gltf/knight_texture.png"
-dest_files=["res://.godot/imported/knight_texture.png-729381ed4877d5d65d4f4aa8697de510.s3tc.ctex"]
+dest_files=["res://.godot/imported/knight_texture.png-729381ed4877d5d65d4f4aa8697de510.s3tc.ctex", "res://.godot/imported/knight_texture.png-729381ed4877d5d65d4f4aa8697de510.etc2.ctex"]
 
 [params]
 

@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=4 uid="uid://dt4kgsj8oxokr"]
+[gd_scene load_steps=8 format=4 uid="uid://dt4kgsj8oxokr"]
 
-[ext_resource type="Texture2D" uid="uid://b2raxip5hj2f2" path="res://Assets/Environment/dungeon_texture.png" id="1_jvoym"]
+[ext_resource type="Script" path="res://Scripts/Environment/table_long_broken.gd" id="1_4x8ry"]
+[ext_resource type="Texture2D" uid="uid://b2raxip5hj2f2" path="res://Assets/Environment/dungeon_texture.png" id="1_vfjo5"]
+[ext_resource type="PackedScene" uid="uid://df1cwfqs3iyd1" path="res://Scenes/Menu/interaction_mode.tscn" id="2_cx5r3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8fq8i"]
 resource_name = "texture"
-albedo_texture = ExtResource("1_jvoym")
+albedo_texture = ExtResource("1_vfjo5")
 roughness = 0.45
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_t5ngl"]
@@ -43,14 +45,17 @@ shadow_mesh = SubResource("ArrayMesh_t5ngl")
 size = Vector3(2.18756, 1, 4.354)
 
 [node name="table_long_broken2" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.4021, 2.12256, -30.669)
+script = ExtResource("1_4x8ry")
 
 [node name="table_long_broken" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.991305, 0, -0.131582, 0, 1, 0, 0.131582, 0, 0.991305, 0.715933, 0, 6.0683)
 mesh = SubResource("ArrayMesh_fkokq")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="table_long_broken"]
+[node name="TableLongBroken" type="StaticBody3D" parent="table_long_broken"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="table_long_broken/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="table_long_broken/TableLongBroken"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0258484, 0.595381, 0.0683613)
 shape = SubResource("BoxShape3D_pbtsw")
+
+[node name="InteractionMode" parent="." instance=ExtResource("2_cx5r3")]
