@@ -9,7 +9,11 @@ extends Control
 @onready var press_to_start_audio = $SFX/PressToStart
 @onready var hover_audio = $SFX/Hover
 @onready var select_audio = $SFX/Select
-@onready var select_audio_2 = $SFX/Select2
+@onready var press_to_start_timer =$MarginContainer/Main/PressToStartTimer
+@onready var continue_timer =$MarginContainer/Main/ContinueTimer
+@onready var start_game_timer =$MarginContainer/Main/StartGameTimer
+@onready var options_timer =$MarginContainer/Main/OptionsTimer
+@onready var quit_timer =$MarginContainer/Main/QuitTimer
 
 func _ready():
 	if !Global.has_game_started():
@@ -19,27 +23,43 @@ func _ready():
 		options_button.visible = false
 		quit_button.visible = false
 	else:
-		show_menu_buttons()
-			
-	
+		show_menu_buttons()	
 
 func _on_continue_pressed():
-	press_to_start_audio.play()
-	Global.load_level(level)
-
+	if continue_timer.is_stopped():
+		continue_timer.start()
+		press_to_start_audio.play()
+		continue_button.disabled = true
+		get_tree().paused = true
 
 func _on_start_game_pressed():
-	press_to_start_audio.play()
-	get_tree().change_scene_to_file("res://Scenes/intro.tscn")
-
+	if start_game_timer.is_stopped():
+		start_game_timer.start()
+		press_to_start_audio.play()
+		start_game_button.disabled = true
+		get_tree().paused = true
 
 func _on_options_pressed():
-	select_audio_2.play()
-	get_tree().change_scene_to_file("res://Scenes/Menu/options_menu.tscn")
+	if options_timer.is_stopped():
+		options_timer.start()
+		options_button.disabled = true
+		select_audio.play()
+		options_button.disabled = true
+		get_tree().paused = true
 
 func _on_quit_pressed():
-	select_audio_2.play()
-	get_tree().quit()
+	if quit_timer.is_stopped():
+		quit_timer.start()
+		select_audio.play()
+		quit_button.disabled = true
+		get_tree().paused = true
+
+func _on_press_to_start_pressed():
+	if press_to_start_timer.is_stopped():
+		press_to_start_timer.start()
+		press_to_start_audio.play()	
+		press_to_start_button.disabled = true
+		get_tree().paused = true
 
 func show_menu_buttons():
 	press_to_start_button.visible = false
@@ -51,13 +71,6 @@ func show_menu_buttons():
 	level = Global.load_game()
 	if level != null and level >= 0:
 		continue_button.visible = true
-
-func _on_press_to_start_pressed():
-	
-	press_to_start_audio.play()
-	
-	Global.set_game_started()
-	show_menu_buttons()
 	
 
 func _on_start_game_focus_entered():
@@ -75,3 +88,42 @@ func _on_options_mouse_entered():
 
 func _on_quit_mouse_entered():
 	hover_audio.play()
+
+func _on_continue_focus_entered():
+	if hover_audio and !hover_audio.is_playing():
+		hover_audio.play()
+
+
+func _on_continue_mouse_entered():
+	hover_audio.play()	
+
+
+func _on_press_to_start_timer_timeout():
+	press_to_start_button.disabled = false
+	get_tree().paused = false
+	Global.set_game_started()
+	show_menu_buttons()
+
+
+func _on_start_game_timer_timeout():
+	start_game_button.disabled = false
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scenes/intro.tscn")
+
+
+func _on_options_timer_timeout():
+	options_button.disabled = false
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scenes/Menu/options_menu.tscn")
+
+
+func _on_quit_timer_timeout():
+	quit_button.disabled = false
+	get_tree().paused = false
+	get_tree().quit()
+
+
+func _on_continue_timer_timeout():
+	continue_button.disabled = false
+	get_tree().paused = false
+	Global.load_level(level)

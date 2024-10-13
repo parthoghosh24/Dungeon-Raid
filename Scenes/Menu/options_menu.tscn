@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8k1np8icylaq"]
+[gd_scene load_steps=16 format=3 uid="uid://b8k1np8icylaq"]
 
 [ext_resource type="Script" path="res://Scripts/menu/options_menu.gd" id="1_hdgri"]
 [ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="2_3ks0m"]
+[ext_resource type="FontFile" uid="uid://plk2ssnqqgfy" path="res://Resources/font/MotionControl-Bold.otf" id="3_5wve5"]
 [ext_resource type="Script" path="res://Scripts/menu/OptionsMenu/check_button.gd" id="3_cf3ea"]
 [ext_resource type="AudioStream" uid="uid://dc70rw3pj7ch6" path="res://Resources/sound/menu_sfx/menu_back.wav" id="4_21aai"]
 [ext_resource type="AudioStream" uid="uid://dapt6hwr4h0r2" path="res://Resources/sound/menu_sfx/menu_hover.wav" id="5_q8kdt"]
+[ext_resource type="AudioStream" uid="uid://bonopwd1xuju2" path="res://Resources/sound/menu_sfx/menu_select.wav" id="6_7tu36"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5nj7"]
 bg_color = Color(1, 1, 1, 1)
@@ -67,6 +69,8 @@ layout_mode = 2
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_5wve5")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = SubResource("StyleBoxFlat_yq56j")
 theme_override_styles/hover = SubResource("StyleBoxFlat_btnpb")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_kv6ix")
@@ -79,6 +83,8 @@ layout_mode = 2
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_5wve5")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_dkvub")
 text = "Reset"
 
@@ -87,8 +93,27 @@ layout_mode = 2
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(0.262745, 0.278431, 0.74902, 1)
 theme_override_colors/font_color = Color(0.261722, 0.278138, 0.747978, 1)
+theme_override_fonts/font = ExtResource("3_5wve5")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_tkebm")
 text = "Back
+"
+
+[node name="ResetTimer" type="Timer" parent="MarginContainer/Options"]
+process_mode = 3
+one_shot = true
+
+[node name="BackTimer" type="Timer" parent="MarginContainer/Options"]
+process_mode = 3
+wait_time = 1.2
+one_shot = true
+
+[node name="ResetGameConfirm" type="ConfirmationDialog" parent="MarginContainer/Options"]
+process_mode = 3
+title = "Reset game?"
+initial_position = 4
+size = Vector2i(252, 100)
+dialog_text = "This will reset your save game.
 "
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
@@ -114,11 +139,17 @@ vertical_alignment = 1
 [node name="SFX" type="Node" parent="."]
 
 [node name="Back" type="AudioStreamPlayer" parent="SFX"]
+process_mode = 3
 stream = ExtResource("4_21aai")
 max_polyphony = 5
 
 [node name="Hover" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("5_q8kdt")
+max_polyphony = 5
+
+[node name="Select" type="AudioStreamPlayer" parent="SFX"]
+process_mode = 3
+stream = ExtResource("6_7tu36")
 max_polyphony = 5
 
 [connection signal="mouse_entered" from="MarginContainer/Options/CheckButton" to="." method="_on_check_button_mouse_entered"]
@@ -127,3 +158,7 @@ max_polyphony = 5
 [connection signal="pressed" from="MarginContainer/Options/Reset" to="." method="_on_reset_pressed"]
 [connection signal="mouse_entered" from="MarginContainer/Options/Back" to="." method="_on_back_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/Options/Back" to="." method="_on_back_pressed"]
+[connection signal="timeout" from="MarginContainer/Options/ResetTimer" to="." method="_on_reset_timer_timeout"]
+[connection signal="timeout" from="MarginContainer/Options/BackTimer" to="." method="_on_back_timer_timeout"]
+[connection signal="canceled" from="MarginContainer/Options/ResetGameConfirm" to="." method="_on_reset_game_confirm_canceled"]
+[connection signal="confirmed" from="MarginContainer/Options/ResetGameConfirm" to="." method="_on_reset_game_confirm_confirmed"]
