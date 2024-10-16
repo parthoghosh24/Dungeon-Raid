@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://df1cwfqs3iyd1"]
+[gd_scene load_steps=5 format=3 uid="uid://df1cwfqs3iyd1"]
 
 [ext_resource type="Script" path="res://Scripts/menu/InteractionMode/interaction_mode.gd" id="1_j86x5"]
 [ext_resource type="FontFile" uid="uid://plk2ssnqqgfy" path="res://Resources/font/MotionControl-Bold.otf" id="2_ns4e1"]
-[ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="3_m6xjp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6qj5"]
 bg_color = Color(0, 0, 0, 0.313726)
@@ -63,7 +62,7 @@ offset_right = 66.0
 offset_bottom = -147.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("3_m6xjp")
+theme_override_fonts/font = ExtResource("2_ns4e1")
 theme_override_font_sizes/font_size = 25
 text = "Take it"
 

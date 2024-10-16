@@ -38,6 +38,9 @@ var player_score = {RETRIES: 0,
 
 func update_player_score(key, score):
 	player_score[key] += score
+
+func get_player_score():
+	return player_score	
 	
 func set_level(level):
 	current_level = level

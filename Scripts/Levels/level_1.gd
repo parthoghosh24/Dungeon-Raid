@@ -7,6 +7,16 @@ extends Node3D
 @onready var player = $Haiya
 @onready var level_timer: Timer = $LevelTimer
 var level_time_spent: int = 0
+var interactions = {
+	"ChestGoldArea": false,
+	"SwordShieldGold": false,
+	"TableLongBroken": false,
+	"KeyRingHanging": false,
+	"FoodTable": false,
+	"BarrelLarge": false,
+	"BedDecorated": false,
+	"NextLevelDoor": false
+}
 
 
 func _input(event):
@@ -28,6 +38,14 @@ func _on_haiya_player_dead():
 	
 func stop_level_timer():
 	level_timer.stop()
+
+func update_interactions(key):
+	interactions[key] = true
+	
+	#Award player with Exploration bonus if player has interacted has explored
+	#everything
+	if interactions.values().all(func(interaction): return interaction == true):
+		Global.update_player_score(Global.EXPLORATION_BONUS, 1000)
 
 
 func _on_level_timer_timeout():

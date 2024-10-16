@@ -126,6 +126,7 @@ func _physics_process(delta):
 
 func interact():
 	if interactive_object:
+		owner.update_interactions(interactive_object.name)
 		if interactive_object.name == "NextLevelDoor" and Global.get_player_inventory() == Global.PLAYER_INVENTORY_ITEMS.DOOR_KEY:
 			owner.stop_level_timer()
 			Global.switch_to_next_level()
