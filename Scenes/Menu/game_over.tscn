@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqu5klpl4tfr5"]
+[gd_scene load_steps=9 format=3 uid="uid://bqu5klpl4tfr5"]
 
 [ext_resource type="Script" path="res://Scripts/menu/game_over.gd" id="1_bj7er"]
 [ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="1_gmnsw"]
 [ext_resource type="Script" path="res://Scripts/menu/GameOver/try_again.gd" id="3_aitvt"]
+[ext_resource type="FontFile" uid="uid://plk2ssnqqgfy" path="res://Resources/font/MotionControl-Bold.otf" id="3_gulbk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xkcvl"]
 bg_color = Color(1, 1, 1, 1)
@@ -58,6 +59,8 @@ layout_mode = 2
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_gulbk")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_5soiw")
 text = "Try Again"
 script = ExtResource("3_aitvt")
@@ -67,6 +70,8 @@ layout_mode = 2
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_gulbk")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_e20lc")
 text = "Quit"
 

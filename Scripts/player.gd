@@ -127,6 +127,7 @@ func _physics_process(delta):
 func interact():
 	if interactive_object:
 		if interactive_object.name == "NextLevelDoor" and Global.get_player_inventory() == Global.PLAYER_INVENTORY_ITEMS.DOOR_KEY:
+			owner.stop_level_timer()
 			Global.switch_to_next_level()
 			return
 		if interactive_object.name == "KeyRingHanging":
@@ -140,17 +141,18 @@ func invoke_interaction(collider):
 					 "SwordShieldGold",
 					 "TableLongBroken",
 					 "KeyRingHanging",
-					"FoodTable",
-					"BarrelLarge",
-					"BedDecorated",
-					"NextLevelDoor"]
+					 "FoodTable",
+					 "BarrelLarge",
+					 "BedDecorated",
+					 "NextLevelDoor"]
 	if collider and collider.name in colliders:
 		interactive_object = collider
 		interaction_prompt.global_position = self.global_position + Vector3(0, 2, 0)
 		self.add_child(interaction_prompt)
 	else:
 		interactive_object = null
-		self.remove_child(interaction_prompt)
+		if interaction_prompt:
+			self.remove_child(interaction_prompt)
 			
 		
 func damage():
@@ -167,9 +169,7 @@ func heal_up(health_vial):
 		hp_bar.value += 2
 		if !heal_audio.is_playing():
 			heal_audio.play()
-		health_vial.queue_free()	
-			
-		
+		health_vial.queue_free()
 
 func knockback(dir):
 	var tween = create_tween()

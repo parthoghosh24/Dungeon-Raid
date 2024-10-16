@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 var player = null
-var walk_speed = 5
-var run_speed = 20
+var walk_speed = 10
+var run_speed = 30
 var hp = 10
 var dir
 var speed
@@ -20,6 +20,7 @@ var speed
 @onready var health_bar = $SubViewport/EnemyHealthBar
 @onready var stealth_prompt = $StealthHit/StealthText
 @onready var health_vial = preload("res://Scenes/Environment/health_vial.tscn")
+@onready var chase_timer = $ChaseTimer
 
 var player_in_attack_range = false
 var looking_at_player = false
@@ -105,6 +106,8 @@ func wait():
 func chase_player(delta):
 	anim_tree.set("parameters/move_attack/blend_amount", 0)
 	if (current_state != States.damaged or current_state != States.die) and level.player_detected == true or (visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")) :
+		if level.player_detected == true and not (visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")):
+			chase_timer.start()
 		if not is_on_floor():
 			velocity.y -=  gravity * delta
 		patrol_timer.stop()
@@ -139,6 +142,7 @@ func damaged():
 
 func stealth_kill():
 	knockback(dir)
+	Global.update_player_score(Global.STEALTH_KILLS, 200)
 	dead()
 		
 	
@@ -153,6 +157,7 @@ func attack_player(delta):
 	if current_state != States.damaged or current_state != States.die:
 		anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
 		anim_tree.set("parameters/move_attack/blend_amount", 1)
+		Global.update_player_score(Global.HITS_TAKEN, -20)
 	
 
 func knockback(dir):
@@ -169,7 +174,7 @@ func _on_player_detection_body_entered(body):
 func _on_player_detection_body_exited(body):
 	if body.is_in_group("player"):
 		level.player_detected = false
-		signal_stop_chase_player()
+		stop_chase_player()
 
 func is_waiting():
 	return current_state == States.wait
@@ -201,11 +206,10 @@ func _on_death_timer_timeout():
 	small_health.global_position = self.global_position
 	self.get_parent().add_child(small_health)
 	small_health.activate_vial("small_health")
+	Global.update_player_score(Global.KILLS, 100)
 	
 	# Free memory
 	queue_free()
-	
-	
 
 func _on_player_attack_body_exited(body):
 	if body.is_in_group("player"):
@@ -214,12 +218,13 @@ func _on_player_attack_body_exited(body):
 		current_state = States.chase
 
 func signal_start_chase_player():
+	Global.update_player_score(Global.SEEN, -50)
 	get_tree().call_group("monster", "start_chase_player")
 
 func signal_stop_chase_player():
 	get_tree().call_group("monster", "stop_chase_player")	
 
-func start_chase_player():
+func start_chase_player():	
 	looking_at_player = true
 	current_state = States.chase	
 	
@@ -241,3 +246,8 @@ func _on_attack_detection_body_exited(body):
 		anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 1)
 		anim_tree.set("parameters/move_attack/blend_amount", 0)
 		current_state = States.chase
+
+
+func _on_chase_timer_timeout():
+	if not (visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")):
+		stop_chase_player()
