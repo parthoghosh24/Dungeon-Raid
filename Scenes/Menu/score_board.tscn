@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://vwnktl8hivfu"]
+[gd_scene load_steps=9 format=3 uid="uid://vwnktl8hivfu"]
 
 [ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="1_7b16u"]
 [ext_resource type="FontFile" uid="uid://plk2ssnqqgfy" path="res://Resources/font/MotionControl-Bold.otf" id="1_7kebq"]
 [ext_resource type="Script" path="res://Scripts/menu/score_board.gd" id="1_ql3l4"]
+[ext_resource type="AudioStream" uid="uid://dmkakomdg1w5x" path="res://Resources/sound/JRPG Piano.mp3" id="4_in0uv"]
+[ext_resource type="AudioStream" uid="uid://dapt6hwr4h0r2" path="res://Resources/sound/menu_sfx/menu_hover.wav" id="5_3q52k"]
+[ext_resource type="AudioStream" uid="uid://bonopwd1xuju2" path="res://Resources/sound/menu_sfx/menu_select.wav" id="6_aby0i"]
+[ext_resource type="AudioStream" uid="uid://yhf2h45cockg" path="res://Resources/sound/menu_sfx/press_to_start.wav" id="7_r4hsr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gguew"]
 bg_color = Color(1, 1, 1, 1)
@@ -428,5 +432,37 @@ theme_override_fonts/font = ExtResource("1_7kebq")
 theme_override_font_sizes/font_size = 30
 text = "Quit"
 
+[node name="NextLevelTimer" type="Timer" parent="Panel"]
+process_mode = 3
+
+[node name="QuitTimer" type="Timer" parent="Panel"]
+process_mode = 3
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_in0uv")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Hover" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_3q52k")
+max_polyphony = 5
+
+[node name="Select" type="AudioStreamPlayer" parent="SFX"]
+process_mode = 3
+stream = ExtResource("6_aby0i")
+max_polyphony = 5
+
+[node name="PressToStart" type="AudioStreamPlayer" parent="SFX"]
+process_mode = 3
+stream = ExtResource("7_r4hsr")
+max_polyphony = 5
+
+[connection signal="mouse_entered" from="Panel/NextLevel" to="." method="_on_next_level_mouse_entered"]
 [connection signal="pressed" from="Panel/NextLevel" to="." method="_on_next_level_pressed"]
+[connection signal="mouse_entered" from="Panel/Quit" to="." method="_on_quit_mouse_entered"]
 [connection signal="pressed" from="Panel/Quit" to="." method="_on_quit_pressed"]
+[connection signal="timeout" from="Panel/NextLevelTimer" to="." method="_on_next_level_timer_timeout"]
+[connection signal="timeout" from="Panel/QuitTimer" to="." method="_on_quit_timer_timeout"]

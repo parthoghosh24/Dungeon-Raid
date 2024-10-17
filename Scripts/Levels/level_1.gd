@@ -39,6 +39,14 @@ func _on_haiya_player_dead():
 func stop_level_timer():
 	level_timer.stop()
 
+	# if it is more than 5 minutes then award min 1000 points
+	if level_time_spent >=300:
+		Global.update_player_score(Global.TIME_TAKEN, 1000)
+	elif level_time_spent <= 30:
+		Global.update_player_score(Global.TIME_TAKEN, 8000)
+	else:
+		Global.update_player_score(Global.TIME_TAKEN, 2500)
+
 func update_interactions(key):
 	interactions[key] = true
 	

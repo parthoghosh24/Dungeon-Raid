@@ -105,11 +105,11 @@ func wait():
 	
 func chase_player(delta):
 	anim_tree.set("parameters/move_attack/blend_amount", 0)
-	if (current_state != States.damaged or current_state != States.die) and level.player_detected == true or (visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")) :
-		if level.player_detected == true and not (visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")):
-			chase_timer.start()
+	if (current_state != States.damaged or current_state != States.die) and level.player_detected == true or (visual_cast and visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")) :
 		if not is_on_floor():
 			velocity.y -=  gravity * delta
+		if level.player_detected == true and not (visual_cast and visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")):
+			chase_timer.start()	
 		patrol_timer.stop()
 		speed = run_speed
 		anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 1)
@@ -130,6 +130,7 @@ func damaged():
 	anim_tree.set("parameters/hit_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
 	if (health_bar.value <= 0):
+		Global.update_player_score(Global.KILLS, 100)
 		current_state = States.die
 		dead()
 		
@@ -157,7 +158,7 @@ func attack_player(delta):
 	if current_state != States.damaged or current_state != States.die:
 		anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
 		anim_tree.set("parameters/move_attack/blend_amount", 1)
-		Global.update_player_score(Global.HITS_TAKEN, -20)
+		Global.update_player_score(Global.HITS_TAKEN, -50)
 	
 
 func knockback(dir):
@@ -249,5 +250,5 @@ func _on_attack_detection_body_exited(body):
 
 
 func _on_chase_timer_timeout():
-	if not (visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")):
+	if not (visual_cast and visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")):
 		stop_chase_player()

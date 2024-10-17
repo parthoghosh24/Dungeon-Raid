@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://plk2ssnqqgfy" path="res://Resources/font/MotionControl-Bold.otf" id="1_83jm5"]
 [ext_resource type="Script" path="res://Scripts/meta_intro.gd" id="1_uougd"]
-[ext_resource type="Texture2D" uid="uid://cw56pjxjkskjj" path="res://icon.svg" id="2_5iwqb"]
+[ext_resource type="Texture2D" uid="uid://cw56pjxjkskjj" path="res://Resources/godot.svg" id="2_5iwqb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yo785"]
 bg_color = Color(0, 0, 0, 1)
