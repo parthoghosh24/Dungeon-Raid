@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqu5klpl4tfr5"]
+[gd_scene load_steps=11 format=3 uid="uid://bqu5klpl4tfr5"]
 
 [ext_resource type="Script" path="res://Scripts/menu/game_over.gd" id="1_bj7er"]
 [ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="1_gmnsw"]
 [ext_resource type="Script" path="res://Scripts/menu/GameOver/try_again.gd" id="3_aitvt"]
 [ext_resource type="FontFile" uid="uid://plk2ssnqqgfy" path="res://Resources/font/MotionControl-Bold.otf" id="3_gulbk"]
+[ext_resource type="AudioStream" uid="uid://dapt6hwr4h0r2" path="res://Resources/sound/menu_sfx/menu_hover.wav" id="5_pe1am"]
+[ext_resource type="AudioStream" uid="uid://bonopwd1xuju2" path="res://Resources/sound/menu_sfx/menu_select.wav" id="6_6py2a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xkcvl"]
 bg_color = Color(1, 1, 1, 1)
@@ -75,6 +77,14 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_e20lc")
 text = "Quit"
 
+[node name="TryAgainTimer" type="Timer" parent="MarginContainer/Main"]
+process_mode = 3
+one_shot = true
+
+[node name="QuitTimer" type="Timer" parent="MarginContainer/Main"]
+process_mode = 3
+one_shot = true
+
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 8
@@ -95,5 +105,20 @@ text = "Copyrighted © PorthrisNaagu, 2024 "
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SFX" type="Node" parent="."]
+
+[node name="Hover" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_pe1am")
+max_polyphony = 5
+
+[node name="Select" type="AudioStreamPlayer" parent="SFX"]
+process_mode = 3
+stream = ExtResource("6_6py2a")
+max_polyphony = 5
+
+[connection signal="mouse_entered" from="MarginContainer/Main/TryAgain" to="." method="_on_try_again_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/Main/TryAgain" to="." method="_on_try_again_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/Main/Quit" to="." method="_on_quit_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/Main/Quit" to="." method="_on_quit_pressed"]
+[connection signal="timeout" from="MarginContainer/Main/TryAgainTimer" to="." method="_on_try_again_timer_timeout"]
+[connection signal="timeout" from="MarginContainer/Main/QuitTimer" to="." method="_on_quit_timer_timeout"]

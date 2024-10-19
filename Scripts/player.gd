@@ -51,7 +51,9 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
+		var pause_menu = preload("res://Scenes/Menu/pause_menu.tscn").instantiate()
+		get_tree().paused = true
+		get_tree().root.add_child(pause_menu)
 	
 	# Add gravity	
 	if !is_on_floor():
