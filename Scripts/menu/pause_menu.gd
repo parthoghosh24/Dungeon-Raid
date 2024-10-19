@@ -13,8 +13,6 @@ func _on_resume_pressed():
 		select_audio.play()
 		resume_button.disabled = true
 		get_tree().paused = true
-	
-	
 
 func _on_quit_pressed():
 	if quit_timer.is_stopped():
@@ -22,7 +20,6 @@ func _on_quit_pressed():
 		select_audio.play()
 		quit_button.disabled = true
 		get_tree().paused = true
-
 
 func _on_quit_timer_timeout():
 	quit_button.disabled = false
