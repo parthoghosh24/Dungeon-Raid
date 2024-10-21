@@ -7,8 +7,13 @@ func _init():
 
 
 func _on_area_entered(area):
-	if area == null or (area.name != "RightArmHitBox" and area.name != "RightLegHitBox"):
+	if area == null or (area.name != "RightArmHitBox" and area.name != "RightLegHitBox" and area.name != "RightHandHitbox"):
 		return
 	
 	if owner.has_method("damage"):
-		owner.damage()
+		#Skelly Rogue does 3 damage per hit
+		if area.name == "RightHandHitbox":
+			owner.damage(3)
+		#Skelly Minion does 2 damage per hit
+		if area.name == "RightArmHitBox" or area.name == "RightLegHitBox":
+			owner.damage(2)	

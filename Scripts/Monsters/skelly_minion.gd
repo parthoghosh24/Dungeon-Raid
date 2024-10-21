@@ -3,7 +3,6 @@ extends CharacterBody3D
 var player = null
 var walk_speed = 10
 var run_speed = 30
-var hp = 10
 var dir
 var speed
 
@@ -106,9 +105,10 @@ func wait():
 func chase_player(delta):
 	anim_tree.set("parameters/move_attack/blend_amount", 0)
 	if (current_state != States.damaged or current_state != States.die) and level.player_detected == true or (visual_cast and visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")) :
-		if not is_on_floor():
-			velocity.y -=  gravity * delta
+		#if not is_on_floor():
+		velocity.y -=  gravity * delta
 		if level.player_detected == true and not (visual_cast and visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")):
+			velocity.y -=  gravity * delta
 			chase_timer.start()	
 		patrol_timer.stop()
 		speed = run_speed
@@ -142,13 +142,15 @@ func damaged():
 	
 
 func stealth_kill():
-	knockback(dir)
+	knockback(-dir)
 	Global.update_player_score(Global.STEALTH_KILLS, 200)
 	dead()
 		
 	
 func dead():
 	health_bar.value = 0
+	player_detection.process_mode = Node.PROCESS_MODE_DISABLED
+	attack_detection.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.set("parameters/death_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	death_timer.start()
 

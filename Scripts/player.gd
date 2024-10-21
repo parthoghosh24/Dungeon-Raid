@@ -158,8 +158,8 @@ func invoke_interaction(collider):
 			self.remove_child(interaction_prompt)
 			
 		
-func damage():
-	hp_bar.value -= 2
+func damage(damage_value):
+	hp_bar.value -= damage_value
 	knockback(direction)
 	animation_tree.set("parameters/attack_hit/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
