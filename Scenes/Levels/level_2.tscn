@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=4 uid="uid://dfcljmxq4tys8"]
+[gd_scene load_steps=76 format=4 uid="uid://dfcljmxq4tys8"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/level_2.gd" id="1_ai4e8"]
 [ext_resource type="MeshLibrary" uid="uid://cc6j2i1aew2no" path="res://Resources/library.tres" id="2_j6qn7"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bqb3lbm5hs4ql" path="res://Scenes/Environment/coin_stack_small.tscn" id="15_alnig"]
 [ext_resource type="AudioStream" uid="uid://caxrjflxgxnpb" path="res://Resources/sound/Intense_Chase_Pianos.wav" id="21_0qh48"]
 [ext_resource type="PackedScene" uid="uid://gxuuvrm45qed" path="res://Scenes/Monsters/skelly_rogue.tscn" id="21_6f6a7"]
+[ext_resource type="PackedScene" uid="uid://miy8cyxnatij" path="res://Scenes/Monsters/skelly_minion.tscn" id="21_g5kae"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jq7ci"]
 sky_energy_multiplier = 0.0
@@ -2986,6 +2987,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -33.19
 [node name="SkellyRogue" parent="Enemies/Rouge1" instance=ExtResource("21_6f6a7")]
 transform = Transform3D(-0.0941951, 0, -0.995554, 0, 1, 0, 0.995554, 0, -0.0941951, -24.8775, 3.21354, 66.4349)
 player_path = NodePath("../../../Haiya")
+has_key = true
 
 [node name="MarkersToVisit" type="Node" parent="Enemies/Rouge1"]
 
@@ -2997,6 +2999,74 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.7105, -0.902313, 33.187)
 
 [node name="Marker3" type="Marker3D" parent="Enemies/Rouge1/MarkersToVisit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.3021, 6.88297, 12.0219)
+
+[node name="Minion1" type="Node" parent="Enemies"]
+
+[node name="MarkersToVisit" type="Node" parent="Enemies/Minion1"]
+
+[node name="Marker1" type="Marker3D" parent="Enemies/Minion1/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.6693, 1.89882, -22.9765)
+
+[node name="Marker2" type="Marker3D" parent="Enemies/Minion1/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1047, 10, -29.4388)
+
+[node name="Marker3" type="Marker3D" parent="Enemies/Minion1/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4678, 10, -39.9336)
+
+[node name="SkellyMinion1" parent="Enemies/Minion1" instance=ExtResource("21_g5kae")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 31.6317, 10.5017, -36.3862)
+player_path = NodePath("../../../Haiya")
+
+[node name="Minion2" type="Node" parent="Enemies"]
+
+[node name="MarkersToVisit" type="Node" parent="Enemies/Minion2"]
+
+[node name="Marker1" type="Marker3D" parent="Enemies/Minion2/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.29319, 2.10964, 0.981687)
+
+[node name="Marker2" type="Marker3D" parent="Enemies/Minion2/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5838, 2.17458, 10.0791)
+
+[node name="Marker3" type="Marker3D" parent="Enemies/Minion2/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.1719, 2.37497, -13.5114)
+
+[node name="SkellyMinion1" parent="Enemies/Minion2" instance=ExtResource("21_g5kae")]
+transform = Transform3D(-0.80956, 0, 0.587037, 0, 1, 0, -0.587037, 0, -0.80956, 24.5682, 2.46428, -27.9087)
+player_path = NodePath("../../../Haiya")
+
+[node name="Minion3" type="Node" parent="Enemies"]
+
+[node name="MarkersToVisit" type="Node" parent="Enemies/Minion3"]
+
+[node name="Marker1" type="Marker3D" parent="Enemies/Minion3/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.47489, 2.10964, -3.0161)
+
+[node name="Marker2" type="Marker3D" parent="Enemies/Minion3/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.581871, 2.17458, 6.75577)
+
+[node name="Marker3" type="Marker3D" parent="Enemies/Minion3/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6902, 2.37497, -13.5114)
+
+[node name="SkellyMinion1" parent="Enemies/Minion3" instance=ExtResource("21_g5kae")]
+transform = Transform3D(-0.992018, 0, -0.126095, 0, 1, 0, 0.126095, 0, -0.992018, 14.7911, 2.46428, -35.7396)
+player_path = NodePath("../../../Haiya")
+
+[node name="Minion4" type="Node" parent="Enemies"]
+
+[node name="MarkersToVisit" type="Node" parent="Enemies/Minion4"]
+
+[node name="Marker1" type="Marker3D" parent="Enemies/Minion4/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.47489, 2.10964, 13.6277)
+
+[node name="Marker2" type="Marker3D" parent="Enemies/Minion4/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.06979, 2.17458, 20.9595)
+
+[node name="Marker3" type="Marker3D" parent="Enemies/Minion4/MarkersToVisit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.784, 3.61709, -8.29987)
+
+[node name="SkellyMinion1" parent="Enemies/Minion4" instance=ExtResource("21_g5kae")]
+transform = Transform3D(0.0455722, 0, 0.998961, 0, 1, 0, -0.998961, 0, 0.0455722, 32.9082, 2.46428, 5.1063)
+player_path = NodePath("../../../Haiya")
 
 [node name="Music" type="Node" parent="."]
 

@@ -21,6 +21,8 @@ var speed
 @onready var health_vial = preload("res://Scenes/Environment/health_vial.tscn")
 @onready var keyring = preload("res://Scenes/Environment/keyring_hanging.tscn")
 @onready var chase_timer = $ChaseTimer
+@export var has_key: bool
+@onready var keyring_attached = $Skeleton_Rogue/Rig/Skeleton3D/Key/keyring2
 
 var player_in_attack_range = false
 var looking_at_player = false
@@ -47,6 +49,10 @@ var current_state : States
 signal skelly_dead
 
 func _ready():
+	if has_key && has_key == true:
+		keyring_attached.visible = true
+	else:
+		keyring_attached.visible = false	
 	stealth_prompt.visible = false
 	level = get_parent().get_parent().get_parent()
 	waypoint_index = 0
@@ -207,13 +213,13 @@ func _on_patrol_timer_timeout():
 func _on_death_timer_timeout():
 	#Spawn health
 	var medium_health = health_vial.instantiate()
-	var keyring_pickup = keyring.instantiate()
 	medium_health.global_position = self.global_position
-	keyring_pickup.global_position = self.global_position +Vector3(0, 1, 0)
-	#keyring_pickup.global_rotation = Vector3(83.9, 69.2, -76.6)
 	self.get_parent().add_child(medium_health)
-	self.get_parent().add_child(keyring_pickup)
 	medium_health.activate_vial("medium_health")
+	if has_key && has_key == true:
+		var keyring_pickup = keyring.instantiate()
+		keyring_pickup.global_position = self.global_position +Vector3(0, 1, 0)
+		self.get_parent().add_child(keyring_pickup)
 	Global.update_player_score(Global.KILLS, 200)
 	
 	# Free memory
