@@ -9,6 +9,11 @@ extends Node3D
 var level_time_spent: int = 0
 var interactions = {
 	"ChestGoldArea": false,
+	"Tree": false,
+	"Chest": false,
+	"KeyRingHanging": false,
+	"NextLevelDoor": false,
+	"Axe": false,
 }
 
 

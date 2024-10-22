@@ -27,8 +27,7 @@ func _on_try_again_timer_timeout():
 	try_again_button.disabled = false
 	get_tree().paused = false
 	Global.update_player_score(Global.RETRIES, -100)
-	var level1 = load("res://Scenes/Levels/level_1.tscn")
-	get_tree().change_scene_to_packed(level1)
+	Global.load_level(Global.get_level())
 
 
 func _on_quit_timer_timeout():

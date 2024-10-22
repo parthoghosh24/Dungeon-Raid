@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://dis4d05ntvh4o"]
+[gd_scene load_steps=8 format=4 uid="uid://dis4d05ntvh4o"]
 
+[ext_resource type="Script" path="res://Scripts/Environment/axe_2_handed.gd" id="1_3ix73"]
 [ext_resource type="Texture2D" uid="uid://bekqt7kuuxfw5" path="res://Assets/CharacterAssets/gltf/barbarian_texture.png" id="1_pdv4o"]
+[ext_resource type="PackedScene" uid="uid://df1cwfqs3iyd1" path="res://Scenes/Menu/interaction_mode.tscn" id="3_3gbb5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xoxe6"]
 resource_name = "barbarian_texture"
@@ -46,13 +48,16 @@ shadow_mesh = SubResource("ArrayMesh_40wiq")
 size = Vector3(1.12018, 1.66711, 0.421143)
 
 [node name="axe_2handed" type="Node3D"]
+script = ExtResource("1_3ix73")
 
 [node name="axe_2handed" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_qiygr")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="axe_2handed"]
+[node name="Axe" type="StaticBody3D" parent="axe_2handed"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="axe_2handed/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="axe_2handed/Axe"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0093689, 0.41115, 0.0203857)
 shape = SubResource("BoxShape3D_wa4a6")
+
+[node name="InteractionMode" parent="." instance=ExtResource("3_3gbb5")]

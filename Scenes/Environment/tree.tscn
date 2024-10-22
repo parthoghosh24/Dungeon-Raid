@@ -1,4 +1,7 @@
-[gd_scene load_steps=8 format=4 uid="uid://dx8w7v86mcg2x"]
+[gd_scene load_steps=10 format=4 uid="uid://dx8w7v86mcg2x"]
+
+[ext_resource type="Script" path="res://Scripts/Environment/tree.gd" id="1_7w4hg"]
+[ext_resource type="PackedScene" uid="uid://df1cwfqs3iyd1" path="res://Scenes/Menu/interaction_mode.tscn" id="1_bpf5r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rd8td"]
 resource_name = "Material.001"
@@ -83,6 +86,7 @@ height = 17.1618
 radius = 3.13943
 
 [node name="tree" type="Node3D"]
+script = ExtResource("1_7w4hg")
 
 [node name="Cylinder" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_gnv4r")
@@ -93,9 +97,11 @@ transform = Transform3D(4.96762, 0, 0, 0, 4.96762, 0, 0, 0, 4.96762, 3.50534, 13
 mesh = SubResource("ArrayMesh_nqqb3")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Icosphere"]
+[node name="Tree" type="StaticBody3D" parent="Icosphere"]
 transform = Transform3D(0.201304, 0, 0, 0, 0.201304, 0, 0, 0, 0.201304, -0.705638, -2.75297, 0.236093)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Icosphere/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Icosphere/Tree"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.18369, 0)
 shape = SubResource("CylinderShape3D_jgf2h")
+
+[node name="InteractionMode" parent="." instance=ExtResource("1_bpf5r")]

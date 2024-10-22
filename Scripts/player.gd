@@ -147,7 +147,10 @@ func invoke_interaction(collider):
 					 "FoodTable",
 					 "BarrelLarge",
 					 "BedDecorated",
-					 "NextLevelDoor"]
+					 "NextLevelDoor",
+					 "Tree",
+					"Chest",
+					"Axe"]
 	if collider and collider.name in colliders:
 		interactive_object = collider
 		interaction_prompt.global_position = self.global_position + Vector3(0, 2, 0)
