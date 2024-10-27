@@ -6,6 +6,11 @@ extends Control
 @onready var quit_button = $Panel/MarginContainer/Main/Quit
 @onready var resume_timer = $Panel/MarginContainer/Main/ResumeTimer
 @onready var quit_timer = $Panel/MarginContainer/Main/QuitTimer
+@onready var controls_button = $Panel/MarginContainer/Main/Controls
+@onready var controls_timer = $Panel/MarginContainer/Main/ControlsTimer
+
+func _ready():
+	get_tree().paused = true
 
 func _on_resume_pressed():
 	if resume_timer.is_stopped():
@@ -43,3 +48,22 @@ func _on_quit_mouse_entered():
 
 func _on_resume_mouse_entered():
 	hover_audio.play()
+
+
+func _on_controls_pressed():
+	if controls_timer.is_stopped():
+		controls_timer.start()
+		select_audio.play()
+		controls_button.disabled = true
+		get_tree().paused = true
+
+
+func _on_controls_mouse_entered():
+	hover_audio.play()
+
+
+func _on_controls_timer_timeout():
+	controls_button.disabled = false
+	get_tree().paused = false
+	var controls_screen = preload("res://Scenes/Menu/control_screen.tscn").instantiate()
+	get_tree().root.add_child(controls_screen)

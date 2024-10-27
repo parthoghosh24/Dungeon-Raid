@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ljlwsdlblaos"]
+[gd_scene load_steps=12 format=3 uid="uid://ljlwsdlblaos"]
 
 [ext_resource type="Script" path="res://Scripts/menu/pause_menu.gd" id="1_e8w1p"]
 [ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="1_ux4a1"]
@@ -15,6 +15,9 @@ bg_color = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ma075"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t8t3m"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mk75"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
@@ -26,6 +29,7 @@ offset_bottom = 40.0
 script = ExtResource("1_e8w1p")
 
 [node name="Panel" type="Panel" parent="."]
+layout_mode = 0
 offset_top = 1.0
 offset_right = 1153.0
 offset_bottom = 647.0
@@ -34,10 +38,11 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_g0l5f")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
-offset_left = 256.0
-offset_top = 194.0
-offset_right = 839.0
-offset_bottom = 518.0
+layout_mode = 0
+offset_left = 324.0
+offset_top = 195.0
+offset_right = 907.0
+offset_bottom = 519.0
 theme = SubResource("Theme_of743")
 
 [node name="Label" type="Label" parent="Panel/MarginContainer"]
@@ -68,6 +73,17 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ma075")
 text = "Resume"
 script = ExtResource("3_c4brl")
 
+[node name="Controls" type="Button" parent="Panel/MarginContainer/Main"]
+process_mode = 3
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_v5ya8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_t8t3m")
+text = "Controls"
+
 [node name="Quit" type="Button" parent="Panel/MarginContainer/Main"]
 process_mode = 3
 layout_mode = 2
@@ -84,6 +100,10 @@ process_mode = 3
 one_shot = true
 
 [node name="QuitTimer" type="Timer" parent="Panel/MarginContainer/Main"]
+process_mode = 3
+one_shot = true
+
+[node name="ControlsTimer" type="Timer" parent="Panel/MarginContainer/Main"]
 process_mode = 3
 one_shot = true
 
@@ -120,7 +140,10 @@ max_polyphony = 5
 
 [connection signal="mouse_entered" from="Panel/MarginContainer/Main/Resume" to="." method="_on_resume_mouse_entered"]
 [connection signal="pressed" from="Panel/MarginContainer/Main/Resume" to="." method="_on_resume_pressed"]
+[connection signal="mouse_entered" from="Panel/MarginContainer/Main/Controls" to="." method="_on_controls_mouse_entered"]
+[connection signal="pressed" from="Panel/MarginContainer/Main/Controls" to="." method="_on_controls_pressed"]
 [connection signal="mouse_entered" from="Panel/MarginContainer/Main/Quit" to="." method="_on_quit_mouse_entered"]
 [connection signal="pressed" from="Panel/MarginContainer/Main/Quit" to="." method="_on_quit_pressed"]
 [connection signal="timeout" from="Panel/MarginContainer/Main/ResumeTimer" to="." method="_on_resume_timer_timeout"]
 [connection signal="timeout" from="Panel/MarginContainer/Main/QuitTimer" to="." method="_on_quit_timer_timeout"]
+[connection signal="timeout" from="Panel/MarginContainer/Main/ControlsTimer" to="." method="_on_controls_timer_timeout"]

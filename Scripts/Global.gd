@@ -7,7 +7,9 @@ enum PLAYER_INVENTORY_ITEMS { DOOR_KEY }
 enum INPUT_SCHEMES { MOUSE_AND_KEYBOARD, GAMEPAD }
 static var INPUT_SCHEME: INPUT_SCHEMES = INPUT_SCHEMES.MOUSE_AND_KEYBOARD
 
-var levels = ["res://Scenes/Levels/level_1.tscn", "res://Scenes/Levels/level_2.tscn"]
+var levels = ["res://Scenes/Levels/level_1.tscn", 
+			  "res://Scenes/Levels/level_2.tscn",
+			  "res://Scenes/Levels/level_3.tscn"]
 
 #Player score keys
 const RETRIES = "retries"
@@ -39,6 +41,8 @@ var player_score = {RETRIES: 0,
 					NOT_SEEN_BONUS: 0,
 					TOTAL: 0,
 					RANK: "",}
+					
+var playing_level_cutscene = false					
 
 func update_player_score(key, score):
 	player_score[key] += score
@@ -145,5 +149,14 @@ func load_game():
 	var level = file.get_var()
 	file.close()
 	return level
+
+func play_level_cutscene():
+	playing_level_cutscene = true
+
+func level_cutscene_playing():
+	return 	playing_level_cutscene
+
+func stop_level_cutscene():
+	playing_level_cutscene = false
 	
 	

@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://7vk13a6athq5"]
+[gd_scene load_steps=8 format=4 uid="uid://7vk13a6athq5"]
 
+[ext_resource type="Script" path="res://Scripts/Environment/stool.gd" id="1_1o2yr"]
 [ext_resource type="Texture2D" uid="uid://b2raxip5hj2f2" path="res://Assets/Environment/dungeon_texture.png" id="1_l8q12"]
+[ext_resource type="PackedScene" uid="uid://df1cwfqs3iyd1" path="res://Scenes/Menu/interaction_mode.tscn" id="3_fy70j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sy7wh"]
 resource_name = "texture"
@@ -43,14 +45,16 @@ shadow_mesh = SubResource("ArrayMesh_y2pvo")
 size = Vector3(0.775818, 1, 0.770752)
 
 [node name="stool2" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.4439, 2.12256, -24.1757)
+script = ExtResource("1_1o2yr")
 
 [node name="stool" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_7wat5")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="stool"]
+[node name="Stool" type="StaticBody3D" parent="stool"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="stool/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="stool/Stool"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00228882, 0, 0.00378418)
 shape = SubResource("BoxShape3D_7u1tx")
+
+[node name="InteractionMode" parent="." instance=ExtResource("3_fy70j")]

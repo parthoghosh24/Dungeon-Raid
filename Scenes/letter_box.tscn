@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc74axs7pqcdn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eh03f"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="LetterBox" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TopLetterBox" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 74.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_eh03f")
+
+[node name="BottomLetterBox" type="Panel" parent="."]
+layout_mode = 0
+offset_top = 576.0
+offset_right = 1154.0
+offset_bottom = 650.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_eh03f")

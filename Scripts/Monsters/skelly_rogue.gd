@@ -112,10 +112,11 @@ func wait():
 func chase_player(delta):
 	anim_tree.set("parameters/move_attack/blend_amount", 0)
 	if (current_state != States.damaged or current_state != States.die) and level.player_detected == true or (visual_cast and visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")) :
-		#if not is_on_floor():
-		velocity.y -=  gravity * delta
-		if level.player_detected == true and not (visual_cast and visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")):
+		if not is_on_floor():
 			velocity.y -=  gravity * delta
+		if level.player_detected == true and not (visual_cast and visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")):
+			if not is_on_floor():
+				velocity.y -=  gravity * delta
 			chase_timer.start()	
 		patrol_timer.stop()
 		speed = run_speed

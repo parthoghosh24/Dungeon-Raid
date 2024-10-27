@@ -65,6 +65,7 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="CheckButton" type="CheckButton" parent="MarginContainer/Options"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
@@ -79,6 +80,7 @@ text = "Play with Joypad"
 script = ExtResource("3_cf3ea")
 
 [node name="Reset" type="Button" parent="MarginContainer/Options"]
+process_mode = 3
 layout_mode = 2
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
@@ -88,7 +90,19 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_dkvub")
 text = "Reset"
 
+[node name="Controls" type="Button" parent="MarginContainer/Options"]
+process_mode = 3
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_5wve5")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_dkvub")
+text = "Controls"
+
 [node name="Back" type="Button" parent="MarginContainer/Options"]
+process_mode = 3
 layout_mode = 2
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(0.262745, 0.278431, 0.74902, 1)
@@ -115,6 +129,10 @@ initial_position = 4
 size = Vector2i(252, 100)
 dialog_text = "This will reset your save game.
 "
+
+[node name="ControlsTimer" type="Timer" parent="MarginContainer/Options"]
+process_mode = 3
+one_shot = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -156,9 +174,12 @@ max_polyphony = 5
 [connection signal="toggled" from="MarginContainer/Options/CheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="mouse_entered" from="MarginContainer/Options/Reset" to="." method="_on_reset_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/Options/Reset" to="." method="_on_reset_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/Options/Controls" to="." method="_on_controls_mouse_entered"]
+[connection signal="pressed" from="MarginContainer/Options/Controls" to="." method="_on_controls_pressed"]
 [connection signal="mouse_entered" from="MarginContainer/Options/Back" to="." method="_on_back_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/Options/Back" to="." method="_on_back_pressed"]
 [connection signal="timeout" from="MarginContainer/Options/ResetTimer" to="." method="_on_reset_timer_timeout"]
 [connection signal="timeout" from="MarginContainer/Options/BackTimer" to="." method="_on_back_timer_timeout"]
 [connection signal="canceled" from="MarginContainer/Options/ResetGameConfirm" to="." method="_on_reset_game_confirm_canceled"]
 [connection signal="confirmed" from="MarginContainer/Options/ResetGameConfirm" to="." method="_on_reset_game_confirm_confirmed"]
+[connection signal="timeout" from="MarginContainer/Options/ControlsTimer" to="." method="_on_controls_timer_timeout"]

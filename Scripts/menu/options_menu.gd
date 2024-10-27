@@ -5,6 +5,8 @@ extends Control
 @onready var select_audio = $SFX/Select
 @onready var reset_button = $MarginContainer/Options/Reset
 @onready var back_button = $MarginContainer/Options/Back
+@onready var controls_button = $MarginContainer/Options/Controls
+@onready var controls_timer = $MarginContainer/Options/ControlsTimer
 @onready var reset_timer = $MarginContainer/Options/ResetTimer
 @onready var back_timer = $MarginContainer/Options/BackTimer
 @onready  var reset_game_confirm = $MarginContainer/Options/ResetGameConfirm
@@ -50,7 +52,6 @@ func _on_back_mouse_entered():
 
 func _on_reset_timer_timeout():
 	pass
-	
 
 
 func _on_back_timer_timeout():
@@ -69,3 +70,22 @@ func _on_reset_game_confirm_confirmed():
 func _on_reset_game_confirm_canceled():
 	reset_button.disabled = false
 	get_tree().paused = false
+
+
+func _on_controls_timer_timeout():
+	controls_button.disabled = false
+	get_tree().paused = false
+	var controls_screen = preload("res://Scenes/Menu/control_screen.tscn").instantiate()
+	get_tree().root.add_child(controls_screen)
+
+
+func _on_controls_pressed():
+	if controls_timer.is_stopped():
+		controls_timer.start()
+		select_audio.play()
+		controls_button.disabled = true
+		get_tree().paused = true
+
+
+func _on_controls_mouse_entered():
+	hover_audio.play()

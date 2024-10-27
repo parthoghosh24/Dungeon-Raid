@@ -129,6 +129,9 @@ func _physics_process(delta):
 func interact():
 	if interactive_object:
 		owner.update_interactions(interactive_object.name)
+		if interactive_object.name == "BarbarianBed":
+			Global.play_level_cutscene()
+			return
 		if interactive_object.name == "NextLevelDoor" and Global.get_player_inventory() == Global.PLAYER_INVENTORY_ITEMS.DOOR_KEY:
 			owner.stop_level_timer()
 			Global.switch_to_score_board()
@@ -149,8 +152,11 @@ func invoke_interaction(collider):
 					 "BedDecorated",
 					 "NextLevelDoor",
 					 "Tree",
-					"Chest",
-					"Axe"]
+					 "Chest",
+					 "Axe",
+					 "Stool",
+					 "BarbarianBed",
+					]
 	if collider and collider.name in colliders:
 		interactive_object = collider
 		interaction_prompt.global_position = self.global_position + Vector3(0, 2, 0)
@@ -170,9 +176,9 @@ func damage(damage_value):
 		animation_tree.set("parameters/hit_death/blend_amount",1)
 		death_timer.start()
 		
-func heal_up(health_vial):
+func heal_up(health_vial, value):
 	if hp_bar.value < hp_bar.max_value - 1:
-		hp_bar.value += 2
+		hp_bar.value += value
 		if !heal_audio.is_playing():
 			heal_audio.play()
 		health_vial.queue_free()

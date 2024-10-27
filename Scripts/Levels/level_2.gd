@@ -14,6 +14,7 @@ var interactions = {
 	"KeyRingHanging": false,
 	"NextLevelDoor": false,
 	"Axe": false,
+	"Stool": false,
 }
 
 

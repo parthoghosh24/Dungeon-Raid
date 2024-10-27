@@ -1,0 +1,314 @@
+[gd_scene load_steps=16 format=3 uid="uid://5tq5qkij8rwc"]
+
+[ext_resource type="Script" path="res://Scripts/menu/control_screen.gd" id="1_hs8dm"]
+[ext_resource type="Texture2D" uid="uid://cc81ojjxuytwm" path="res://Resources/images/w_dark.png" id="1_wq6kx"]
+[ext_resource type="Texture2D" uid="uid://7va86pukimse" path="res://Resources/images/s_dark.png" id="2_xlvlj"]
+[ext_resource type="Texture2D" uid="uid://du6wttyqs5v4n" path="res://Resources/images/a_key_dark.png" id="3_5crpb"]
+[ext_resource type="Texture2D" uid="uid://y1wvxaaevau8" path="res://Resources/images/d_dark.png" id="4_fm5jw"]
+[ext_resource type="Texture2D" uid="uid://b2ind6p504tfk" path="res://Resources/images/q_dark.png" id="5_kow6o"]
+[ext_resource type="Texture2D" uid="uid://bi06fp4r0wyur" path="res://Resources/images/e_dark.png" id="6_t8fof"]
+[ext_resource type="Texture2D" uid="uid://b5oyw5wdvadnu" path="res://Resources/images/shift_dark.png" id="7_dsupx"]
+[ext_resource type="Texture2D" uid="uid://dfws7er2byn2x" path="res://Resources/images/space_dark.png" id="8_kqj1c"]
+[ext_resource type="Texture2D" uid="uid://c4y14t4tgklpd" path="res://Resources/images/left_mouse_button_dark.png" id="9_xobie"]
+[ext_resource type="FontFile" uid="uid://plk2ssnqqgfy" path="res://Resources/font/MotionControl-Bold.otf" id="10_6rxdn"]
+[ext_resource type="AudioStream" uid="uid://dc70rw3pj7ch6" path="res://Resources/sound/menu_sfx/menu_back.wav" id="12_ttmjn"]
+[ext_resource type="AudioStream" uid="uid://dapt6hwr4h0r2" path="res://Resources/sound/menu_sfx/menu_hover.wav" id="13_wh2lq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vwyq"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yo61s"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="ControlScreen" type="Control"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hs8dm")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6vwyq")
+
+[node name="W" type="TextureRect" parent="Panel"]
+layout_mode = 2
+offset_left = 465.0
+offset_top = 192.0
+offset_right = 513.0
+offset_bottom = 233.0
+texture = ExtResource("1_wq6kx")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="S" type="TextureRect" parent="Panel"]
+layout_mode = 2
+offset_left = 465.0
+offset_top = 256.0
+offset_right = 513.0
+offset_bottom = 297.0
+texture = ExtResource("2_xlvlj")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="A" type="TextureRect" parent="Panel"]
+layout_mode = 2
+offset_left = 376.0
+offset_top = 256.0
+offset_right = 424.0
+offset_bottom = 297.0
+texture = ExtResource("3_5crpb")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="D" type="TextureRect" parent="Panel"]
+layout_mode = 2
+offset_left = 551.0
+offset_top = 256.0
+offset_right = 599.0
+offset_bottom = 297.0
+texture = ExtResource("4_fm5jw")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Q" type="TextureRect" parent="Panel"]
+layout_mode = 2
+offset_left = 376.0
+offset_top = 104.0
+offset_right = 424.0
+offset_bottom = 145.0
+texture = ExtResource("5_kow6o")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="E" type="TextureRect" parent="Panel"]
+layout_mode = 2
+offset_left = 576.0
+offset_top = 104.0
+offset_right = 624.0
+offset_bottom = 145.0
+texture = ExtResource("6_t8fof")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Shift" type="TextureRect" parent="Panel"]
+layout_mode = 2
+offset_left = 168.0
+offset_top = 249.0
+offset_right = 256.0
+offset_bottom = 309.0
+texture = ExtResource("7_dsupx")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="SpaceBar" type="TextureRect" parent="Panel"]
+layout_mode = 2
+offset_left = 376.0
+offset_top = 376.0
+offset_right = 592.0
+offset_bottom = 424.0
+texture = ExtResource("8_kqj1c")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="MouseLeft" type="TextureRect" parent="Panel"]
+layout_mode = 2
+offset_left = 784.0
+offset_top = 200.0
+offset_right = 960.0
+offset_bottom = 300.0
+texture = ExtResource("9_xobie")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="StealthKill" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 56.0
+offset_right = 431.0
+offset_bottom = 87.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_6rxdn")
+theme_override_font_sizes/font_size = 30
+text = "Stealth Kill"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Use_Interact" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 552.0
+offset_top = 56.0
+offset_right = 691.0
+offset_bottom = 87.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_6rxdn")
+theme_override_font_sizes/font_size = 30
+text = "Use/Interact
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Up" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 145.0
+offset_right = 528.0
+offset_bottom = 210.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_6rxdn")
+theme_override_font_sizes/font_size = 30
+text = "Up
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Left" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 312.0
+offset_right = 432.0
+offset_bottom = 411.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_6rxdn")
+theme_override_font_sizes/font_size = 30
+text = "Left
+
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Down" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 312.0
+offset_right = 520.0
+offset_bottom = 411.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_6rxdn")
+theme_override_font_sizes/font_size = 30
+text = "Down
+
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Right" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 544.0
+offset_top = 312.0
+offset_right = 616.0
+offset_bottom = 411.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_6rxdn")
+theme_override_font_sizes/font_size = 30
+text = "Right
+
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HoldToRun" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 216.0
+offset_right = 311.0
+offset_bottom = 281.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_6rxdn")
+theme_override_font_sizes/font_size = 30
+text = "Hold with DIrection to run
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Jump" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 416.0
+offset_right = 544.0
+offset_bottom = 480.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_6rxdn")
+theme_override_font_sizes/font_size = 30
+text = "Jump
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Attack" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 752.0
+offset_top = 136.0
+offset_right = 969.0
+offset_bottom = 200.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_6rxdn")
+theme_override_font_sizes/font_size = 30
+text = "Left click for attack
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 744.0
+offset_top = 296.0
+offset_right = 1026.0
+offset_bottom = 360.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_6rxdn")
+theme_override_font_sizes/font_size = 30
+text = "Rotate Camera with mouse"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 525.0
+offset_right = 624.0
+offset_bottom = 565.0
+
+[node name="Back" type="Button" parent="Panel/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0.262745, 0.278431, 0.74902, 1)
+theme_override_colors/font_color = Color(0.261722, 0.278138, 0.747978, 1)
+theme_override_fonts/font = ExtResource("10_6rxdn")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_yo61s")
+text = "Back"
+
+[node name="BackTimer" type="Timer" parent="Panel/VBoxContainer"]
+process_mode = 3
+wait_time = 1.2
+one_shot = true
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Back" type="AudioStreamPlayer" parent="SFX"]
+process_mode = 3
+stream = ExtResource("12_ttmjn")
+max_polyphony = 5
+
+[node name="Hover" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("13_wh2lq")
+max_polyphony = 5
+
+[connection signal="mouse_entered" from="Panel/VBoxContainer/Back" to="." method="_on_back_mouse_entered"]
+[connection signal="pressed" from="Panel/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="timeout" from="Panel/VBoxContainer/BackTimer" to="." method="_on_back_timer_timeout"]
