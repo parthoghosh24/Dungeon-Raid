@@ -156,6 +156,7 @@ func invoke_interaction(collider):
 					 "Axe",
 					 "Stool",
 					 "BarbarianBed",
+					 "Spike"
 					]
 	if collider and collider.name in colliders:
 		interactive_object = collider
@@ -195,3 +196,8 @@ func _on_attack_timer_timeout():
 
 func _on_death_timer_timeout():
 	emit_signal("player_dead")
+	
+func dead():
+	hp_bar.value = 0
+	animation_tree.set("parameters/hit_death/blend_amount",1)
+	death_timer.start()

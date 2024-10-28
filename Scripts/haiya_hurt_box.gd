@@ -7,6 +7,9 @@ func _init():
 
 
 func _on_area_entered(area):
+	if area.name == "SpikeArea":
+		owner.dead()
+
 	if area == null or (area.name != "RightArmHitBox" and area.name != "RightLegHitBox" and area.name != "RightHandHitbox"):
 		return
 	

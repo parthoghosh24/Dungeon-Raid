@@ -9,7 +9,8 @@ static var INPUT_SCHEME: INPUT_SCHEMES = INPUT_SCHEMES.MOUSE_AND_KEYBOARD
 
 var levels = ["res://Scenes/Levels/level_1.tscn", 
 			  "res://Scenes/Levels/level_2.tscn",
-			  "res://Scenes/Levels/level_3.tscn"]
+			  "res://Scenes/Levels/level_3.tscn",
+			  "res://Scenes/Levels/level_4.tscn"]
 
 #Player score keys
 const RETRIES = "retries"
