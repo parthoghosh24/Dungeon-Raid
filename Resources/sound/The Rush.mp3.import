@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://sy8a6fvu6i4o"
+path="res://.godot/imported/The Rush.mp3-9243507b03ec59e8a92e97d4f509d0b8.mp3str"
+
+[deps]
+
+source_file="res://Resources/sound/The Rush.mp3"
+dest_files=["res://.godot/imported/The Rush.mp3-9243507b03ec59e8a92e97d4f509d0b8.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

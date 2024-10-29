@@ -11,7 +11,6 @@ extends Node3D
 var level_time_spent: int = 0
 var interactions = {
 	"BarbarianBed": false,
-	"KeyRingHanging": false,
 	"NextLevelDoor": false,
 }
 var cutscene_playing = false

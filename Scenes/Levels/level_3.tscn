@@ -274,13 +274,13 @@ _data = {
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6xile"]
 sky_energy_multiplier = 0.0
 
-[sub_resource type="Sky" id="Sky_min7p"]
+[sub_resource type="Sky" id="Sky_hmttl"]
 sky_material = SubResource("ProceduralSkyMaterial_6xile")
 
 [sub_resource type="Environment" id="Environment_0u5gi"]
 background_mode = 2
 background_energy_multiplier = 2.0
-sky = SubResource("Sky_min7p")
+sky = SubResource("Sky_hmttl")
 tonemap_mode = 2
 sdfgi_enabled = true
 sdfgi_use_occlusion = true

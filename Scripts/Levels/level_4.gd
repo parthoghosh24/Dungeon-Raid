@@ -3,15 +3,19 @@ extends Node3D
 @onready var player_detected: bool
 @onready var chase_music = $Music/Chase
 @onready var music_animation = $Music/MusicAnimation
+@onready var battle_music = $Music/BattleMusic
 @onready var player = $Haiya
+@onready var warrior = $Enemies/Warrior/SkellyWarrior
 @onready var level_timer: Timer = $LevelTimer
 var level_time_spent: int = 0
 
 var interactions = {
-	"Spike": false,
+	"MiniBossFightDoor": false,
 	"KeyRingHanging": false,
 	"NextLevelDoor": false,
 }
+
+var cutscene_playing = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,6 +27,12 @@ func _ready():
 func _physics_process(delta):
 	if player_detected:
 		music_animation.play("FadeIn")
+	
+	if Global.level_cutscene_playing() == true and !cutscene_playing:
+		trigger_cutscene()
+	
+	if Global.level_cutscene_playing() == false and cutscene_playing:
+		resume_game()	
 
 func update_interactions(key):
 	interactions[key] = true
@@ -49,3 +59,19 @@ func stop_level_timer():
 		
 func _on_level_timer_timeout():
 	level_time_spent += 1
+	
+func trigger_cutscene():
+	cutscene_playing = true
+	get_tree().paused = true
+	player.visible = false
+	warrior.visible = false
+	var level_4_cutscene = preload("res://Scenes/LevelCutscenes/level_4_cutscene.tscn").instantiate()
+	get_tree().root.add_child(level_4_cutscene)
+
+func resume_game():
+	cutscene_playing = false
+	player.visible = true
+	warrior.visible = true
+	if chase_music and chase_music.is_playing():
+		chase_music.stop()
+	battle_music.play()

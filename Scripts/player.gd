@@ -129,6 +129,10 @@ func _physics_process(delta):
 func interact():
 	if interactive_object:
 		owner.update_interactions(interactive_object.name)
+		if interactive_object.name == "MiniBossFightDoor":
+			Global.play_level_cutscene()
+			global_position = Vector3(-1.926, 10.092, 55.988)
+			return
 		if interactive_object.name == "BarbarianBed":
 			Global.play_level_cutscene()
 			return
@@ -156,7 +160,8 @@ func invoke_interaction(collider):
 					 "Axe",
 					 "Stool",
 					 "BarbarianBed",
-					 "Spike"
+					 "Spike",
+					 "MiniBossFightDoor",
 					]
 	if collider and collider.name in colliders:
 		interactive_object = collider
