@@ -10,10 +10,13 @@ func _on_area_entered(area):
 	if area.name == "SpikeArea":
 		owner.dead()
 
-	if area == null or (area.name != "RightArmHitBox" and area.name != "RightLegHitBox" and area.name != "RightHandHitbox"):
+	if area == null or (area.name != "RightArmHitBox" and area.name != "RightLegHitBox" and area.name != "RightHandHitbox" and area.name!= "WarriorLeftHandHitbox" and area.name!= "WarriorRightHandHitbox"):
 		return
 	
 	if owner.has_method("damage"):
+		#Skelly Warrior does 3 damage per hit
+		if area.name == "WarriorLeftHandHitbox" or area.name == "WarriorRightHandHitbox":
+			owner.damage(6)
 		#Skelly Rogue does 3 damage per hit
 		if area.name == "RightHandHitbox":
 			owner.damage(3)

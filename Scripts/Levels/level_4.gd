@@ -23,6 +23,7 @@ func _ready():
 	player_detected = false
 	Global.set_level(3)
 	Global.save_game(3)
+	warrior.process_mode = Node.PROCESS_MODE_DISABLED
 
 func _physics_process(delta):
 	if player_detected:
@@ -72,6 +73,7 @@ func resume_game():
 	cutscene_playing = false
 	player.visible = true
 	warrior.visible = true
+	warrior.process_mode = Node.PROCESS_MODE_INHERIT
 	if chase_music and chase_music.is_playing():
 		chase_music.stop()
 	battle_music.play()
