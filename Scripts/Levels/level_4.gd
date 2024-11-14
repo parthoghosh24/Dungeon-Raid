@@ -42,7 +42,7 @@ func update_interactions(key):
 	#everything
 	if interactions.values().all(func(interaction): return interaction == true):
 		Global.update_player_score(Global.EXPLORATION_BONUS, 1000)
-
+ 
 
 func _on_haiya_player_dead():
 	get_tree().change_scene_to_file("res://Scenes/Menu/game_over.tscn")
@@ -76,4 +76,7 @@ func resume_game():
 	warrior.process_mode = Node.PROCESS_MODE_INHERIT
 	if chase_music and chase_music.is_playing():
 		chase_music.stop()
+	var rogues = get_tree().get_nodes_in_group("rogues")
+	for rogue in rogues:
+		rogue.process_mode = Node.PROCESS_MODE_DISABLED
 	battle_music.play()

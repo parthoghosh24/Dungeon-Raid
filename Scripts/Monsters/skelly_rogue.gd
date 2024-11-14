@@ -17,7 +17,7 @@ var speed
 @onready var attack_timer = $AttackTimer
 @onready var visual_cast =$VisualCast
 @onready var health_bar = $HealthBar/EnemyHealthBar
-@onready var stealth_prompt = $StealthHit/StealthText
+@onready var stealth_prompt = $StealthHit/TextureRect
 @onready var health_vial = preload("res://Scenes/Environment/health_vial.tscn")
 @onready var keyring = preload("res://Scenes/Environment/keyring_hanging.tscn")
 @onready var chase_timer = $ChaseTimer

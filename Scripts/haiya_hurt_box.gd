@@ -14,9 +14,9 @@ func _on_area_entered(area):
 		return
 	
 	if owner.has_method("damage"):
-		#Skelly Warrior does 3 damage per hit
+		#Skelly Warrior does 5 damage per hit
 		if area.name == "WarriorLeftHandHitbox" or area.name == "WarriorRightHandHitbox":
-			owner.damage(6)
+			owner.damage(4)
 		#Skelly Rogue does 3 damage per hit
 		if area.name == "RightHandHitbox":
 			owner.damage(3)

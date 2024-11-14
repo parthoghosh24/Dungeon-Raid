@@ -1,97 +1,124 @@
 extends CharacterBody3D
 
-var player = null
-var player_detected = false
-var hp = 20
-var dir
-
 @export var player_path : NodePath
-
+@onready var animation_tree = $AnimationTree
 @onready var nav_agent = $NavigationAgent3D
-@onready var anim_tree = $AnimationTree
-@onready var player_detection = $PlayerDetection
-@onready var death_timer = $DeathTimer
+@onready var health_bar = $HealthBar/EnemyHealthBar
+@onready var idle_timer = $Timers/IdleTimer
+@onready var attack_timer = $Timers/AttackTimer
 @onready var player_attack = $PlayerAttack
-@onready var visual_cast = $VisualCast
+@onready var hurt_box = $HurtBox/CollisionShape3D
+@onready var aim = $Aim
+@onready var fireball = preload("res://Scenes/Monsters/fireball.tscn")
 
-var player_in_attack_range = false
+var attacking = false
+var player_in_range = false
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var run_speed = 45
+var dir
+var speed
+var player
 
-enum States {
-	wait,
-	attack,
-	damaged,
-	warp,
-}
-
-var current_state : States
+# Algo for phased boss behaviour
+# 100 - 75% health, attack
+# 75 -50% health, block, attack
+# 50-0% health, block,dodge, taunt, attack
 
 func _ready():
 	player = get_node(player_path)
-	current_state = States.wait
-	
+	animation_tree.state = animation_tree.IDLE
 	
 func _physics_process(delta):
-	
-	match current_state:
-		States.wait:
-			wait()
-		States.attack:
-			attack_player(delta)
-		States.damaged:
-			damaged()	
-	
-func wait():
-	anim_tree.set("parameters/move_death/blend_amount", 0)
-	
-func damaged():
-	hp -= 2
-	print(hp)
-	
-	knockback(dir)
-	
-	if (hp <= 0):
-		dead()
-	if player_in_attack_range:	
-		current_state = States.attack  
-	else: 
-		current_state = States.wait
+	if not is_on_floor():
+			velocity.y -=  gravity * delta
 
-func attack_player(delta):
-	if visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player"):
+	if animation_tree.state == animation_tree.IDLE and idle_timer.is_stopped():
+		animation_tree.get("parameters/playback").travel("Idle")
 		look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
-		anim_tree.set("parameters/death_attack/active", true)
-		anim_tree.set("parameters/death_attack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		idle_timer.start()
+	
+	if animation_tree.state == animation_tree.ATTACK and !attacking:
+		attacking = true
+		shoot()
+		attack_timer.start()
+	
 
-func damage():
-	current_state = States.damaged	
+func shoot():
+	look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
+	animation_tree.get("parameters/playback").travel("Attack")
+	await get_tree().create_timer(0.3).timeout
+	print("aim global position")
+	print(aim.global_position)
+	var firing_position = aim.global_position
+	print("firing_position")
+	print(firing_position)
+	print("player_position")
+	print(player.global_position)
+	var target_position = (player.global_position - firing_position).normalized()
+	#create fireball
+	var fireball_object = fireball.instantiate()
+	fireball_object.speed = 10
+	fireball_object.direction = target_position
+	fireball_object.global_position = firing_position
+	fireball_object.global_rotation = aim.global_rotation
+	fireball_object.look_at(player.global_position)
+	self.get_parent().add_child(fireball_object)
+	await get_node("AnimationTree").animation_finished
+		
+func deplete_health():
+	var health_left = health_left()
+	if health_left >= 0.75 and health_left() <= 1:
+		return 5
+	if health_left >= 0.50 and health_left() < 0.75:
+		return 4
+	if health_left >= 0.25 and health_left() < 0.50:
+		return 3
+	if health_left >= 0 and health_left() < 0.25:
+		return 2
+
+func attack_timer_wait():
+	var health_left = health_left()
+	if health_left >= 0.75 and health_left() <= 1:
+		return 5
+	if health_left >= 0.50 and health_left() < 0.75:
+		return 2
+	if health_left >= 0 and health_left() < 0.50:
+		return 1
+		
 
 func knockback(dir):
 	var tween = create_tween()
-	tween.tween_property(self, "global_position", global_position - (dir / 1.5), 0.2)		
+	tween.tween_property(self, "global_position", global_position - (dir/2), 0.2)
+
+	
+func damage():
+	knockback(dir)
+	animation_tree.state = animation_tree.HIT
 
 func dead():
-	anim_tree.set("parameters/death_attack/blend_amount", 0)
-	anim_tree.set("parameters/death_shot/active", true)
-	anim_tree.set("parameters/death_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	death_timer.start()	
-
-func _on_player_detection_body_entered(body):
-	if body.is_in_group("player"):
-		player_detected = true
-		current_state = States.attack
+	health_bar.value = 0
+	player_attack.process_mode = Node.PROCESS_MODE_DISABLED
+	animation_tree.state = animation_tree.DEAD
 
 
-func _on_player_detection_body_exited(body):
-	if body.is_in_group("player"):
-		player_detected = false
-		current_state = States.wait
+func _on_hurt_box_area_entered(area):
+	if area == null or area.name != "HaiyaHitBox" or animation_tree.state == animation_tree.BLOCK:
+		return
+	if area.name == "HaiyaHitBox" and has_method("damage"):
+		get_viewport().get_camera_3d().shake_camera()
+		damage()
 
-func _on_death_timer_timeout():
-	queue_free()
+func health_left():
+	return health_bar.value/(health_bar.max_value * 1.0	)
 
 
-func _on_hand_hit_box_body_entered(body):
-	if body.is_in_group("player"):
-		body.damage()
+func _on_idle_timer_timeout():
+	animation_tree.state = animation_tree.ATTACK
+
+
+func _on_attack_timer_timeout():
+	attacking = false
+	animation_tree.state = animation_tree.IDLE
+	

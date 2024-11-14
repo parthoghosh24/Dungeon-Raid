@@ -1,0 +1,104 @@
+[gd_scene load_steps=17 format=3 uid="uid://cqwhup6v2vfmg"]
+
+[ext_resource type="Texture2D" uid="uid://dwgb063hnvj2b" path="res://Resources/shaders/particles/circle_01.png" id="1_2xcyt"]
+[ext_resource type="Script" path="res://Scripts/Monsters/fireball.gd" id="1_spobh"]
+[ext_resource type="Texture2D" uid="uid://o4wpy2betuwb" path="res://Resources/shaders/particles/spark_02.png" id="2_ypgdv"]
+
+[sub_resource type="Gradient" id="Gradient_vx7jo"]
+offsets = PackedFloat32Array(0, 0.520619, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ds235"]
+gradient = SubResource("Gradient_vx7jo")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_uf2p8"]
+_data = [Vector2(0, 0.535398), 0.0, 0.586865, 0, 0, Vector2(0.964286, 1), 0.435564, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_f8cec"]
+curve = SubResource("Curve_uf2p8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rdtxs"]
+gravity = Vector3(0, 0, 0)
+scale_min = 7.0
+scale_max = 7.0
+scale_curve = SubResource("CurveTexture_f8cec")
+color = Color(0.661605, 0.473137, 0.916086, 1)
+color_ramp = SubResource("GradientTexture1D_ds235")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tcoj8"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_2xcyt")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_d7b8s"]
+material = SubResource("StandardMaterial3D_tcoj8")
+
+[sub_resource type="Curve" id="Curve_jvl2u"]
+_data = [Vector2(0, 0.628319), 0.0, 0.325936, 0, 0, Vector2(1, 0.938053), 0.278761, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_766ep"]
+curve = SubResource("Curve_jvl2u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_prhml"]
+angle_min = 1.00001
+angle_max = 360.0
+gravity = Vector3(0, 0, 0)
+scale_min = 6.0
+scale_max = 7.0
+scale_curve = SubResource("CurveTexture_766ep")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2gcr"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0.461114, 0.151532, 0.51099, 1)
+albedo_texture = ExtResource("2_ypgdv")
+albedo_texture_msdf = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_m37bs"]
+material = SubResource("StandardMaterial3D_u2gcr")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qoykb"]
+radius = 2.59962
+
+[node name="Fireball" type="Area3D"]
+script = ExtResource("1_spobh")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 3
+lifetime = 4.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_rdtxs")
+draw_pass_1 = SubResource("QuadMesh_d7b8s")
+
+[node name="ElectricBeam" type="GPUParticles3D" parent="."]
+amount = 50
+lifetime = 2.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_prhml")
+draw_pass_1 = SubResource("QuadMesh_m37bs")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.759197, 0.487313, 0.668297, 1)
+light_energy = 5.0
+omni_range = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_qoykb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

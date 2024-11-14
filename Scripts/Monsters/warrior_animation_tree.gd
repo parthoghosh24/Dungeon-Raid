@@ -4,8 +4,11 @@ enum {
 	IDLE,
 	RUN,
 	HIT,
-	ATTACK,
+	ATTACK1,
+	ATTACK2,
+	ATTACK3,
 	BLOCK,
+	COMBO,
 	DEAD,
 	DODGE,
 	TAUNT
@@ -22,11 +25,20 @@ func change_state_run():
 func change_state_hit():
 	state = HIT
 
-func change_state_attack():
-	state = ATTACK
+func change_state_attack1():
+	state = ATTACK1
+	
+func change_state_attack2():
+	state = ATTACK2
+	
+func change_state_attack3():
+	state = ATTACK3		
 
 func change_state_block():
 	state = BLOCK
+
+func change_state_combo():
+	state = COMBO
 	
 func change_state_dead():
 	state = DEAD

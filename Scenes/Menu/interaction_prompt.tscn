@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bpcvk2ti5e61j"]
 
-[ext_resource type="PackedScene" uid="uid://5v5bbauos20s" path="res://Scenes/Menu/press_to_interact.tscn" id="1_euipm"]
+[ext_resource type="Texture2D" uid="uid://dmlfgyux1k4fw" path="res://Resources/images/e_light.png" id="2_gjh3l"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_myb5q"]
 viewport_path = NodePath("SubViewport")
@@ -10,7 +10,14 @@ viewport_path = NodePath("SubViewport")
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
 
-[node name="PressToInteract" parent="SubViewport" instance=ExtResource("1_euipm")]
+[node name="TextureRect" type="TextureRect" parent="SubViewport"]
+offset_left = 190.0
+offset_top = 200.0
+offset_right = 230.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_gjh3l")
+expand_mode = 3
 
 [node name="InteractionPrompt" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.774364, 0)
