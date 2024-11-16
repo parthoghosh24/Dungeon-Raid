@@ -580,7 +580,7 @@ shape = SubResource("CylinderShape3D_4v252")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77455, 2.09272, -37.5635)
 
 [node name="SkellyBoss" parent="." instance=ExtResource("6_kvdk5")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 2.08464, 25.4658)
+transform = Transform3D(9, 0, 0, 0, 9, 0, 0, 0, 9, -3, 2.08464, 25.4658)
 player_path = NodePath("../Haiya")
 
 [node name="Knight" parent="." instance=ExtResource("1_hx3ke")]

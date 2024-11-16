@@ -8,7 +8,7 @@ extends CharacterBody3D
 @onready var attack_timer = $Timers/AttackTimer
 @onready var player_attack = $PlayerAttack
 @onready var hurt_box = $HurtBox/CollisionShape3D
-@onready var aim = $Aim
+@onready var aim = $Skeleton_Mage/Aim
 @onready var fireball = preload("res://Scenes/Monsters/fireball.tscn")
 
 var attacking = false
@@ -41,30 +41,27 @@ func _physics_process(delta):
 	
 	if animation_tree.state == animation_tree.ATTACK and !attacking:
 		attacking = true
-		shoot()
+		shoot(delta)
 		attack_timer.start()
 	
 
-func shoot():
+func shoot(delta):
+	#self.rotation.y = lerp_angle(self.rotation.y, atan2(player.global_position.x, player.global_position.z) - self.rotation.y, delta)
 	look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
 	animation_tree.get("parameters/playback").travel("Attack")
 	await get_tree().create_timer(0.3).timeout
-	print("aim global position")
-	print(aim.global_position)
 	var firing_position = aim.global_position
-	print("firing_position")
-	print(firing_position)
-	print("player_position")
-	print(player.global_position)
+	aim.look_at(player.global_position)
 	var target_position = (player.global_position - firing_position).normalized()
 	#create fireball
 	var fireball_object = fireball.instantiate()
-	fireball_object.speed = 10
+	fireball_object.speed = 5
 	fireball_object.direction = target_position
-	fireball_object.global_position = firing_position
+	fireball_object.global_position = aim.global_position
 	fireball_object.global_rotation = aim.global_rotation
 	fireball_object.look_at(player.global_position)
-	self.get_parent().add_child(fireball_object)
+	
+	self.add_child(fireball_object)
 	await get_node("AnimationTree").animation_finished
 		
 func deplete_health():
