@@ -610,5 +610,6 @@ stream = ExtResource("9_bh267")
 [node name="LevelTimer" type="Timer" parent="."]
 process_mode = 3
 
+[connection signal="player_dead" from="Haiya" to="." method="_on_haiya_player_dead"]
 [connection signal="body_entered" from="CutsceneTrigger" to="." method="_on_cutscene_trigger_body_entered"]
 [connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]

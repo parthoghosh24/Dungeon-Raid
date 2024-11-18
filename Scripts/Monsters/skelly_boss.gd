@@ -3,13 +3,16 @@ extends CharacterBody3D
 @export var player_path : NodePath
 @onready var animation_tree = $AnimationTree
 @onready var nav_agent = $NavigationAgent3D
-@onready var health_bar = $HealthBar/EnemyHealthBar
+@onready var health_bar = $HealthBar/BossHealthBar
 @onready var idle_timer = $Timers/IdleTimer
 @onready var attack_timer = $Timers/AttackTimer
+@onready var jump_attack_timer = $Timers/JumpAttackTimer
+@onready var jump_attack_wait_timer = $Timers/JumpAttackWaitTimer
 @onready var player_attack = $PlayerAttack
 @onready var hurt_box = $HurtBox/CollisionShape3D
 @onready var aim = $Skeleton_Mage/Aim
 @onready var fireball = preload("res://Scenes/Monsters/fireball.tscn")
+@onready var attack_ray = $AttackRay
 
 var attacking = false
 var player_in_range = false
@@ -20,6 +23,9 @@ var run_speed = 45
 var dir
 var speed
 var player
+var period = 0.3
+var magnitude = 0.1
+var vertical_velocity = Vector3()
 
 # Algo for phased boss behaviour
 # 100 - 75% health, attack
@@ -28,28 +34,43 @@ var player
 
 func _ready():
 	player = get_node(player_path)
-	animation_tree.state = animation_tree.IDLE
+	animation_tree.state = animation_tree.ATTACK
 	
 func _physics_process(delta):
-	if not is_on_floor():
-			velocity.y -=  gravity * delta
 
+	look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
+	
 	if animation_tree.state == animation_tree.IDLE and idle_timer.is_stopped():
-		animation_tree.get("parameters/playback").travel("Idle")
-		look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
-		idle_timer.start()
+		if attack_ray.is_colliding() and attack_ray.get_collider().is_in_group("player") and jump_attack_wait_timer.is_stopped() and !attacking:
+			jump_attack_wait_timer.start()
+		else:	
+			animation_tree.get("parameters/playback").travel("Idle")
+			idle_timer.start()
 	
 	if animation_tree.state == animation_tree.ATTACK and !attacking:
 		attacking = true
 		shoot(delta)
 		attack_timer.start()
 	
+	if animation_tree.state == animation_tree.JUMP_ATTACK and !attacking:
+		animation_tree.get("parameters/playback").travel("Jump_attack")
+		attacking = true
+		player.damage(10)
+		jump_attack_timer.start()
+	
+	if animation_tree.state == animation_tree.HIT:
+		shake_camera()
+		if health_bar.value <=0:
+			pass
+		else:
+			health_bar.value -= deplete_health()
+			animation_tree.state = animation_tree.IDLE
+		
+	
 
 func shoot(delta):
-	#self.rotation.y = lerp_angle(self.rotation.y, atan2(player.global_position.x, player.global_position.z) - self.rotation.y, delta)
-	look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
 	animation_tree.get("parameters/playback").travel("Attack")
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(1).timeout
 	var firing_position = aim.global_position
 	aim.look_at(player.global_position)
 	var target_position = (player.global_position - firing_position).normalized()
@@ -83,29 +104,14 @@ func attack_timer_wait():
 		return 2
 	if health_left >= 0 and health_left() < 0.50:
 		return 1
-		
-
-func knockback(dir):
-	var tween = create_tween()
-	tween.tween_property(self, "global_position", global_position - (dir/2), 0.2)
-
 	
 func damage():
-	knockback(dir)
 	animation_tree.state = animation_tree.HIT
 
 func dead():
 	health_bar.value = 0
 	player_attack.process_mode = Node.PROCESS_MODE_DISABLED
 	animation_tree.state = animation_tree.DEAD
-
-
-func _on_hurt_box_area_entered(area):
-	if area == null or area.name != "HaiyaHitBox" or animation_tree.state == animation_tree.BLOCK:
-		return
-	if area.name == "HaiyaHitBox" and has_method("damage"):
-		get_viewport().get_camera_3d().shake_camera()
-		damage()
 
 func health_left():
 	return health_bar.value/(health_bar.max_value * 1.0	)
@@ -118,4 +124,45 @@ func _on_idle_timer_timeout():
 func _on_attack_timer_timeout():
 	attacking = false
 	animation_tree.state = animation_tree.IDLE
-	
+
+func apply_shake():
+	var initial_transform = self.transform 
+	var elapsed_time = 0.0
+
+	while elapsed_time < period:
+		var offset = Vector3(
+			randf_range(-magnitude, magnitude),
+			randf_range(-magnitude, magnitude),
+			0.0
+		)
+
+		self.transform.origin = initial_transform.origin + offset
+		elapsed_time += get_process_delta_time()
+		await get_tree().process_frame
+
+	self.transform = initial_transform
+
+
+func shake_camera():
+	get_viewport().get_camera_3d().apply_shake()
+
+
+func _on_jump_attack_timer_timeout():
+	if !is_on_floor():
+		velocity.y -=  gravity * 2
+	else:
+		velocity = Vector3.DOWN * gravity/10
+	attacking = false
+	animation_tree.state = animation_tree.IDLE
+
+func _on_hurt_box_area_entered(area):
+	if area == null or area.name != "HaiyaHitBox":
+		return
+	if area.name == "HaiyaHitBox" and has_method("damage"):
+		print("damaging")
+		damage()
+
+
+func _on_jump_attack_wait_timer_timeout():
+	print("jump attack")
+	animation_tree.state = animation_tree.JUMP_ATTACK

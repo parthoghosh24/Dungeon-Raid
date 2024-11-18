@@ -3,14 +3,22 @@ extends Area3D
 var direction = Vector3.ZERO
 var damage = 1
 var speed =  1
+@onready var fireball_sfx = $FireballSFX
+
+func _init():
+	collision_layer = 3
+	collision_mask = 0
+	
 
 func _ready():
-	global_position += Vector3(0,13,0)
+	scale *= 2
+	global_position += Vector3(0,6,0)
+	fireball_sfx.play()
 
 func _physics_process(delta):
 	global_position += direction * speed * delta
+			
+
 
 func _on_body_entered(body):
-	if body.is_in_group("player"):
-		self.queue_free()
-			
+	queue_free()

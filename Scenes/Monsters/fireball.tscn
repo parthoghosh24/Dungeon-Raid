@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://cqwhup6v2vfmg"]
+[gd_scene load_steps=18 format=3 uid="uid://cqwhup6v2vfmg"]
 
 [ext_resource type="Texture2D" uid="uid://dwgb063hnvj2b" path="res://Resources/shaders/particles/circle_01.png" id="1_2xcyt"]
 [ext_resource type="Script" path="res://Scripts/Monsters/fireball.gd" id="1_spobh"]
 [ext_resource type="Texture2D" uid="uid://o4wpy2betuwb" path="res://Resources/shaders/particles/spark_02.png" id="2_ypgdv"]
+[ext_resource type="AudioStream" uid="uid://dmtovxyp7553m" path="res://Resources/sound/Fireball.wav" id="4_1v7qu"]
 
 [sub_resource type="Gradient" id="Gradient_vx7jo"]
 offsets = PackedFloat32Array(0, 0.520619, 1)
@@ -77,6 +78,9 @@ material = SubResource("StandardMaterial3D_u2gcr")
 radius = 1.84666
 
 [node name="Fireball" type="Area3D"]
+top_level = true
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_spobh")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
@@ -101,4 +105,11 @@ omni_range = 3.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_qoykb")
 
+[node name="FireballSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_1v7qu")
+volume_db = 20.0
+max_db = 6.0
+autoplay = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -114,7 +114,7 @@ func _physics_process(delta):
 	interaction_ray.rotation.y = lerp_angle(player_mesh.rotation.y, atan2(direction.x, direction.z) - rotation.y, delta * ACCELERATION)
 	
 	if interaction_ray.is_colliding():
-		invoke_interaction(interaction_ray.get_collider())	
+		invoke_interaction(interaction_ray.get_collider())
 	
 		
 	
@@ -191,7 +191,7 @@ func heal_up(health_vial, value):
 
 func knockback(dir):
 	var tween = create_tween()
-	tween.tween_property(self, "global_position", global_position - (dir / 1.5), 0.2)	
+	tween.tween_property(self, "global_position", global_position - ((dir * 6) / 1.5), 0.2)	
 	
 func _on_attack_timer_timeout():
 	is_attacking = false
