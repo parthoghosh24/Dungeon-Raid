@@ -10,14 +10,16 @@ func _on_area_entered(area):
 	if area.name == "SpikeArea":
 		owner.dead()
 
-	if area == null or (area.name != "RightArmHitBox" and area.name != "RightLegHitBox" and area.name != "RightHandHitbox" and area.name!= "WarriorLeftHandHitbox" and area.name!= "WarriorRightHandHitbox" and area.name!= "Fireball"):
+	if area == null or (area.name != "RightArmHitBox" and area.name != "RightLegHitBox" and area.name != "RightHandHitbox" and area.name!= "WarriorLeftHandHitbox" and area.name!= "WarriorRightHandHitbox" and !area.name.contains("Fireball")):
 		return
 	
 	if owner.has_method("damage"):
-		#Boss does 10 damage per hit
-		if area.name == "Fireball":
+		#Boss does 2 damage per hit
+		print(area.name.contains("Fireball"))
+		if area.name.contains("Fireball") == true:
 			area.queue_free()
-			owner.damage(10)
+			owner.damage(2)
+			
 			
 		#Skelly Warrior does 5 damage per hit
 		if area.name == "WarriorLeftHandHitbox" or area.name == "WarriorRightHandHitbox":

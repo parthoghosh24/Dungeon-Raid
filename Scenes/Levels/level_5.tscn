@@ -606,6 +606,7 @@ shape = SubResource("BoxShape3D_8casn")
 
 [node name="BossMusic" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("9_bh267")
+volume_db = -5.0
 
 [node name="LevelTimer" type="Timer" parent="."]
 process_mode = 3

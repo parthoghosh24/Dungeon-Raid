@@ -173,9 +173,9 @@ func invoke_interaction(collider):
 			self.remove_child(interaction_prompt)
 			
 		
-func damage(damage_value):
+func damage(damage_value, knockback_override = 1):
 	hp_bar.value -= damage_value
-	knockback(direction)
+	knockback(direction, knockback_override)
 	animation_tree.set("parameters/attack_hit/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
 	if (hp_bar.value <= 0):
@@ -189,9 +189,9 @@ func heal_up(health_vial, value):
 			heal_audio.play()
 		health_vial.queue_free()
 
-func knockback(dir):
+func knockback(dir,knockback_override = 1):
 	var tween = create_tween()
-	tween.tween_property(self, "global_position", global_position - ((dir * 6) / 1.5), 0.2)	
+	tween.tween_property(self, "global_position", global_position - ((dir * knockback_override) / 1.5), 0.2)	
 	
 func _on_attack_timer_timeout():
 	is_attacking = false

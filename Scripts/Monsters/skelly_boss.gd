@@ -8,18 +8,16 @@ extends CharacterBody3D
 @onready var attack_timer = $Timers/AttackTimer
 @onready var jump_attack_timer = $Timers/JumpAttackTimer
 @onready var jump_attack_wait_timer = $Timers/JumpAttackWaitTimer
-@onready var player_attack = $PlayerAttack
 @onready var hurt_box = $HurtBox/CollisionShape3D
 @onready var aim = $Skeleton_Mage/Aim
 @onready var fireball = preload("res://Scenes/Monsters/fireball.tscn")
 @onready var attack_ray = $AttackRay
 
 var attacking = false
+var jump_attacking = false
 var player_in_range = false
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
-var run_speed = 45
 var dir
 var speed
 var player
@@ -40,22 +38,26 @@ func _physics_process(delta):
 
 	look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
 	
+	if attack_ray.is_colliding() and attack_ray.get_collider().is_in_group("player") and jump_attack_wait_timer.is_stopped():
+		attacking = false
+		jump_attacking = false
+		jump_attack_wait_timer.start()
+
 	if animation_tree.state == animation_tree.IDLE and idle_timer.is_stopped():
-		if attack_ray.is_colliding() and attack_ray.get_collider().is_in_group("player") and jump_attack_wait_timer.is_stopped() and !attacking:
-			jump_attack_wait_timer.start()
-		else:	
-			animation_tree.get("parameters/playback").travel("Idle")
-			idle_timer.start()
+		attacking = false
+		jump_attacking = false
+		animation_tree.get("parameters/playback").travel("Idle")
+		idle_timer.start()
 	
 	if animation_tree.state == animation_tree.ATTACK and !attacking:
 		attacking = true
 		shoot(delta)
 		attack_timer.start()
 	
-	if animation_tree.state == animation_tree.JUMP_ATTACK and !attacking:
+	if animation_tree.state == animation_tree.JUMP_ATTACK and !attacking and !jump_attacking:
 		animation_tree.get("parameters/playback").travel("Jump_attack")
 		attacking = true
-		player.damage(10)
+		jump_attacking = true
 		jump_attack_timer.start()
 	
 	if animation_tree.state == animation_tree.HIT:
@@ -66,13 +68,15 @@ func _physics_process(delta):
 			health_bar.value -= deplete_health()
 			animation_tree.state = animation_tree.IDLE
 		
-	
+
+func jump_attack_damage():
+	if player.is_on_floor():
+		player.damage(10,15)
 
 func shoot(delta):
 	animation_tree.get("parameters/playback").travel("Attack")
-	await get_tree().create_timer(1).timeout
 	var firing_position = aim.global_position
-	aim.look_at(player.global_position)
+	aim.look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
 	var target_position = (player.global_position - firing_position).normalized()
 	#create fireball
 	var fireball_object = fireball.instantiate()
@@ -80,38 +84,29 @@ func shoot(delta):
 	fireball_object.direction = target_position
 	fireball_object.global_position = aim.global_position
 	fireball_object.global_rotation = aim.global_rotation
-	fireball_object.look_at(player.global_position)
+	fireball_object.look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
 	
-	self.add_child(fireball_object)
+	aim.add_child(fireball_object)
 	await get_node("AnimationTree").animation_finished
 		
 func deplete_health():
 	var health_left = health_left()
 	if health_left >= 0.75 and health_left() <= 1:
-		return 5
+		return 10
 	if health_left >= 0.50 and health_left() < 0.75:
-		return 4
+		return 5
 	if health_left >= 0.25 and health_left() < 0.50:
-		return 3
+		return 4
 	if health_left >= 0 and health_left() < 0.25:
 		return 2
-
-func attack_timer_wait():
-	var health_left = health_left()
-	if health_left >= 0.75 and health_left() <= 1:
-		return 5
-	if health_left >= 0.50 and health_left() < 0.75:
-		return 2
-	if health_left >= 0 and health_left() < 0.50:
-		return 1
 	
 func damage():
 	animation_tree.state = animation_tree.HIT
 
 func dead():
 	health_bar.value = 0
-	player_attack.process_mode = Node.PROCESS_MODE_DISABLED
-	animation_tree.state = animation_tree.DEAD
+	# Trigger end cutscene
+	pass
 
 func health_left():
 	return health_bar.value/(health_bar.max_value * 1.0	)
@@ -153,16 +148,15 @@ func _on_jump_attack_timer_timeout():
 	else:
 		velocity = Vector3.DOWN * gravity/10
 	attacking = false
+	jump_attacking = false
 	animation_tree.state = animation_tree.IDLE
 
 func _on_hurt_box_area_entered(area):
 	if area == null or area.name != "HaiyaHitBox":
 		return
-	if area.name == "HaiyaHitBox" and has_method("damage"):
-		print("damaging")
+	if area.name == "HaiyaHitBox" and has_method("damage") and !jump_attacking:
 		damage()
 
 
 func _on_jump_attack_wait_timer_timeout():
-	print("jump attack")
 	animation_tree.state = animation_tree.JUMP_ATTACK

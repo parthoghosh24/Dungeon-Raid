@@ -78,7 +78,6 @@ material = SubResource("StandardMaterial3D_u2gcr")
 radius = 1.84666
 
 [node name="Fireball" type="Area3D"]
-top_level = true
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_spobh")
