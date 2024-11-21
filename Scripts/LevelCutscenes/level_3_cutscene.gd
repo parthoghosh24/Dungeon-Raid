@@ -13,8 +13,8 @@ extends Node3D
 func _input(event):
 	return null
 func _ready():
-	speech1.set_text("I knew it... HEY!!!")
 	get_tree().paused = true
+	speech1.set_text("I knew it... HEY!!!")
 	cutscene.queue("ACT1")
 	cam1.make_current()
 	await cutscene.animation_finished
@@ -23,11 +23,6 @@ func _ready():
 	await cutscene.animation_finished
 	cam3.make_current()
 	speech1.set_text("How, in all realms, are ye sleeping here instead of saving the knight?")
-	#speech3.set_text("Well... I lost my axe, ye see, and the blasted door on this floor locked itself. Then I stumbled upon this fine bed with meat and ale at its side, and, well, who am I to deny such bounty?")
-	#speech4.set_text("Of all the reasons... fine, lets haste! We've a knight to save.")
-	#speech5.set_text("Er... actually, I reckon I'd rather head back. 'Tis surely a sight more dangerous up yonder. But, uh, I can give ye the key to the next floor if ye fancy it.")
-	#speech6.set_text("You were meant to be a mighty barbarian, not a blubbering cow! Very well, hand it over!")
-	#speech7.set_text("Much obliged! Here you go!")
 	cutscene.queue("ACT3")
 	await cutscene.animation_finished
 	speech1.set_text("Well... I lost my axe, ye see, and the blasted door on this floor locked itself. Then I stumbled upon this fine bed with meat and ale at its side, and, well, who am I to deny such bounty?")

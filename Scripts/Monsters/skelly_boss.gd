@@ -6,6 +6,7 @@ extends CharacterBody3D
 @onready var health_bar = $HealthBar/BossHealthBar
 @onready var idle_timer = $Timers/IdleTimer
 @onready var attack_timer = $Timers/AttackTimer
+@onready var death_timer = $Timers/DeathTimer
 @onready var jump_attack_timer = $Timers/JumpAttackTimer
 @onready var jump_attack_wait_timer = $Timers/JumpAttackWaitTimer
 @onready var hurt_box = $HurtBox/CollisionShape3D
@@ -63,7 +64,7 @@ func _physics_process(delta):
 	if animation_tree.state == animation_tree.HIT:
 		shake_camera()
 		if health_bar.value <=0:
-			pass
+			death_timer.start()
 		else:
 			health_bar.value -= deplete_health()
 			animation_tree.state = animation_tree.IDLE
@@ -105,8 +106,10 @@ func damage():
 
 func dead():
 	health_bar.value = 0
+	get_tree().paused = true
 	# Trigger end cutscene
-	pass
+	var level_5_end = load("res://Scenes/LevelCutscenes/level_5_cutscene_outro.tscn")
+	get_tree().change_scene_to_packed(level_5_end)
 
 func health_left():
 	return health_bar.value/(health_bar.max_value * 1.0	)
@@ -160,3 +163,7 @@ func _on_hurt_box_area_entered(area):
 
 func _on_jump_attack_wait_timer_timeout():
 	animation_tree.state = animation_tree.JUMP_ATTACK
+
+
+func _on_death_timer_timeout():
+	dead()

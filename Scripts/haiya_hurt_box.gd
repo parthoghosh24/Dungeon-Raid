@@ -14,8 +14,7 @@ func _on_area_entered(area):
 		return
 	
 	if owner.has_method("damage"):
-		#Boss does 2 damage per hit
-		print(area.name.contains("Fireball"))
+		#Boss fireball does 2 damage per hit
 		if area.name.contains("Fireball") == true:
 			area.queue_free()
 			owner.damage(2)
