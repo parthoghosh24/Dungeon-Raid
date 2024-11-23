@@ -12,6 +12,7 @@ var interactions = {
 	"Tree": false,
 	"Chest": false,
 	"KeyRingHanging": false,
+	
 	"NextLevelDoor": false,
 	"Axe": false,
 	"Stool": false,

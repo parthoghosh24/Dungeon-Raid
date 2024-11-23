@@ -39,7 +39,7 @@ func _ready():
 	speech.set_text("Calm thy fiery spirit, oh blade-weilding tempest! Thou shalt be richly rewarded! Though, tell me, what became of Bork the Barbarian?")
 	cutscene.queue("ACT7")
 	await cutscene.animation_finished
-	speech.set_text("Bork? That maad-guzzling oaf? He supped on roasted fowl, snored like a wyvern, and, lo, fled with naught but a grunt after giving me the key! Truly, a lion-hearted champion, that one.")
+	speech.set_text("Bork? That mead-guzzling oaf? He supped on roasted fowl, snored like a wyvern, and, lo, fled with naught but a grunt after giving me the key! Truly, a lion-hearted champion, that one.")
 	cutscene.queue("ACT8")
 	await cutscene.animation_finished
 	speech.set_text("Alas! I had pinned too many hopes upon that barrel-chested dolt. Yet his strength is legendary, my lady.")
@@ -60,7 +60,6 @@ func _ready():
 
 
 func _on_cutscene_animation_finished(anim_name):
-	if anim_name == "ACT4":
-		get_tree().paused = false
-		Global.stop_level_cutscene()
-		queue_free()
+	if anim_name == "ACT12":
+		var credits = load("res://Scenes/credits.tscn")
+		get_tree().change_scene_to_packed(credits)

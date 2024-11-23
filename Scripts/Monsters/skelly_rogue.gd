@@ -94,16 +94,18 @@ func patrol(delta):
 		patrol_timer.start()
 		current_state = States.wait
 		return
+		
 	var target_pos = nav_agent.get_next_path_position() - global_position
 	target_pos.y = 0
 	dir = target_pos.normalized()
-	velocity.y =0 
-	velocity = velocity.lerp(dir * speed * delta * gravity, 1.0)
-	
-	
 	look_at(global_transform.origin + dir)
+	velocity.y =0
+	velocity = velocity.lerp(dir * speed * delta * gravity, 0.75)
 	
-	move_and_slide()
+	if nav_agent.avoidance_enabled:
+		nav_agent.set_velocity(velocity)
+	else:
+		_on_navigation_agent_3d_velocity_computed(velocity)
 	
 func wait():
 	anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
@@ -123,11 +125,21 @@ func chase_player(delta):
 		anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 1)
 		
 		nav_agent.target_position = player.global_position
+		
 		var next_nav_point = nav_agent.get_next_path_position()
-		dir = next_nav_point - global_position
-		velocity = dir.normalized() * speed * delta * gravity
-		velocity.y = velocity.y - (gravity * delta)
 		look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
+		dir = (next_nav_point - global_position).normalized()
+		
+		velocity = velocity.lerp(dir * speed * delta * gravity, 0.75)
+		velocity.y = velocity.y - (gravity * delta)
+	
+		if nav_agent.avoidance_enabled:
+			nav_agent.set_velocity(velocity)
+		else:
+			_on_navigation_agent_3d_velocity_computed(velocity)
+			
+		
+		
 		
 	move_and_slide()
 
@@ -266,3 +278,9 @@ func _on_attack_detection_body_exited(body):
 func _on_chase_timer_timeout():
 	if not (visual_cast and visual_cast.is_colliding() and visual_cast.get_collider().is_in_group("player")):
 		stop_chase_player()
+
+
+func _on_navigation_agent_3d_velocity_computed(safe_velocity):
+	velocity = safe_velocity
+		
+	move_and_slide()
