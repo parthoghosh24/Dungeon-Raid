@@ -64,7 +64,7 @@ func _on_back_timer_timeout():
 func _on_reset_game_confirm_confirmed():
 	reset_button.disabled = false
 	get_tree().paused = false
-	DirAccess.remove_absolute("res://savegame.data")
+	Global.delete_save()
 
 
 func _on_reset_game_confirm_canceled():

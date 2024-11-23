@@ -107,6 +107,7 @@ func damage():
 func dead():
 	health_bar.value = 0
 	get_tree().paused = true
+	Global.update_player_score(Global.KILLS, 10000)
 	# Trigger end cutscene
 	var level_5_end = load("res://Scenes/LevelCutscenes/level_5_cutscene_outro.tscn")
 	get_tree().change_scene_to_packed(level_5_end)

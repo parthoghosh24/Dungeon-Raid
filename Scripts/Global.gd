@@ -137,7 +137,19 @@ func knockback(mesh_global_position, direction):
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", mesh_global_position - (direction / 1.5), 0.2)
 	
+func save_grand_total(grand_total):
+	file = FileAccess.open("res://grand_total.data", FileAccess.WRITE)
+	file.store_var(grand_total)
+	file.close()
 
+func load_grand_total():
+	file = FileAccess.open("res://grand_total.data", FileAccess.READ)
+	if not file:
+		return
+	var grand_total = file.get_var()
+	file.close()
+	return grand_total	
+	
 func save_game(data):
 	file = FileAccess.open("res://savegame.data", FileAccess.WRITE)
 	file.store_var(data)
@@ -151,6 +163,11 @@ func load_game():
 	var level = file.get_var()
 	file.close()
 	return level
+
+func delete_save():
+	DirAccess.remove_absolute("res://savegame.data")
+	DirAccess.remove_absolute("res://grand_total.data")
+		
 
 func play_level_cutscene():
 	playing_level_cutscene = true
