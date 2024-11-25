@@ -19,8 +19,10 @@ var cutscene_playing = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	level_timer.start()
 	player_detected = false
+	Global.clear_player_inventory()
 	Global.set_level(3)
 	Global.save_game(3)
 	warrior.process_mode = Node.PROCESS_MODE_DISABLED

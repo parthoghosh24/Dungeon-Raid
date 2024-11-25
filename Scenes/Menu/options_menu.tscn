@@ -101,6 +101,28 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_dkvub")
 text = "Controls"
 
+[node name="Credits" type="Button" parent="MarginContainer/Options"]
+process_mode = 3
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_5wve5")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_dkvub")
+text = "Credits"
+
+[node name="Help" type="Button" parent="MarginContainer/Options"]
+process_mode = 3
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_5wve5")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_dkvub")
+text = "Help"
+
 [node name="Back" type="Button" parent="MarginContainer/Options"]
 process_mode = 3
 layout_mode = 2
@@ -114,6 +136,14 @@ text = "Back
 "
 
 [node name="ResetTimer" type="Timer" parent="MarginContainer/Options"]
+process_mode = 3
+one_shot = true
+
+[node name="CreditsTimer" type="Timer" parent="MarginContainer/Options"]
+process_mode = 3
+one_shot = true
+
+[node name="HelpTimer" type="Timer" parent="MarginContainer/Options"]
 process_mode = 3
 one_shot = true
 
@@ -176,9 +206,15 @@ max_polyphony = 5
 [connection signal="pressed" from="MarginContainer/Options/Reset" to="." method="_on_reset_pressed"]
 [connection signal="mouse_entered" from="MarginContainer/Options/Controls" to="." method="_on_controls_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/Options/Controls" to="." method="_on_controls_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/Options/Credits" to="." method="_on_credits_mouse_entered"]
+[connection signal="pressed" from="MarginContainer/Options/Credits" to="." method="_on_credits_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/Options/Help" to="." method="_on_help_mouse_entered"]
+[connection signal="pressed" from="MarginContainer/Options/Help" to="." method="_on_help_pressed"]
 [connection signal="mouse_entered" from="MarginContainer/Options/Back" to="." method="_on_back_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/Options/Back" to="." method="_on_back_pressed"]
 [connection signal="timeout" from="MarginContainer/Options/ResetTimer" to="." method="_on_reset_timer_timeout"]
+[connection signal="timeout" from="MarginContainer/Options/CreditsTimer" to="." method="_on_credits_timer_timeout"]
+[connection signal="timeout" from="MarginContainer/Options/HelpTimer" to="." method="_on_help_timer_timeout"]
 [connection signal="timeout" from="MarginContainer/Options/BackTimer" to="." method="_on_back_timer_timeout"]
 [connection signal="canceled" from="MarginContainer/Options/ResetGameConfirm" to="." method="_on_reset_game_confirm_canceled"]
 [connection signal="confirmed" from="MarginContainer/Options/ResetGameConfirm" to="." method="_on_reset_game_confirm_confirmed"]

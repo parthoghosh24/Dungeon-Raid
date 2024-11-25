@@ -12,20 +12,17 @@ var interactions = {
 	"Tree": false,
 	"Chest": false,
 	"KeyRingHanging": false,
-	
 	"NextLevelDoor": false,
 	"Axe": false,
 	"Stool": false,
 }
 
-
-func _input(event):
-	Global.evaluate_input_scheme(event)
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	level_timer.start()
 	player_detected = false
+	Global.clear_player_inventory()
 	Global.set_level(1)
 	Global.save_game(1)
 	

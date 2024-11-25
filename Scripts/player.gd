@@ -41,6 +41,7 @@ signal player_dead
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	interaction_prompt =  interaction_prompt_scn.instantiate()
 	direction = Vector3.BACK.rotated(Vector3.UP, pivot.global_transform.basis.get_euler().y)
 	movement_speed = 0
@@ -175,6 +176,7 @@ func invoke_interaction(collider):
 		
 func damage(damage_value, knockback_override = 1):
 	hp_bar.value -= damage_value
+	Global.update_player_score(Global.HITS_TAKEN, -50)
 	knockback(direction, knockback_override)
 	animation_tree.set("parameters/attack_hit/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	

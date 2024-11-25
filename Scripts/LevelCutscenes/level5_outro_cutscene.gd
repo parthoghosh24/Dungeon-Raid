@@ -27,5 +27,4 @@ func _ready():
 
 func _on_cutscene_animation_finished(anim_name):
 	if anim_name == "ACT2":
-		var end_cutscene = load("res://Scenes/end_cutscene.tscn")
-		get_tree().change_scene_to_packed(end_cutscene)
+		Global.switch_to_score_board()

@@ -10,6 +10,7 @@ extends Control
 @onready var controls_timer = $Panel/MarginContainer/Main/ControlsTimer
 
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().paused = true
 
 func _on_resume_pressed():
@@ -33,6 +34,7 @@ func _on_quit_timer_timeout():
 	get_tree().change_scene_to_file("res://Scenes/Menu/main_menu.tscn")
 
 func _on_resume_timer_timeout():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	resume_button.disabled = false
 	get_tree().paused = false
 	queue_free()	

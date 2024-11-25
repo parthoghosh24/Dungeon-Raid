@@ -88,6 +88,10 @@ func _ready():
 	person_name.text = "Markiro (markiro.itch.io)"
 	cutscene.queue("ACT2")
 	await cutscene.animation_finished
+	heading.text = "Mouse pointer texture"
+	person_name.text = "Mikiz (mikiz.itch.io)"
+	cutscene.queue("ACT2")
+	await cutscene.animation_finished
 	heading.text = "Fonts"
 	person_name.text = "Chequered Ink, UkiyoMoji Fonts (dafont.com)"
 	cutscene.queue("ACT2")
@@ -137,5 +141,5 @@ func _ready():
 func _on_cutscene_animation_finished(anim_name):
 	if anim_name == "ACT2" and heading.text == "And finally":
 		await get_tree().create_timer(1).timeout
-		get_tree().paused = false
-		self.queue_free()
+		var final_score_board = load("res://Scenes/Menu/final_score_board.tscn")
+		get_tree().change_scene_to_packed(final_score_board)

@@ -16,6 +16,7 @@ extends Control
 @onready var quit_timer =$MarginContainer/Main/QuitTimer
 
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if !Global.has_game_started():
 		press_to_start_button.visible = true
 		continue_button.visible = false

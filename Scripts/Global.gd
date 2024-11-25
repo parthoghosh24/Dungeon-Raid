@@ -11,7 +11,7 @@ var levels = ["res://Scenes/Levels/level_1.tscn",
 			  "res://Scenes/Levels/level_2.tscn",
 			  "res://Scenes/Levels/level_3.tscn",
 			  "res://Scenes/Levels/level_4.tscn",
-				"res://Scenes/Levels/level_5.tscn"]
+			  "res://Scenes/Levels/level_5.tscn"]
 
 #Player score keys
 const RETRIES = "retries"
@@ -68,7 +68,10 @@ func set_player_inventory(item: PLAYER_INVENTORY_ITEMS):
 	player_inventory = item
 
 func get_player_inventory():
-	return player_inventory	
+	return player_inventory
+
+func clear_player_inventory():
+	player_inventory = null
 	
 func evaluate_input_scheme(event):
 	if event is InputEventJoypadMotion or event is InputEventJoypadButton and INPUT_SCHEME != INPUT_SCHEMES.GAMEPAD:
@@ -85,7 +88,6 @@ func calculate_final_player_score():
 	# calculate total score
 	for score_item in player_score:
 		if score_item != TOTAL and score_item != RANK:
-			print(score_item) 
 			player_score[TOTAL] += player_score[score_item]	
 	
 	if player_score[TOTAL] >= 15000:
@@ -98,6 +100,8 @@ func calculate_final_player_score():
 		player_score[RANK] = "C"
 	elif player_score[TOTAL] < 5000:
 		player_score[RANK] = "D"
+	
+		
 						
 func reset_score_board():
 	player_score = {RETRIES: 0,
@@ -115,14 +119,21 @@ func reset_score_board():
 	
 func switch_to_score_board():
 	calculate_final_player_score()
+	var grand_total = load_grand_total()
+	save_grand_total(grand_total + player_score[TOTAL])
 	save_game(current_level + 1)
 	var score_board = load("res://Scenes/Menu/score_board.tscn")
-	get_tree().change_scene_to_packed(score_board)		
+	get_tree().change_scene_to_packed(score_board)	
 
 func switch_to_next_level():
 	reset_score_board()
-	var level = load(levels[current_level + 1])
-	get_tree().change_scene_to_packed(level)
+	# last level
+	if current_level == 4:
+		var end_cutscene = load("res://Scenes/end_cutscene.tscn")
+		get_tree().change_scene_to_packed(end_cutscene)
+	else:
+		var level = load(levels[current_level + 1])
+		get_tree().change_scene_to_packed(level)
 	
 func load_level(index):
 	var level
@@ -145,19 +156,21 @@ func save_grand_total(grand_total):
 func load_grand_total():
 	file = FileAccess.open("res://grand_total.data", FileAccess.READ)
 	if not file:
-		return
+		return 0
 	var grand_total = file.get_var()
+	if grand_total == null:
+		grand_total = 0
 	file.close()
 	return grand_total	
 	
 func save_game(data):
-	file = FileAccess.open("res://savegame.data", FileAccess.WRITE)
+	file = FileAccess.open("user://savegame.data", FileAccess.WRITE)
 	file.store_var(data)
 	file.close()
 	
 
 func load_game():
-	file = FileAccess.open("res://savegame.data", FileAccess.READ)
+	file = FileAccess.open("user://savegame.data", FileAccess.READ)
 	if not file:
 		return
 	var level = file.get_var()
@@ -165,8 +178,8 @@ func load_game():
 	return level
 
 func delete_save():
-	DirAccess.remove_absolute("res://savegame.data")
-	DirAccess.remove_absolute("res://grand_total.data")
+	DirAccess.remove_absolute("user://savegame.data")
+	DirAccess.remove_absolute("user://grand_total.data")
 		
 
 func play_level_cutscene():

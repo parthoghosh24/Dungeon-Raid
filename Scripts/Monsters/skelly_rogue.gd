@@ -180,7 +180,6 @@ func attack_player(delta):
 	if current_state != States.damaged or current_state != States.die:
 		anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
 		anim_tree.set("parameters/move_attack/blend_amount", 1)
-		Global.update_player_score(Global.HITS_TAKEN, -50)
 	
 
 func knockback(dir):

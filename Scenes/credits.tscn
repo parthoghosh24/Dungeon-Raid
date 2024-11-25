@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bxm8vswqvdoax"]
+[gd_scene load_steps=11 format=3 uid="uid://bxm8vswqvdoax"]
 
 [ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="1_5qri2"]
 [ext_resource type="Script" path="res://Scripts/credits.gd" id="1_vqy48"]
@@ -9,9 +9,9 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fh2ih"]
 bg_color = Color(1, 1, 1, 1)
 
-[sub_resource type="Animation" id="Animation_3bkd1"]
+[sub_resource type="Animation" id="Animation_04d2x"]
 resource_name = "ACT1"
-length = 5.0
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -19,117 +19,41 @@ tracks/0/path = NodePath("Panel/Title:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.06667, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.333333, 2.6, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel/Heading:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.0333333),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Panel/PersonName:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.0666667),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_tsi5x"]
+[sub_resource type="Animation" id="Animation_iehm3"]
 resource_name = "ACT2"
-length = 5.0
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Panel/Title:self_modulate")
+tracks/0/path = NodePath("Panel/Heading:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.333333, 2.56667, 2.86667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Panel/Heading:self_modulate")
+tracks/1/path = NodePath("Panel/PersonName:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.0333333, 1.1, 4.96667),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.3, 2.53333, 2.86667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Panel/PersonName:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.0666667, 1.1, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_ikxwa"]
-resource_name = "ACT3"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel/Title:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel/Heading:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.0333333, 1.1, 4.96667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Panel/PersonName:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.0666667, 1.1, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_4das6"]
+[sub_resource type="Animation" id="Animation_0s7ki"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -168,12 +92,11 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vtcvl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e4nci"]
 _data = {
-"ACT1": SubResource("Animation_3bkd1"),
-"ACT2": SubResource("Animation_tsi5x"),
-"ACT3": SubResource("Animation_ikxwa"),
-"RESET": SubResource("Animation_4das6")
+"ACT1": SubResource("Animation_04d2x"),
+"ACT2": SubResource("Animation_iehm3"),
+"RESET": SubResource("Animation_0s7ki")
 }
 
 [node name="Credits" type="Control"]
@@ -194,7 +117,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fh2ih")
-metadata/_edit_use_anchors_ = true
 
 [node name="Title" type="Label" parent="Panel"]
 self_modulate = Color(1, 1, 1, 0)
@@ -243,14 +165,14 @@ autowrap_mode = 3
 
 [node name="LetterBox" parent="." instance=ExtResource("2_3hqnx")]
 
-[node name="Cutscene" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_vtcvl")
-}
-
 [node name="SFX" type="Node" parent="."]
 
 [node name="Music" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("5_5qmgy")
+
+[node name="Cutscene" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_e4nci")
+}
 
 [connection signal="animation_finished" from="Cutscene" to="." method="_on_cutscene_animation_finished"]

@@ -1,0 +1,214 @@
+[gd_scene load_steps=11 format=3 uid="uid://dnaht2bmkrcq3"]
+
+[ext_resource type="Script" path="res://Scripts/menu/options_menu_credits.gd" id="1_ie61j"]
+[ext_resource type="FontFile" uid="uid://gh3mknrglbsr" path="res://Resources/font/The Wild Breath of Zelda.otf" id="2_3shq4"]
+[ext_resource type="FontFile" uid="uid://plk2ssnqqgfy" path="res://Resources/font/MotionControl-Bold.otf" id="3_jd433"]
+[ext_resource type="PackedScene" uid="uid://cc74axs7pqcdn" path="res://Scenes/letter_box.tscn" id="4_qgner"]
+[ext_resource type="AudioStream" uid="uid://c14uy56xw8h1o" path="res://Resources/sound/happy_end.wav" id="5_jxj7e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oxw7r"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_3bkd1"]
+resource_name = "ACT1"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/Title:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 2.56667, 2.86667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/Heading:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel/PersonName:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tsi5x"]
+resource_name = "ACT2"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/Title:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/Heading:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.366667, 2.5, 2.83333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel/PersonName:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0666667, 0.4, 2.53333, 2.86667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4das6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/Title:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/Heading:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel/PersonName:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vtcvl"]
+_data = {
+"ACT1": SubResource("Animation_3bkd1"),
+"ACT2": SubResource("Animation_tsi5x"),
+"RESET": SubResource("Animation_4das6")
+}
+
+[node name="OptionsMenuCredits" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ie61j")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oxw7r")
+
+[node name="Title" type="Label" parent="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 368.0
+offset_top = 216.0
+offset_right = 754.0
+offset_bottom = 319.0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_3shq4")
+theme_override_font_sizes/font_size = 80
+text = "Dungeon Raid"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Heading" type="Label" parent="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 399.0
+offset_top = 240.0
+offset_right = 754.0
+offset_bottom = 293.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_jd433")
+theme_override_font_sizes/font_size = 30
+text = "A game by"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PersonName" type="Label" parent="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 376.0
+offset_top = 289.0
+offset_right = 793.0
+offset_bottom = 364.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_jd433")
+theme_override_font_sizes/font_size = 40
+text = "PorthorisNaagu"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="LetterBox" parent="." instance=ExtResource("4_qgner")]
+
+[node name="Cutscene" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vtcvl")
+}
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_jxj7e")
+
+[connection signal="animation_finished" from="Cutscene" to="." method="_on_cutscene_animation_finished"]

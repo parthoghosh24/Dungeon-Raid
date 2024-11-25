@@ -19,6 +19,7 @@ var cutscene_playing = false
 func _ready():
 	level_timer.start()
 	player_detected = false
+	Global.clear_player_inventory()
 	Global.set_level(4)
 	Global.save_game(4)
 	boss.process_mode = Node.PROCESS_MODE_DISABLED
@@ -59,6 +60,7 @@ func _on_level_timer_timeout():
 	level_time_spent += 1
 	
 func trigger_cutscene():
+	update_interactions("CutsceneTrigger")
 	cutscene_playing = true
 	get_tree().paused = true
 	player.visible = false

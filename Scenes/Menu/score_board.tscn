@@ -12,6 +12,7 @@
 bg_color = Color(1, 1, 1, 1)
 
 [node name="ScoreBoard" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchor_top = 0.002
 anchor_bottom = 0.002
@@ -434,9 +435,11 @@ text = "Quit"
 
 [node name="NextLevelTimer" type="Timer" parent="Panel"]
 process_mode = 3
+one_shot = true
 
 [node name="QuitTimer" type="Timer" parent="Panel"]
 process_mode = 3
+one_shot = true
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_in0uv")

@@ -5,8 +5,10 @@ extends Node3D
 @onready var intro_camera = $Camera1
 @onready var reveal_dungeon_camera = $Camera2
 @onready var audio_anim_player = $AudioAnimationPlayer
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED	
 	audio_anim_player.play("Play")
 	anim_player.queue("FadeIn")
 	intro_camera.make_current()

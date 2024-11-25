@@ -22,7 +22,14 @@ Global="*res://Scripts/Global.gd"
 
 [display]
 
+window/size/mode=4
+window/size/borderless=true
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="res://Resources/images/Mousepointer.png"
+
+[editor]
+
+movie_writer/movie_file="/Users/parthoghosh/Desktop/workspace/Godot/DungeonRaid/Exports/trailer.avi"
 
 [input]
 

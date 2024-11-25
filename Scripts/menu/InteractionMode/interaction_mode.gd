@@ -16,6 +16,7 @@ func _process(delta):
 
 func show_message(message_text, show_button=false):
 	if show_button:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		action_button.show()
 	message.text = message_text
 	self.show()
@@ -31,6 +32,7 @@ func _on_message_timer_timeout():
 
 func _on_action_button_pressed():
 	get_tree().paused = false
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	message.text = ''
 	self.hide()
 	if owner.name == "keyring_hanging2":

@@ -7,6 +7,9 @@ extends Control
 @onready var try_again_timer = $MarginContainer/Main/TryAgainTimer
 @onready var quit_timer = $MarginContainer/Main/QuitTimer
 
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 func _on_try_again_pressed():
 	if try_again_timer.is_stopped():
 		try_again_timer.start()
