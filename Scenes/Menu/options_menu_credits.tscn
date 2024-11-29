@@ -187,10 +187,10 @@ vertical_alignment = 1
 [node name="PersonName" type="Label" parent="Panel"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 376.0
-offset_top = 289.0
-offset_right = 793.0
-offset_bottom = 364.0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 873.0
+offset_bottom = 363.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_jd433")
 theme_override_font_sizes/font_size = 40
@@ -198,6 +198,16 @@ text = "PorthorisNaagu"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="Close" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 488.0
+offset_right = 1088.0
+offset_bottom = 544.0
+theme_override_fonts/font = ExtResource("3_jd433")
+theme_override_font_sizes/font_size = 30
+text = "Close"
 
 [node name="LetterBox" parent="." instance=ExtResource("4_qgner")]
 
@@ -211,4 +221,5 @@ libraries = {
 [node name="Music" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("5_jxj7e")
 
+[connection signal="pressed" from="Panel/Close" to="." method="_on_close_pressed"]
 [connection signal="animation_finished" from="Cutscene" to="." method="_on_cutscene_animation_finished"]

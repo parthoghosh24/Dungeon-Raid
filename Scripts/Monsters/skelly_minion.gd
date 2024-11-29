@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 var player = null
 var walk_speed = 10
-var run_speed = 30
+var run_speed = 25
 var dir
 var speed
 
@@ -166,6 +166,7 @@ func attack_player(delta):
 	look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
 	
 	if current_state != States.damaged or current_state != States.die:
+		await get_tree().create_timer(0.5)
 		anim_tree.set("parameters/idle_walk_run_blend/blend_amount", 0)
 		anim_tree.set("parameters/move_attack/blend_amount", 1)
 	

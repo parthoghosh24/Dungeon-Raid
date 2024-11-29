@@ -17,7 +17,7 @@ func _ready():
 	cutscene.queue("ACT1")
 	await cutscene.animation_finished
 	heading.text = "A game by"
-	person_name.text = "PorthorisNaagu"
+	person_name.text = "Partho \"PorthorisNaagu\" Ghosh"
 	cutscene.queue("ACT2")
 	await cutscene.animation_finished
 	heading.text = "Haiya voice"
@@ -61,7 +61,7 @@ func _ready():
 	cutscene.queue("ACT2")
 	await cutscene.animation_finished
 	heading.text = "Programmer, story, gameplay & levels"
-	person_name.text = "Partho Ghosh"
+	person_name.text = "Partho \"PorthorisNaagu\" Ghosh"
 	cutscene.queue("ACT2")
 	await cutscene.animation_finished
 	heading.text = "3d characters & environment assets"

@@ -14,6 +14,8 @@ extends Control
 @onready var start_game_timer =$MarginContainer/Main/StartGameTimer
 @onready var options_timer =$MarginContainer/Main/OptionsTimer
 @onready var quit_timer =$MarginContainer/Main/QuitTimer
+@onready var help_button = $MarginContainer/Main/Help
+@onready var help_timer = $MarginContainer/Main/HelpTimer
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -22,6 +24,7 @@ func _ready():
 		continue_button.visible = false
 		start_game_button.visible = false
 		options_button.visible = false
+		help_button.visible = false
 		quit_button.visible = false
 	else:
 		show_menu_buttons()	
@@ -66,6 +69,7 @@ func show_menu_buttons():
 	press_to_start_button.visible = false
 	start_game_button.visible = true
 	options_button.visible = true
+	help_button.visible = true
 	quit_button.visible = true
 	
 	continue_button.visible = false
@@ -128,3 +132,22 @@ func _on_continue_timer_timeout():
 	continue_button.disabled = false
 	get_tree().paused = false
 	Global.load_level(level)
+
+
+func _on_help_pressed():
+	if help_timer.is_stopped():
+		help_timer.start()
+		select_audio.play()
+		help_button.disabled = true
+		get_tree().paused = true
+
+
+func _on_help_mouse_entered():
+	hover_audio.play()
+
+
+func _on_help_timer_timeout():
+	help_button.disabled = false
+	get_tree().paused = false
+	var help_screen = preload("res://Scenes/Menu/help_screen.tscn").instantiate()
+	get_tree().root.add_child(help_screen)

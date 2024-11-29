@@ -34,10 +34,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_xkcvl")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_left = 256.0
-offset_top = 194.0
-offset_right = 839.0
-offset_bottom = 518.0
+offset_left = 296.0
+offset_top = 192.0
+offset_right = 879.0
+offset_bottom = 516.0
 theme = SubResource("Theme_8gvmh")
 
 [node name="Label" type="Label" parent="MarginContainer"]

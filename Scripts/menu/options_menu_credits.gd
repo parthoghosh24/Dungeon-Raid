@@ -4,6 +4,7 @@ extends Control
 @onready var heading = $Panel/Heading
 @onready var person_name = $Panel/PersonName
 @onready var music = $SFX/Music
+@onready var close = $Panel/Close
 
 # Called when the node enters the scene tree for the first time.
 
@@ -11,14 +12,14 @@ func _input(event):
 	return null
 	
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	await get_tree().create_timer(1).timeout
 	music.play()
 	get_tree().paused = true
 	cutscene.queue("ACT1")
 	await cutscene.animation_finished
 	heading.text = "A game by"
-	person_name.text = "PorthorisNaagu"
+	person_name.text = "Partho \"PorthorisNaagu\" Ghosh"
 	cutscene.queue("ACT2")
 	await cutscene.animation_finished
 	heading.text = "Haiya voice"
@@ -62,7 +63,7 @@ func _ready():
 	cutscene.queue("ACT2")
 	await cutscene.animation_finished
 	heading.text = "Programmer, story, gameplay & levels"
-	person_name.text = "Partho Ghosh"
+	person_name.text = "Partho \"PorthorisNaagu\" Ghosh"
 	cutscene.queue("ACT2")
 	await cutscene.animation_finished
 	heading.text = "3d characters & environment assets"
@@ -144,3 +145,8 @@ func _on_cutscene_animation_finished(anim_name):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		await get_tree().create_timer(1).timeout
 		queue_free()
+
+
+func _on_close_pressed():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	queue_free() # Replace with function body.

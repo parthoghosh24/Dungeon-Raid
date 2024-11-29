@@ -151,10 +151,10 @@ vertical_alignment = 1
 [node name="PersonName" type="Label" parent="Panel"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 376.0
-offset_top = 289.0
-offset_right = 793.0
-offset_bottom = 364.0
+offset_left = 336.0
+offset_top = 288.0
+offset_right = 849.0
+offset_bottom = 363.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_u7ui3")
 theme_override_font_sizes/font_size = 40

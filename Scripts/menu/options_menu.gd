@@ -11,8 +11,6 @@ extends Control
 @onready var back_timer = $MarginContainer/Options/BackTimer
 @onready var credits_button = $MarginContainer/Options/Credits
 @onready var credits_timer = $MarginContainer/Options/CreditsTimer
-@onready var help_button = $MarginContainer/Options/Help
-@onready var help_timer = $MarginContainer/Options/HelpTimer
 @onready  var reset_game_confirm = $MarginContainer/Options/ResetGameConfirm
 
 func _ready():
@@ -95,19 +93,6 @@ func _on_controls_pressed():
 func _on_controls_mouse_entered():
 	hover_audio.play()
 
-
-func _on_help_pressed():
-	if help_timer.is_stopped():
-		help_timer.start()
-		select_audio.play()
-		help_button.disabled = true
-		get_tree().paused = true
-
-
-func _on_help_mouse_entered():
-	hover_audio.play()
-
-
 func _on_credits_pressed():
 	if credits_timer.is_stopped():
 		credits_timer.start()
@@ -125,8 +110,3 @@ func _on_credits_timer_timeout():
 	get_tree().paused = false
 	var credits_screen = preload("res://Scenes/Menu/options_menu_credits.tscn").instantiate()
 	get_tree().root.add_child(credits_screen)
-
-
-func _on_help_timer_timeout():
-	help_button.disabled = false
-	get_tree().paused = false

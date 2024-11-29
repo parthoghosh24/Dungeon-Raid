@@ -139,7 +139,7 @@ func load_level(index):
 	var level
 	if index == -1:
 		level = load("res://Scenes/Menu/main_menu.tscn")
-	else:	
+	else:
 		level = load(levels[index])
 	get_tree().change_scene_to_packed(level)
 		
@@ -149,12 +149,12 @@ func knockback(mesh_global_position, direction):
 	tween.tween_property(self, "global_position", mesh_global_position - (direction / 1.5), 0.2)
 	
 func save_grand_total(grand_total):
-	file = FileAccess.open("res://grand_total.data", FileAccess.WRITE)
+	file = FileAccess.open("user://grand_total.data", FileAccess.WRITE)
 	file.store_var(grand_total)
 	file.close()
 
 func load_grand_total():
-	file = FileAccess.open("res://grand_total.data", FileAccess.READ)
+	file = FileAccess.open("user://grand_total.data", FileAccess.READ)
 	if not file:
 		return 0
 	var grand_total = file.get_var()

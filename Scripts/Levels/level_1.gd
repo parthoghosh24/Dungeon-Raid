@@ -27,6 +27,7 @@ func _ready():
 	Global.set_level(0)
 	Global.save_game(0)
 	
+	
 func _physics_process(delta):
 	if player_detected:
 		music_animation.play("FadeIn")

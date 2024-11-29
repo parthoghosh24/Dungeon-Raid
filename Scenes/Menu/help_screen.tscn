@@ -1,0 +1,105 @@
+[gd_scene load_steps=6 format=3 uid="uid://q4mbr8ejckee"]
+
+[ext_resource type="Script" path="res://Scripts/menu/help_screen.gd" id="1_dg0uw"]
+[ext_resource type="FontFile" uid="uid://plk2ssnqqgfy" path="res://Resources/font/MotionControl-Bold.otf" id="2_l726x"]
+[ext_resource type="AudioStream" uid="uid://dc70rw3pj7ch6" path="res://Resources/sound/menu_sfx/menu_back.wav" id="3_ioy1j"]
+[ext_resource type="AudioStream" uid="uid://dapt6hwr4h0r2" path="res://Resources/sound/menu_sfx/menu_hover.wav" id="4_skeiw"]
+[ext_resource type="AudioStream" uid="uid://bonopwd1xuju2" path="res://Resources/sound/menu_sfx/menu_select.wav" id="5_5ms6i"]
+
+[node name="HelpScreen" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dg0uw")
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="Next" type="Button" parent="."]
+layout_mode = 0
+offset_left = 904.0
+offset_top = 600.0
+offset_right = 949.0
+offset_bottom = 631.0
+theme_override_fonts/font = ExtResource("2_l726x")
+theme_override_font_sizes/font_size = 20
+text = "Next
+"
+
+[node name="Prev" type="Button" parent="."]
+layout_mode = 0
+offset_left = 968.0
+offset_top = 600.0
+offset_right = 1013.0
+offset_bottom = 631.0
+theme_override_fonts/font = ExtResource("2_l726x")
+theme_override_font_sizes/font_size = 20
+text = "Prev
+"
+
+[node name="Close" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 600.0
+offset_right = 1082.0
+offset_bottom = 631.0
+theme_override_fonts/font = ExtResource("2_l726x")
+theme_override_font_sizes/font_size = 20
+text = "Close
+"
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Back" type="AudioStreamPlayer" parent="SFX"]
+process_mode = 3
+stream = ExtResource("3_ioy1j")
+max_polyphony = 5
+
+[node name="Hover" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_skeiw")
+max_polyphony = 5
+
+[node name="Select" type="AudioStreamPlayer" parent="SFX"]
+process_mode = 3
+stream = ExtResource("5_5ms6i")
+max_polyphony = 5
+
+[node name="NextTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PrevTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CloseTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HelpText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 40.0
+offset_right = 416.0
+offset_bottom = 257.0
+theme_override_fonts/font = ExtResource("2_l726x")
+theme_override_font_sizes/font_size = 40
+text = "Press \"Q\" to stealth Kill enemy. Enemies can only be killed when \"Q\" prompt shows up on them."
+autowrap_mode = 3
+
+[connection signal="mouse_entered" from="Next" to="." method="_on_next_mouse_entered"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
+[connection signal="mouse_entered" from="Prev" to="." method="_on_prev_mouse_entered"]
+[connection signal="pressed" from="Prev" to="." method="_on_prev_pressed"]
+[connection signal="mouse_entered" from="Close" to="." method="_on_close_mouse_entered"]
+[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]
+[connection signal="timeout" from="NextTimer" to="." method="_on_next_timer_timeout"]
+[connection signal="timeout" from="PrevTimer" to="." method="_on_prev_timer_timeout"]
+[connection signal="timeout" from="CloseTimer" to="." method="_on_close_timer_timeout"]
