@@ -22,7 +22,7 @@ var help_texts = [
 	"Haiya can stealth kill enemies . Enemies can only be stealth killed when \"Q\" prompt shows up on them.",
 	"Press \"E\" to interact with environment. Interactions reward with points.",
 	"Press \"Left click\" to attack. Haiya can perform 3 hit combos with quick clicks. Press \"Spacebar\" to jump. Jumps can be added in attacks strategically." ,
-	"Although combat is an option, stealth is the better choice. Enemies will swarm and attack once Haiya is detected. Better outrun then and attack them stealthly."
+	"Although combat is an option, stealth is the better choice. Enemies will swarm and attack once Haiya is detected. Better outrun then and attack them stealthly. Hold \"Shift\" with \"W,A,S,D\" to sprint."
 ]	
 
 var curr_idx = 0
