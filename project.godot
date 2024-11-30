@@ -11,10 +11,13 @@ config_version=5
 [application]
 
 config/name="Dungeon Raid"
+config/description="Dungeon Raid is a third-person stealth action game set in an imaginary fantasy world."
 run/main_scene="res://Scenes/meta_intro.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/image="res://Resources/Splash.png"
 config/icon="res://Resources/DR_icon.png"
+config/macos_native_icon="res://Resources/DR_icon.png"
+config/windows_native_icon="res://Resources/DR_icon.png"
 
 [autoload]
 
