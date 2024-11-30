@@ -174,7 +174,7 @@ func dead():
 	anim_tree.set("parameters/death_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	death_timer.start()
 
-func attack_player(delta):
+func attack_player(_delta):
 	look_at(Vector3(player.global_position.x, global_transform.origin.y, player.global_position.z), Vector3.UP)
 	
 	if current_state != States.damaged or current_state != States.die:

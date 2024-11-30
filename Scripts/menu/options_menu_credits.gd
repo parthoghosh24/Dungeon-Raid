@@ -19,7 +19,7 @@ func _ready():
 	cutscene.queue("ACT1")
 	await cutscene.animation_finished
 	heading.text = "A game by"
-	person_name.text = "Partho \"PorthorisNaagu\" Ghosh"
+	person_name.text = "PorthorisNaagu"
 	cutscene.queue("ACT2")
 	await cutscene.animation_finished
 	heading.text = "Haiya voice"
@@ -106,7 +106,7 @@ func _ready():
 	person_name.text = "Kenney Vleugels (Kenney.nl)"
 	cutscene.queue("ACT2")
 	await cutscene.animation_finished
-	heading.text = "Intro theme"
+	heading.text = "Intro & trailer theme"
 	person_name.text = "\"Wipe away those tears\" by Jonathan Shaw (www.jshaw.co.uk)"
 	cutscene.queue("ACT2")
 	await cutscene.animation_finished
@@ -114,11 +114,11 @@ func _ready():
 	person_name.text = "Michael Robinson Homingstar (opengameart.org/users/michael-robinson)"
 	cutscene.queue("ACT2")
 	await cutscene.animation_finished
-	heading.text = "Mini boss theme"
+	heading.text = "Mini boss & trailer theme"
 	person_name.text = "\"The Rush\" by tebruno99 (opengameart.org/users/tebruno99)"
 	cutscene.queue("ACT2")
 	await cutscene.animation_finished
-	heading.text = "Final boss theme"
+	heading.text = "Final boss & trailer theme"
 	person_name.text = "\"Colossal Boss Battle\" by Matthew Pablo (matthewpablo.com)"
 	cutscene.queue("ACT2")
 	await cutscene.animation_finished

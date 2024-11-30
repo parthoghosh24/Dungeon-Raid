@@ -94,6 +94,7 @@ func _on_next_level_mouse_entered():
 
 
 func _on_next_level_timer_timeout():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	next_level_button.disabled = false
 	get_tree().paused = false
 	Global.switch_to_next_level()

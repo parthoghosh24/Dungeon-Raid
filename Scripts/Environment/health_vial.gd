@@ -15,17 +15,17 @@ func _ready():
 func activate_vial(vial_name):
 	match vial_name:
 		"small_health":
-			vial_value = 4
+			vial_value = 10
 			small_health.show()
 			medium_health.hide()
 			large_health.hide()
 		"medium_health":
-			vial_value = 10
+			vial_value = 50
 			small_health.hide()
 			medium_health.show()
 			large_health.hide()
 		"large_health":
-			vial_value = 20
+			vial_value = 100
 			small_health.hide()
 			medium_health.hide()
 			large_health.show()

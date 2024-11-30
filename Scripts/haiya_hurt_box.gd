@@ -14,18 +14,18 @@ func _on_area_entered(area):
 		return
 	
 	if owner.has_method("damage"):
-		#Boss fireball does 2 damage per hit
+		#Boss fireball does 5 damage per hit
 		if area.name.contains("Fireball") == true:
 			area.queue_free()
-			owner.damage(2)
+			owner.damage(5)
 			
 			
-		#Skelly Warrior does 5 damage per hit
+		#Skelly Warrior does 25 damage per hit
 		if area.name == "WarriorLeftHandHitbox" or area.name == "WarriorRightHandHitbox":
-			owner.damage(4)
-		#Skelly Rogue does 3 damage per hit
+			owner.damage(25)
+		#Skelly Rogue does 5 damage per hit
 		if area.name == "RightHandHitbox":
-			owner.damage(3)
+			owner.damage(5)
 		#Skelly Minion does 2 damage per hit
 		if area.name == "RightArmHitBox" or area.name == "RightLegHitBox":
 			owner.damage(2)	

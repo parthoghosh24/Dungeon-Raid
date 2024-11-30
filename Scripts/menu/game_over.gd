@@ -27,6 +27,7 @@ func _on_quit_pressed():
 
 
 func _on_try_again_timer_timeout():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	try_again_button.disabled = false
 	get_tree().paused = false
 	Global.update_player_score(Global.RETRIES, -100)

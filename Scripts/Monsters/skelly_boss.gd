@@ -72,7 +72,7 @@ func _physics_process(delta):
 
 func jump_attack_damage():
 	if player.is_on_floor():
-		player.damage(10,15)
+		player.damage(50,15)
 
 func shoot(delta):
 	animation_tree.get("parameters/playback").travel("Attack")

@@ -34,7 +34,7 @@ func _ready():
 	
 func get_image_texture(idx):
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	image_texture.texture = ImageTexture.create_from_image(Image.load_from_file(help_images[idx]))
+	image_texture.texture = load(help_images[idx])
 	image_texture.expand_mode = TextureRect.EXPAND_FIT_WIDTH
 	return image_texture
 

@@ -170,7 +170,7 @@ func invoke_interaction(collider):
 		self.add_child(interaction_prompt)
 	else:
 		interactive_object = null
-		if interaction_prompt:
+		if is_instance_valid(interaction_prompt):
 			self.remove_child(interaction_prompt)
 			
 		

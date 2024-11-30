@@ -39,6 +39,7 @@ func calc_final_rank():
 
 
 func _on_main_menu_timer_timeout():
+	Global.delete_save()
 	main_menu_button.disabled = false
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/Menu/main_menu.tscn")
