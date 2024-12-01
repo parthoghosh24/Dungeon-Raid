@@ -9,24 +9,24 @@ enum {
 	HIT,
 }
 
-var state
+var state: int
 
-func change_state_idle():
+func change_state_idle() -> void:
 	state = IDLE
 
-func change_state_attack():
+func change_state_attack()-> void:
 	state = ATTACK
 
-func change_state_jump_attack():
+func change_state_jump_attack()-> void:
 	state = JUMP_ATTACK	
 
-func change_state_run():
+func change_state_run()-> void:
 	state = RUN
 
-func change_state_hit():
+func change_state_hit()-> void:
 	state = HIT
 	
-func change_state_dead():
+func change_state_dead()-> void:
 	state = DEAD
 
 

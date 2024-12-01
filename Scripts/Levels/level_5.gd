@@ -1,22 +1,22 @@
 extends Node3D
 
 @onready var player_detected: bool
-@onready var battle_music = $SFX/BossMusic
-@onready var player = $Haiya
-@onready var boss = $SkellyBoss
-@onready var knight = $Knight
+@onready var battle_music: AudioStreamPlayer = $SFX/BossMusic
+@onready var player: CharacterBody3D = $Haiya
+@onready var boss: CharacterBody3D = $SkellyBoss
+@onready var knight: Node3D = $Knight
 @onready var level_timer: Timer = $LevelTimer
-@onready var cutscene_trigger_collision = $CutsceneTrigger/CollisionShape3D
+@onready var cutscene_trigger_collision: CollisionShape3D = $CutsceneTrigger/CollisionShape3D
 var level_time_spent: int = 0
 
-var interactions = {
+var interactions: Dictionary = {
 	"CutsceneTrigger": false,
 }
 
 var cutscene_playing = false
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	level_timer.start()
 	player_detected = false
 	Global.clear_player_inventory()
@@ -26,14 +26,14 @@ func _ready():
 	boss.visible = false
 	knight.visible = false
 
-func _physics_process(delta):
+func _process(_delta) -> void:
 	if Global.level_cutscene_playing() == true and !cutscene_playing:
 		trigger_cutscene()
 	
 	if Global.level_cutscene_playing() == false and cutscene_playing:
 		resume_game()	
 
-func update_interactions(key):
+func update_interactions(key: String) -> void:
 	interactions[key] = true
 	
 	#Award player with Exploration bonus if player has interacted has explored
@@ -42,10 +42,10 @@ func update_interactions(key):
 		Global.update_player_score(Global.EXPLORATION_BONUS, 1000)
  
 
-func _on_haiya_player_dead():
+func _on_haiya_player_dead() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Menu/game_over.tscn")
 
-func stop_level_timer():
+func stop_level_timer() -> void:
 	level_timer.stop()
 
 	# if it is more than 5 minutes then award min 1000 points
@@ -56,10 +56,10 @@ func stop_level_timer():
 	else:
 		Global.update_player_score(Global.TIME_TAKEN, 2500)
 		
-func _on_level_timer_timeout():
+func _on_level_timer_timeout() -> void:
 	level_time_spent += 1
 	
-func trigger_cutscene():
+func trigger_cutscene() -> void:
 	update_interactions("CutsceneTrigger")
 	cutscene_playing = true
 	get_tree().paused = true
@@ -68,7 +68,7 @@ func trigger_cutscene():
 	var level_5_cutscene_intro = preload("res://Scenes/LevelCutscenes/level_5_cutscene_intro.tscn").instantiate()
 	get_tree().root.add_child(level_5_cutscene_intro)
 
-func resume_game():
+func resume_game() -> void:
 	cutscene_playing = false
 	player.visible = true
 	boss.visible = true
@@ -79,6 +79,6 @@ func resume_game():
 	battle_music.play()
 
 
-func _on_cutscene_trigger_body_entered(body):
+func _on_cutscene_trigger_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		trigger_cutscene()

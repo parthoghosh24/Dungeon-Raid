@@ -1,38 +1,38 @@
 extends CharacterBody3D
 
 @export var player_path : NodePath
-@onready var animation_tree = $AnimationTree
-@onready var nav_agent = $NavigationAgent3D
-@onready var health_bar = $HealthBar/EnemyHealthBar
-@onready var death_timer = $Timers/DeathTimer
-@onready var idle_timer = $Timers/IdleTimer
-@onready var dodge_timer = $Timers/DodgeTimer
-@onready var attack_timer = $Timers/AttackTimer
-@onready var player_attack = $PlayerAttack
-@onready var hurt_box = $HurtBox/CollisionShape3D
-@onready var health_vial = preload("res://Scenes/Environment/health_vial.tscn")
-@onready var keyring = preload("res://Scenes/Environment/keyring_hanging.tscn")
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var health_bar: TextureProgressBar = $HealthBar/EnemyHealthBar
+@onready var death_timer: Timer = $Timers/DeathTimer
+@onready var idle_timer: Timer = $Timers/IdleTimer
+@onready var dodge_timer: Timer = $Timers/DodgeTimer
+@onready var attack_timer: Timer = $Timers/AttackTimer
+@onready var player_attack: Area3D = $PlayerAttack
+@onready var hurt_box: CollisionShape3D = $HurtBox/CollisionShape3D
+@onready var health_vial: PackedScene = preload("res://Scenes/Environment/health_vial.tscn")
+@onready var keyring: PackedScene = preload("res://Scenes/Environment/keyring_hanging.tscn")
 
-var attacking = false
-var player_in_range = false
+var attacking: bool = false
+var player_in_range: bool = false
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-var run_speed = 45
-var dir
-var speed
-var player
+var run_speed: int = 35
+var dir: Vector3
+var speed: float
+var player: Node
 
 # Algo for phased boss behaviour
 # 100 - 75% health, attack
 # 75 -50% health, block, attack
 # 50-0% health, block,dodge, taunt, attack
 
-func _ready():
+func _ready() -> void:
 	player = get_node(player_path)
 	animation_tree.state = animation_tree.RUN
 	
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 			velocity.y -=  gravity * delta
 	if animation_tree.state == animation_tree.RUN and !attacking:
@@ -90,7 +90,7 @@ func _physics_process(delta):
 		animation_tree.get("parameters/playback").travel("Dead")
 		
 		
-func deplete_health():
+func deplete_health() -> int:
 	var health_left = health_left()
 	if health_left >= 0.75 and health_left() <= 1:
 		return 5
@@ -100,8 +100,9 @@ func deplete_health():
 		return 3
 	if health_left >= 0 and health_left() < 0.25:
 		return 2
+	return 0	
 
-func attack_timer_wait():
+func attack_timer_wait() -> int:
 	var health_left = health_left()
 	if health_left >= 0.75 and health_left() <= 1:
 		return 5
@@ -109,46 +110,46 @@ func attack_timer_wait():
 		return 2
 	if health_left >= 0 and health_left() < 0.50:
 		return 1
-		
+	return 0	
 
-func knockback(dir):
+func knockback(dir: Vector3) -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", global_position - (dir/2), 0.2)
 
 	
-func damage():
+func damage() -> void:
 	knockback(dir)
 	animation_tree.state = animation_tree.HIT
 
-func dead():
+func dead() -> void:
 	health_bar.value = 0
 	player_attack.process_mode = Node.PROCESS_MODE_DISABLED
 	animation_tree.state = animation_tree.DEAD
 	death_timer.start()
 
-func _on_player_attack_body_entered(body):
+func _on_player_attack_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		player_in_range = true
 		animation_tree.state = rand_attack()
 		
 
-func _on_player_attack_body_exited(body):
+func _on_player_attack_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		player_in_range = false
 		animation_tree.state = animation_tree.RUN
 
-func _on_hurt_box_area_entered(area):
+func _on_hurt_box_area_entered(area: Area3D) -> void:
 	if area == null or area.name != "HaiyaHitBox" or animation_tree.state == animation_tree.BLOCK:
 		return
 	if area.name == "HaiyaHitBox" and has_method("damage"):
 		get_viewport().get_camera_3d().shake_camera()
 		damage()
 
-func health_left():
+func health_left() -> float:
 	return health_bar.value/(health_bar.max_value * 1.0	)
 
 
-func _on_death_timer_timeout():
+func _on_death_timer_timeout() -> void:
 	#Spawn health and keyring
 	var large_health = health_vial.instantiate()
 	large_health.global_position = self.global_position
@@ -163,11 +164,11 @@ func _on_death_timer_timeout():
 	queue_free()
 
 
-func _on_idle_timer_timeout():
+func _on_idle_timer_timeout() -> void:
 	animation_tree.state = rand_attack()
 	
 
-func rand_attack():
+func rand_attack() -> int:
 	if health_left() <= 0.25:
 		return animation_tree.COMBO
  
@@ -179,13 +180,13 @@ func rand_attack():
 			return animation_tree.ATTACK2
 		3:
 			return animation_tree.ATTACK3	
-
-
-func _on_dodge_timer_timeout():
+	return animation_tree.ATTACK1
+	
+func _on_dodge_timer_timeout() -> void:
 	animation_tree.state = animation_tree.RUN
 
 
-func _on_attack_timer_timeout():
+func _on_attack_timer_timeout() -> void:
 	attacking = false
 	if player_in_range:
 		animation_tree.state = rand_attack()

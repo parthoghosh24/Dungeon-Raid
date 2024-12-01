@@ -165,21 +165,22 @@ light_energy = 5.0
 
 [node name="LargeHealth" type="Node3D" parent="."]
 
-[node name="large_health_interaction_box" type="MeshInstance3D" parent="LargeHealth"]
+[node name="bottle_C_green" type="MeshInstance3D" parent="LargeHealth"]
 mesh = SubResource("ArrayMesh_4e7r3")
 skeleton = NodePath("")
 
-[node name="InteractionBox" type="Area3D" parent="LargeHealth/large_health_interaction_box"]
+[node name="large_health_interaction_box" type="Area3D" parent="LargeHealth/bottle_C_green"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LargeHealth/large_health_interaction_box/InteractionBox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LargeHealth/bottle_C_green/large_health_interaction_box"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.448747, 0)
 shape = SubResource("CapsuleShape3D_b53ky")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="LargeHealth/large_health_interaction_box"]
+[node name="OmniLight3D" type="OmniLight3D" parent="LargeHealth/bottle_C_green"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0453285, 0.885213, 0)
 light_color = Color(0.251572, 0.619398, 0.401778, 1)
 light_energy = 5.0
 
 [connection signal="generate_vial" from="." to="." method="_on_generate_vial"]
 [connection signal="body_entered" from="SmallHealth/bottle_A_green/small_health_interaction_box" to="." method="_on_small_health_interaction_box_body_entered"]
-[connection signal="body_entered" from="MediumHealth/bottle_B_green/medium_health_interaction_box" to="." method="_on_interaction_box_body_entered"]
+[connection signal="body_entered" from="MediumHealth/bottle_B_green/medium_health_interaction_box" to="." method="_on_medium_health_interaction_box_body_entered"]
+[connection signal="body_entered" from="LargeHealth/bottle_C_green/large_health_interaction_box" to="." method="_on_large_health_interaction_box_body_entered"]

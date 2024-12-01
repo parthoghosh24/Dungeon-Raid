@@ -6,12 +6,6 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 	
 
-func set_text(content):
+func set_text(content: String) -> void:
 	text.text = content
 	text_animation.queue("Typewriter")
-	
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass

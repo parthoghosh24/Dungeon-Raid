@@ -2,12 +2,12 @@ extends Node3D
 
 
 @onready var player_detected: bool
-@onready var chase_music = $Music/Chase
-@onready var music_animation = $Music/MusicAnimation
-@onready var player = $Haiya
+@onready var chase_music: AudioStreamPlayer = $Music/Chase
+@onready var music_animation: AnimationPlayer = $Music/MusicAnimation
+@onready var player: CharacterBody3D = $Haiya
 @onready var level_timer: Timer = $LevelTimer
 var level_time_spent: int = 0
-var interactions = {
+var interactions: Dictionary = {
 	"ChestGoldArea": false,
 	"Tree": false,
 	"Chest": false,
@@ -18,7 +18,7 @@ var interactions = {
 }
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	level_timer.start()
 	player_detected = false
@@ -26,14 +26,14 @@ func _ready():
 	Global.set_level(1)
 	Global.save_game(1)
 	
-func _physics_process(delta):
+func _process(_delta) -> void:
 	if player_detected:
 		music_animation.play("FadeIn")
 			
-func _on_haiya_player_dead():
+func _on_haiya_player_dead() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Menu/game_over.tscn")
 	
-func stop_level_timer():
+func stop_level_timer() -> void:
 	level_timer.stop()
 
 	# if it is more than 5 minutes then award min 1000 points
@@ -44,7 +44,7 @@ func stop_level_timer():
 	else:
 		Global.update_player_score(Global.TIME_TAKEN, 2500)
 
-func update_interactions(key):
+func update_interactions(key: String) -> void:
 	interactions[key] = true
 	
 	#Award player with Exploration bonus if player has interacted has explored
@@ -53,5 +53,5 @@ func update_interactions(key):
 		Global.update_player_score(Global.EXPLORATION_BONUS, 1000)
 
 
-func _on_level_timer_timeout():
+func _on_level_timer_timeout() -> void:
 	level_time_spent += 1

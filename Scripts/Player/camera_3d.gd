@@ -3,7 +3,7 @@ extends Camera3D
 @export var period = 0.3
 @export var magnitude = 0.1
 
-func apply_shake():
+func apply_shake() -> void:
 	var initial_transform = self.transform 
 	var elapsed_time = 0.0
 
@@ -21,6 +21,6 @@ func apply_shake():
 	self.transform = initial_transform
 
 
-func shake_camera():
+func shake_camera() -> void:
 	apply_shake()
 	

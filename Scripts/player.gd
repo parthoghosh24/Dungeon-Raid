@@ -1,10 +1,10 @@
 extends CharacterBody3D
 
 
-const JUMP_VELOCITY = 9
-const ACCELERATION = 15
-const RUN_SPEED = 6
-const WALK_SPEED = 3
+const JUMP_VELOCITY: int = 9
+const ACCELERATION: int = 15
+const RUN_SPEED: int = 8
+const WALK_SPEED: int = 3
 
 enum ANIM_STATES {
 	IDLE,
@@ -12,45 +12,43 @@ enum ANIM_STATES {
 	ATTACK
 }
 
-@onready var player_mesh = $Rogue
-@onready var pivot = $CameraOrigin/CamH
-@export var sensitivity = 0.5
+@onready var player_mesh: Node3D = $Rogue
+@onready var pivot: Node3D = $CameraOrigin/CamH
+@export var sensitivity: float = 0.5
 
-@onready var animation_tree = $AnimationTree
-@onready var attack_timer = $AttackTimer
-@onready var is_attacking = false
-@onready var hp_bar = $PlayerHealthbar
-@onready var death_timer = $DeathTimer
-@onready var heal_audio = $Sfx/HealAudio
-@onready var interaction_ray = $InteractionRay
-@onready var interaction_prompt_scn = preload("res://Scenes/Menu/interaction_prompt.tscn")
-var interaction_prompt
-var interactive_object
-var inventory
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var attack_timer: Timer = $AttackTimer
+@onready var is_attacking: bool = false
+@onready var hp_bar: TextureProgressBar = $PlayerHealthbar
+@onready var death_timer: Timer = $DeathTimer
+@onready var heal_audio: AudioStreamPlayer = $Sfx/HealAudio
+@onready var interaction_ray: RayCast3D = $InteractionRay
+@onready var interaction_prompt_scn: PackedScene = preload("res://Scenes/Menu/interaction_prompt.tscn")
+var interaction_prompt: Node3D
+var interactive_object: StaticBody3D
 
 
-var direction
-var movement_speed = 0
-var vertical_velocity = Vector3()
-var horizontal_velocity = Vector3()
-var combo_counter = 0
+var direction: Vector3
+var movement_speed: int = 0
+var vertical_velocity: Vector3 = Vector3()
+var horizontal_velocity: Vector3 = Vector3()
+var combo_counter: int = 0
 
 signal player_dead
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-func _ready():
+func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	interaction_prompt =  interaction_prompt_scn.instantiate()
 	direction = Vector3.BACK.rotated(Vector3.UP, pivot.global_transform.basis.get_euler().y)
 	movement_speed = 0
 	animation_tree.set("parameters/idle_move/blend_amount", 0)
 	animation_tree.set("parameters/hit_death/blend_amount",0)
-	inventory = null
 		
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("quit"):
 		var pause_menu = preload("res://Scenes/Menu/pause_menu.tscn").instantiate()
 		get_tree().paused = true
@@ -127,7 +125,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-func interact():
+func interact() -> void:
 	if interactive_object:
 		owner.update_interactions(interactive_object.name)
 		if interactive_object.name == "MiniBossFightDoor":
@@ -147,7 +145,7 @@ func interact():
 			interactive_object.owner.show_interaction_mode()
 		
 
-func invoke_interaction(collider):
+func invoke_interaction(collider) -> void:
 	var colliders = ["ChestGoldArea",
 					 "SwordShieldGold",
 					 "TableLongBroken",
@@ -174,7 +172,7 @@ func invoke_interaction(collider):
 			self.remove_child(interaction_prompt)
 			
 		
-func damage(damage_value, knockback_override = 1):
+func damage(damage_value: int, knockback_override: int = 1) -> void:
 	hp_bar.value -= damage_value
 	Global.update_player_score(Global.HITS_TAKEN, -50)
 	knockback(direction, knockback_override)
@@ -184,27 +182,27 @@ func damage(damage_value, knockback_override = 1):
 		animation_tree.set("parameters/hit_death/blend_amount",1)
 		death_timer.start()
 		
-func heal_up(health_vial, value):
+func heal_up(health_vial: Node3D, value: int) -> void:
 	if hp_bar.value < hp_bar.max_value - 1:
 		hp_bar.value += value
 		if !heal_audio.is_playing():
 			heal_audio.play()
 		health_vial.queue_free()
 
-func knockback(dir,knockback_override = 1):
+func knockback(dir: Vector3,knockback_override: int = 1) -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", global_position - ((dir * knockback_override) / 1.5), 0.2)	
 	
-func _on_attack_timer_timeout():
+func _on_attack_timer_timeout() -> void:
 	is_attacking = false
 	combo_counter = 0
 	animation_tree.set("parameters/move_attack/blend_amount", 0)
 		
 
-func _on_death_timer_timeout():
+func _on_death_timer_timeout() -> void:
 	emit_signal("player_dead")
 	
-func dead():
+func dead() -> void:
 	hp_bar.value = 0
 	animation_tree.set("parameters/hit_death/blend_amount",1)
 	death_timer.start()

@@ -2,19 +2,19 @@ extends Control
 
 @onready var message: Label = $Panel/Message
 @onready var message_timer: Timer = $MessageTimer
-@onready var action_button = $Panel/ActionButton
+@onready var action_button: Button  = $Panel/ActionButton
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	action_button.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process(_delta: float) -> void:
 	pass
 	
 
-func show_message(message_text, show_button=false):
+func show_message(message_text: String, show_button: bool=false) -> void:
 	if show_button:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		action_button.show()
@@ -24,13 +24,13 @@ func show_message(message_text, show_button=false):
 	message_timer.start()
 	
 	
-func _on_message_timer_timeout():
+func _on_message_timer_timeout() -> void:
 	get_tree().paused = false
 	message.text = ''
 	self.hide()
 
 
-func _on_action_button_pressed():
+func _on_action_button_pressed() -> void:
 	get_tree().paused = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	message.text = ''

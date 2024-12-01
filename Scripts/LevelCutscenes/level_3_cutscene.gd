@@ -1,18 +1,18 @@
 extends Node3D
 
-@onready var cutscene = $Cutscene
-@onready var char_anim_player = $Haiya/Rogue/AnimationPlayer
-@onready var cam1 = $Cameras/Cam1
-@onready var cam2 = $Cameras/Cam2
-@onready var cam3 = $Cameras/Cam3
-@onready var cam4 = $Cameras/Cam4
-@onready var speech1 = $Speeches/Speech1
+@onready var cutscene: AnimationPlayer = $Cutscene
+@onready var char_anim_player: AnimationPlayer = $Haiya/Rogue/AnimationPlayer
+@onready var cam1: Camera3D = $Cameras/Cam1
+@onready var cam2: Camera3D = $Cameras/Cam2
+@onready var cam3: Camera3D = $Cameras/Cam3
+@onready var cam4: Camera3D = $Cameras/Cam4
+@onready var speech1: Control = $Speeches/Speech1
 
 # Called when the node enters the scene tree for the first time.
 
-func _input(_event):
+func _input(_event: InputEvent) -> void:
 	return
-func _ready():
+func _ready() -> void:
 	get_tree().paused = true
 	speech1.set_text("I knew it... HEY!!!")
 	cutscene.queue("ACT1")
@@ -45,7 +45,7 @@ func _ready():
 	await cutscene.animation_finished
 
 
-func _on_cutscene_animation_finished(anim_name):
+func _on_cutscene_animation_finished(anim_name: String) -> void:
 	if anim_name == "ACT9":
 		get_tree().paused = false
 		Global.set_player_inventory(Global.PLAYER_INVENTORY_ITEMS.DOOR_KEY)

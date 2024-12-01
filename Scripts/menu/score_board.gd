@@ -31,16 +31,15 @@ extends Control
 @onready var retry_bonus_value = $Panel/RetryBonusValue
 @onready var not_seem_bonus_value = $Panel/NotSeenBonusValue
 @onready var total_value = $Panel/TotalValue
-var level_scores
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready()  -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	assign_scores_and_calculate_rank()
 	
 
-func assign_scores_and_calculate_rank():
+func assign_scores_and_calculate_rank()  -> void:
 	var level_score: Dictionary = Global.get_player_score()
 		
 		
@@ -69,7 +68,7 @@ func assign_scores_and_calculate_rank():
 			rank_value_d.visible = true
 	
 
-func _on_quit_pressed():
+func _on_quit_pressed() -> void:
 	if quit_timer.is_stopped():
 		quit_timer.start()
 		select_audio.play()
@@ -77,7 +76,7 @@ func _on_quit_pressed():
 		get_tree().paused = true
 
 
-func _on_next_level_pressed():
+func _on_next_level_pressed()  -> void:
 	if next_level_timer.is_stopped():
 		next_level_timer.start()
 		press_to_start_audio.play()
@@ -85,22 +84,22 @@ func _on_next_level_pressed():
 		get_tree().paused = true
 
 
-func _on_quit_mouse_entered():
+func _on_quit_mouse_entered()  -> void:
 	hover_audio.play()
 
 
-func _on_next_level_mouse_entered():
+func _on_next_level_mouse_entered()  -> void:
 	hover_audio.play()
 
 
-func _on_next_level_timer_timeout():
+func _on_next_level_timer_timeout()  -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	next_level_button.disabled = false
 	get_tree().paused = false
 	Global.switch_to_next_level()
 
 
-func _on_quit_timer_timeout():
+func _on_quit_timer_timeout() -> void:
 	quit_button.disabled = false
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/Menu/main_menu.tscn")

@@ -1,24 +1,24 @@
 extends Node3D
 
 @onready var player_detected: bool
-@onready var chase_music = $Music/Chase
-@onready var music_animation = $Music/MusicAnimation
-@onready var battle_music = $Music/BattleMusic
-@onready var player = $Haiya
-@onready var warrior = $Enemies/Warrior/SkellyWarrior
+@onready var chase_music: AudioStreamPlayer = $Music/Chase
+@onready var music_animation: AnimationPlayer = $Music/MusicAnimation
+@onready var battle_music: AudioStreamPlayer = $Music/BattleMusic
+@onready var player: CharacterBody3D = $Haiya
+@onready var warrior: CharacterBody3D = $Enemies/Warrior/SkellyWarrior
 @onready var level_timer: Timer = $LevelTimer
 var level_time_spent: int = 0
 
-var interactions = {
+var interactions: Dictionary = {
 	"MiniBossFightDoor": false,
 	"KeyRingHanging": false,
 	"NextLevelDoor": false,
 }
 
-var cutscene_playing = false
+var cutscene_playing: bool = false
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	level_timer.start()
 	player_detected = false
@@ -27,7 +27,7 @@ func _ready():
 	Global.save_game(3)
 	warrior.process_mode = Node.PROCESS_MODE_DISABLED
 
-func _physics_process(delta):
+func _process(_delta) -> void:
 	if player_detected:
 		music_animation.play("FadeIn")
 	
@@ -37,7 +37,7 @@ func _physics_process(delta):
 	if Global.level_cutscene_playing() == false and cutscene_playing:
 		resume_game()	
 
-func update_interactions(key):
+func update_interactions(key: String) -> void:
 	interactions[key] = true
 	
 	#Award player with Exploration bonus if player has interacted has explored
@@ -46,10 +46,10 @@ func update_interactions(key):
 		Global.update_player_score(Global.EXPLORATION_BONUS, 1000)
  
 
-func _on_haiya_player_dead():
+func _on_haiya_player_dead() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Menu/game_over.tscn")
 
-func stop_level_timer():
+func stop_level_timer() -> void:
 	level_timer.stop()
 
 	# if it is more than 5 minutes then award min 1000 points
@@ -60,10 +60,10 @@ func stop_level_timer():
 	else:
 		Global.update_player_score(Global.TIME_TAKEN, 2500)
 		
-func _on_level_timer_timeout():
+func _on_level_timer_timeout() -> void:
 	level_time_spent += 1
 	
-func trigger_cutscene():
+func trigger_cutscene() -> void:
 	cutscene_playing = true
 	get_tree().paused = true
 	player.visible = false
@@ -71,7 +71,7 @@ func trigger_cutscene():
 	var level_4_cutscene = preload("res://Scenes/LevelCutscenes/level_4_cutscene.tscn").instantiate()
 	get_tree().root.add_child(level_4_cutscene)
 
-func resume_game():
+func resume_game() -> void:
 	cutscene_playing = false
 	player.visible = true
 	warrior.visible = true
