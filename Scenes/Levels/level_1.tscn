@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=4 uid="uid://c5b03pjogjo1k"]
+[gd_scene load_steps=118 format=4 uid="uid://c5b03pjogjo1k"]
 
 [ext_resource type="MeshLibrary" uid="uid://cc6j2i1aew2no" path="res://Resources/library.tres" id="1_lxl63"]
 [ext_resource type="Script" path="res://Scripts/Levels/level_1.gd" id="1_w5qsd"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dt4kgsj8oxokr" path="res://Scenes/Environment/table_long_broken.tscn" id="9_pa5yl"]
 [ext_resource type="PackedScene" uid="uid://dln1uc8jhscab" path="res://Scenes/Environment/keyring_hanging.tscn" id="10_4j1bp"]
 [ext_resource type="PackedScene" uid="uid://miy8cyxnatij" path="res://Scenes/Monsters/skelly_minion.tscn" id="10_tfju3"]
+[ext_resource type="ArrayOccluder3D" uid="uid://c1yqvh4ybn8a8" path="res://Scenes/Occluders/level_1.occ" id="17_fhws6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c1ux7"]
 sky_energy_multiplier = 0.0
@@ -2971,6 +2972,9 @@ libraries = {
 
 [node name="LevelTimer" type="Timer" parent="."]
 process_mode = 3
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+occluder = ExtResource("17_fhws6")
 
 [connection signal="player_dead" from="Haiya" to="." method="_on_haiya_player_dead"]
 [connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]

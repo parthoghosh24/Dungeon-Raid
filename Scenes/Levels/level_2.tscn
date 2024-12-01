@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=4 uid="uid://dfcljmxq4tys8"]
+[gd_scene load_steps=83 format=4 uid="uid://dfcljmxq4tys8"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/level_2.gd" id="1_ai4e8"]
 [ext_resource type="MeshLibrary" uid="uid://cc6j2i1aew2no" path="res://Resources/library.tres" id="2_j6qn7"]
@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://caxrjflxgxnpb" path="res://Resources/sound/Intense_Chase_Pianos.wav" id="21_0qh48"]
 [ext_resource type="PackedScene" uid="uid://gxuuvrm45qed" path="res://Scenes/Monsters/skelly_rogue.tscn" id="21_6f6a7"]
 [ext_resource type="PackedScene" uid="uid://miy8cyxnatij" path="res://Scenes/Monsters/skelly_minion.tscn" id="21_g5kae"]
+[ext_resource type="ArrayOccluder3D" uid="uid://ex0ctscue0nw" path="res://Scenes/Occluders/level_2.occ" id="23_i88h7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jq7ci"]
 sky_energy_multiplier = 0.0
@@ -3094,7 +3095,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1047, 10, -29.4388)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4678, 10, -39.9336)
 
 [node name="SkellyMinion1" parent="Enemies/Minion1" instance=ExtResource("21_g5kae")]
-transform = Transform3D(-0.99967, 0, 0.0257059, 0, 1, 0, -0.0257059, 0, -0.99967, 31.8049, 10.5017, -37.8091)
+transform = Transform3D(-0.99967, 0, 0.0257059, 0, 1, 0, -0.0257059, 0, -0.99967, 31.8049, 10.0731, -37.8091)
 player_path = NodePath("../../../Haiya")
 
 [node name="Minion2" type="Node" parent="Enemies"]
@@ -3297,6 +3298,9 @@ libraries = {
 
 [node name="LevelTimer" type="Timer" parent="."]
 process_mode = 3
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+occluder = ExtResource("23_i88h7")
 
 [connection signal="player_dead" from="Haiya" to="." method="_on_haiya_player_dead"]
 [connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]
