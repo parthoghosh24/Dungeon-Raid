@@ -1,17 +1,17 @@
 extends Control
 
-@onready var cutscene = $Cutscene
-@onready var heading = $Panel/Heading
-@onready var person_name = $Panel/PersonName
-@onready var music = $SFX/Music
-@onready var close = $Panel/Close
+@onready var cutscene: AnimationPlayer = $Cutscene
+@onready var heading: Label = $Panel/Heading
+@onready var person_name: Label = $Panel/PersonName
+@onready var music: AudioStreamPlayer = $SFX/Music
+@onready var close: Button = $Panel/Close
 
 # Called when the node enters the scene tree for the first time.
 
-func _input(event):
-	return null
+func _input(_event: InputEvent) -> void:
+	return
 	
-func _ready():
+func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	await get_tree().create_timer(1).timeout
 	music.play()
@@ -140,13 +140,13 @@ func _ready():
 	await cutscene.animation_finished
 
 
-func _on_cutscene_animation_finished(anim_name):
+func _on_cutscene_animation_finished(anim_name: String) -> void:
 	if anim_name == "ACT2" and heading.text == "And finally":
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		await get_tree().create_timer(1).timeout
 		queue_free()
 
 
-func _on_close_pressed():
+func _on_close_pressed() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	queue_free() # Replace with function body.

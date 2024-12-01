@@ -1,36 +1,36 @@
 extends Control
 
-@onready var press_to_start_audio = $SFX/PressToStart
-@onready var hover_audio = $SFX/Hover
-@onready var select_audio = $SFX/Select
+@onready var press_to_start_audio: AudioStreamPlayer = $SFX/PressToStart
+@onready var hover_audio: AudioStreamPlayer = $SFX/Hover
+@onready var select_audio: AudioStreamPlayer = $SFX/Select
 
 #Timers
-@onready var next_level_timer = $Panel/NextLevelTimer
-@onready var quit_timer = $Panel/QuitTimer
+@onready var next_level_timer: Timer = $Panel/NextLevelTimer
+@onready var quit_timer: Timer = $Panel/QuitTimer
 
 #Buttons
-@onready var next_level_button = $Panel/NextLevel
-@onready var quit_button = $Panel/Quit
+@onready var next_level_button: Button = $Panel/NextLevel
+@onready var quit_button: Button = $Panel/Quit
 
 
 #Ranks
-@onready var rank_value_s = $Panel/RankValueS
-@onready var rank_value_a = $Panel/RankValueA
-@onready var rank_value_b = $Panel/RankValueB
-@onready var rank_value_c = $Panel/RankValueC
-@onready var rank_value_d = $Panel/RankValueD
+@onready var rank_value_s: Label = $Panel/RankValueS
+@onready var rank_value_a: Label = $Panel/RankValueA
+@onready var rank_value_b: Label = $Panel/RankValueB
+@onready var rank_value_c: Label = $Panel/RankValueC
+@onready var rank_value_d: Label = $Panel/RankValueD
 
-@onready var time_value = $Panel/TimeValue
-@onready var hits_taken_value = $Panel/HitsTakenValue
-@onready var retries_value = $Panel/RetriesValue
-@onready var seen_value = $Panel/SeenValue
-@onready var kills_value = $Panel/KillsValue
-@onready var stealth_kills_value = $Panel/StealthKillsValue
-@onready var exploration_bonus_value = $Panel/ExplorationBonusValue
-@onready var stealth_kill_bonus_value = $Panel/StealthKillBonusValue
-@onready var retry_bonus_value = $Panel/RetryBonusValue
-@onready var not_seem_bonus_value = $Panel/NotSeenBonusValue
-@onready var total_value = $Panel/TotalValue
+@onready var time_value: Label = $Panel/TimeValue
+@onready var hits_taken_value: Label = $Panel/HitsTakenValue
+@onready var retries_value: Label = $Panel/RetriesValue
+@onready var seen_value: Label = $Panel/SeenValue
+@onready var kills_value: Label = $Panel/KillsValue
+@onready var stealth_kills_value: Label = $Panel/StealthKillsValue
+@onready var exploration_bonus_value: Label = $Panel/ExplorationBonusValue
+@onready var stealth_kill_bonus_value: Label = $Panel/StealthKillBonusValue
+@onready var retry_bonus_value: Label = $Panel/RetryBonusValue
+@onready var not_seem_bonus_value: Label = $Panel/NotSeenBonusValue
+@onready var total_value: Label = $Panel/TotalValue
 
 
 # Called when the node enters the scene tree for the first time.
