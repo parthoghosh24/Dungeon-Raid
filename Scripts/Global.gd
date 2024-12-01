@@ -7,31 +7,31 @@ enum PLAYER_INVENTORY_ITEMS { DOOR_KEY }
 enum INPUT_SCHEMES { MOUSE_AND_KEYBOARD, GAMEPAD }
 static var INPUT_SCHEME: INPUT_SCHEMES = INPUT_SCHEMES.MOUSE_AND_KEYBOARD
 
-var levels = ["res://Scenes/Levels/level_1.tscn", 
+var levels: Array = ["res://Scenes/Levels/level_1.tscn", 
 			  "res://Scenes/Levels/level_2.tscn",
 			  "res://Scenes/Levels/level_3.tscn",
 			  "res://Scenes/Levels/level_4.tscn",
 			  "res://Scenes/Levels/level_5.tscn"]
 
 #Player score keys
-const RETRIES = "retries"
-const TIME_TAKEN = "time_taken"
-const HITS_TAKEN = "hits_taken"
-const SEEN = "seen"
-const KILLS = "kills"
-const STEALTH_KILLS = "stealth_kills"
-const EXPLORATION_BONUS = "exploration_bouns"
-const STEALTH_KILL_BONUS = "stealth_kill_bonus"
-const RETRY_BONUS = "retry_bonus"
-const NOT_SEEN_BONUS = "not_seen_bonus"
-const TOTAL = "total"
-const RANK = "rank"
+const RETRIES: String = "retries"
+const TIME_TAKEN: String = "time_taken"
+const HITS_TAKEN: String = "hits_taken"
+const SEEN: String = "seen"
+const KILLS: String = "kills"
+const STEALTH_KILLS: String = "stealth_kills"
+const EXPLORATION_BONUS: String = "exploration_bouns"
+const STEALTH_KILL_BONUS: String = "stealth_kill_bonus"
+const RETRY_BONUS: String = "retry_bonus"
+const NOT_SEEN_BONUS: String = "not_seen_bonus"
+const TOTAL: String = "total"
+const RANK: String = "rank"
 
 var player_inventory
-var current_level
-var file
-var game_started = false
-var player_score = {RETRIES: 0,
+var current_level: int
+var file: FileAccess
+var game_started: bool = false
+var player_score: Dictionary = {RETRIES: 0,
 					TIME_TAKEN: 0,
 					HITS_TAKEN: 0,
 					SEEN: 0,
@@ -44,43 +44,43 @@ var player_score = {RETRIES: 0,
 					TOTAL: 0,
 					RANK: "",}
 					
-var playing_level_cutscene = false					
+var playing_level_cutscene: bool = false					
 
-func update_player_score(key, score):
+func update_player_score(key: String, score: int) -> void:
 	player_score[key] += score
 
-func get_player_score():
+func get_player_score() -> Dictionary:
 	return player_score	
 	
-func set_level(level):
+func set_level(level: int) -> void:
 	current_level = level
 	
-func get_level():
+func get_level() -> int:
 	return current_level
 	
-func set_game_started():
+func set_game_started() -> void:
 	game_started = true
 	
-func has_game_started():
+func has_game_started() -> bool:
 	return game_started	
 
-func set_player_inventory(item: PLAYER_INVENTORY_ITEMS):
+func set_player_inventory(item: PLAYER_INVENTORY_ITEMS) -> void:
 	player_inventory = item
 
-func get_player_inventory():
+func get_player_inventory() -> PLAYER_INVENTORY_ITEMS:
 	return player_inventory
 
-func clear_player_inventory():
+func clear_player_inventory() -> void:
 	player_inventory = null
 	
-func evaluate_input_scheme(event):
+func evaluate_input_scheme(event: InputEvent) -> void:
 	if event is InputEventJoypadMotion or event is InputEventJoypadButton and INPUT_SCHEME != INPUT_SCHEMES.GAMEPAD:
 		return
 	
 	if (event is InputEventMouseMotion or event is InputEventMouseButton or event is InputEventKey) and  INPUT_SCHEME != INPUT_SCHEMES.MOUSE_AND_KEYBOARD:
 		return
 
-func calculate_final_player_score():
+func calculate_final_player_score() -> void:
 	player_score[STEALTH_KILL_BONUS] = 2000 if player_score[STEALTH_KILLS] == 0 else 0
 	player_score[RETRY_BONUS] = 2000 if player_score[RETRIES] == 0 else 0
 	player_score[NOT_SEEN_BONUS] = 5000 if player_score[SEEN] == 0 else 0
@@ -103,7 +103,7 @@ func calculate_final_player_score():
 	
 		
 						
-func reset_score_board():
+func reset_score_board() -> void:
 	player_score = {RETRIES: 0,
 					TIME_TAKEN: 0,
 					HITS_TAKEN: 0,
@@ -117,7 +117,7 @@ func reset_score_board():
 					TOTAL: 0,
 					RANK: "",}
 	
-func switch_to_score_board():
+func switch_to_score_board() -> void:
 	calculate_final_player_score()
 	var grand_total = load_grand_total()
 	save_grand_total(grand_total + player_score[TOTAL])
@@ -125,7 +125,7 @@ func switch_to_score_board():
 	var score_board = load("res://Scenes/Menu/score_board.tscn")
 	get_tree().change_scene_to_packed(score_board)	
 
-func switch_to_next_level():
+func switch_to_next_level() -> void:
 	reset_score_board()
 	# last level
 	if current_level == 4:
@@ -135,7 +135,7 @@ func switch_to_next_level():
 		var level = load(levels[current_level + 1])
 		get_tree().change_scene_to_packed(level)
 	
-func load_level(index):
+func load_level(index: int) -> void:
 	var level
 	if index == -1:
 		level = load("res://Scenes/Menu/main_menu.tscn")
@@ -144,16 +144,16 @@ func load_level(index):
 	get_tree().change_scene_to_packed(level)
 		
 
-func knockback(mesh_global_position, direction):
+func knockback(mesh_global_position: Vector3, direction: Vector3) -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", mesh_global_position - (direction / 1.5), 0.2)
 	
-func save_grand_total(grand_total):
+func save_grand_total(grand_total: int)-> void:
 	file = FileAccess.open("user://grand_total.data", FileAccess.WRITE)
 	file.store_var(grand_total)
 	file.close()
 
-func load_grand_total():
+func load_grand_total() -> int:
 	file = FileAccess.open("user://grand_total.data", FileAccess.READ)
 	if not file:
 		return 0
@@ -163,32 +163,32 @@ func load_grand_total():
 	file.close()
 	return grand_total	
 	
-func save_game(data):
+func save_game(data: int) -> void:
 	file = FileAccess.open("user://savegame.data", FileAccess.WRITE)
 	file.store_var(data)
 	file.close()
 	
 
-func load_game():
+func load_game() -> int:
 	file = FileAccess.open("user://savegame.data", FileAccess.READ)
 	if not file:
-		return
+		return -1
 	var level = file.get_var()
 	file.close()
 	return level
 
-func delete_save():
+func delete_save() -> void:
 	DirAccess.remove_absolute("user://savegame.data")
 	DirAccess.remove_absolute("user://grand_total.data")
 		
 
-func play_level_cutscene():
+func play_level_cutscene() -> void:
 	playing_level_cutscene = true
 
-func level_cutscene_playing():
+func level_cutscene_playing() -> bool:
 	return 	playing_level_cutscene
 
-func stop_level_cutscene():
+func stop_level_cutscene() -> void:
 	playing_level_cutscene = false
 	
 	

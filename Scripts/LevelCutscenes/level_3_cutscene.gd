@@ -12,6 +12,7 @@ extends Node3D
 
 func _input(_event: InputEvent) -> void:
 	return
+
 func _ready() -> void:
 	get_tree().paused = true
 	speech1.set_text("I knew it... HEY!!!")

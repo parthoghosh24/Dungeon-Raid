@@ -1,23 +1,23 @@
 extends Control
 
-@onready var continue_button = $MarginContainer/Main/Continue
-@onready var press_to_start_button = $MarginContainer/Main/PressToStart
-@onready var start_game_button = $MarginContainer/Main/StartGame
-@onready var options_button = $MarginContainer/Main/Options
-@onready var quit_button = $MarginContainer/Main/Quit
-@onready var level
-@onready var press_to_start_audio = $SFX/PressToStart
-@onready var hover_audio = $SFX/Hover
-@onready var select_audio = $SFX/Select
-@onready var press_to_start_timer =$MarginContainer/Main/PressToStartTimer
-@onready var continue_timer =$MarginContainer/Main/ContinueTimer
-@onready var start_game_timer =$MarginContainer/Main/StartGameTimer
-@onready var options_timer =$MarginContainer/Main/OptionsTimer
-@onready var quit_timer =$MarginContainer/Main/QuitTimer
-@onready var help_button = $MarginContainer/Main/Help
-@onready var help_timer = $MarginContainer/Main/HelpTimer
+@onready var continue_button: Button = $MarginContainer/Main/Continue
+@onready var press_to_start_button: Button = $MarginContainer/Main/PressToStart
+@onready var start_game_button: Button = $MarginContainer/Main/StartGame
+@onready var options_button: Button = $MarginContainer/Main/Options
+@onready var quit_button: Button = $MarginContainer/Main/Quit
+@onready var level: int
+@onready var press_to_start_audio: AudioStreamPlayer = $SFX/PressToStart
+@onready var hover_audio: AudioStreamPlayer = $SFX/Hover
+@onready var select_audio: AudioStreamPlayer = $SFX/Select
+@onready var press_to_start_timer: Timer =$MarginContainer/Main/PressToStartTimer
+@onready var continue_timer: Timer =$MarginContainer/Main/ContinueTimer
+@onready var start_game_timer: Timer =$MarginContainer/Main/StartGameTimer
+@onready var options_timer: Timer =$MarginContainer/Main/OptionsTimer
+@onready var quit_timer: Timer =$MarginContainer/Main/QuitTimer
+@onready var help_button: Button = $MarginContainer/Main/Help
+@onready var help_timer: Timer = $MarginContainer/Main/HelpTimer
 
-func _ready():
+func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if !Global.has_game_started():
 		press_to_start_button.visible = true
@@ -29,21 +29,21 @@ func _ready():
 	else:
 		show_menu_buttons()	
 
-func _on_continue_pressed():
+func _on_continue_pressed() -> void:
 	if continue_timer.is_stopped():
 		continue_timer.start()
 		press_to_start_audio.play()
 		continue_button.disabled = true
 		get_tree().paused = true
 
-func _on_start_game_pressed():
+func _on_start_game_pressed() -> void:
 	if start_game_timer.is_stopped():
 		start_game_timer.start()
 		press_to_start_audio.play()
 		start_game_button.disabled = true
 		get_tree().paused = true
 
-func _on_options_pressed():
+func _on_options_pressed() -> void:
 	if options_timer.is_stopped():
 		options_timer.start()
 		options_button.disabled = true
@@ -51,21 +51,21 @@ func _on_options_pressed():
 		options_button.disabled = true
 		get_tree().paused = true
 
-func _on_quit_pressed():
+func _on_quit_pressed() -> void:
 	if quit_timer.is_stopped():
 		quit_timer.start()
 		select_audio.play()
 		quit_button.disabled = true
 		get_tree().paused = true
 
-func _on_press_to_start_pressed():
+func _on_press_to_start_pressed() -> void:
 	if press_to_start_timer.is_stopped():
 		press_to_start_timer.start()
 		press_to_start_audio.play()	
 		press_to_start_button.disabled = true
 		get_tree().paused = true
 
-func show_menu_buttons():
+func show_menu_buttons() -> void:
 	press_to_start_button.visible = false
 	start_game_button.visible = true
 	options_button.visible = true

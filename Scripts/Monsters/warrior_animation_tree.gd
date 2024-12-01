@@ -14,7 +14,7 @@ enum {
 	TAUNT
 }
 
-var state
+var state: int
 
 func change_state_idle():
 	state = IDLE
