@@ -27,7 +27,7 @@ const NOT_SEEN_BONUS: String = "not_seen_bonus"
 const TOTAL: String = "total"
 const RANK: String = "rank"
 
-var player_inventory
+var player_inventory: PLAYER_INVENTORY_ITEMS = -1
 var current_level: int
 var file: FileAccess
 var game_started: bool = false
@@ -71,7 +71,7 @@ func get_player_inventory() -> PLAYER_INVENTORY_ITEMS:
 	return player_inventory
 
 func clear_player_inventory() -> void:
-	player_inventory = null
+	player_inventory = -1
 	
 func evaluate_input_scheme(event: InputEvent) -> void:
 	if event is InputEventJoypadMotion or event is InputEventJoypadButton and INPUT_SCHEME != INPUT_SCHEMES.GAMEPAD:
