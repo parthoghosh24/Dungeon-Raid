@@ -5,7 +5,7 @@ Dungeon raid is a free third person stealth/action game where the player (Haiya,
 * Epic boss battles.
 * Lighthearted fun story.
   
-This is built in Godot engine.
+This is built in [Godot](https://godotengine.org/) engine.
 Download it at [itch.io](https://porthorisnaagu.itch.io/dungeon-raid)
 
 ## Inspirition
@@ -19,7 +19,7 @@ This game is built with all open-sourced assets available over the internet.
 
 ## How to work with the source code?
 Well if you are well verse with how Git works, then you will not have any issues. But a rudimentary list of steps can be followed is as below:
-* Ensure you have Godot engine (4.3 is better as this game runs on that).
+* Ensure you have [Godot](https://godotengine.org/) engine (4.3 is better as this game runs on that).
 * clone this project.
 * Then try to open it in Godot engine itself.
 
