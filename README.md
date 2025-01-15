@@ -12,6 +12,9 @@ This game is inspired from games like metal gear solid, tenchu and zelda.
 ## Why this got made?
 Well, I decided to teach myself game development and after months of dabbling with Godot engine, I decided to make this game as an exercise to learn Godot engine.
 
+## Why this game is free?
+This game is built with all open-sourced assets available over the internet.
+
 ## How to work with the source code?
 Well if you are well verse with how Git works, then you will not have any issues. But a rudimentary list of steps can be followed is as below:
 * Ensure you have Godot engine (4.3 is better as this game runs on that).
