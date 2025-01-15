@@ -21,7 +21,7 @@ Well if you are well verse with how Git works, then you will not have any issues
 ## Why the code is open-source/public?
 Well, I would like to support the community and aspiring game devs who would want to make a finished game. This game project has many aspects which I believe people can learn from. Some aspects are:
 * How to design levels?
-* How 3d assets are imported to be used in the game?
+* How 3d & other assets that are imported to be used in the game?
 * How to implement enemy AI and combat logic?
 * How to implement gameplay?
 * How to use the AnimationPlayer to make animations as well as cutscenes?
