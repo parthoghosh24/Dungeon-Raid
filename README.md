@@ -8,6 +8,10 @@ Dungeon raid is a free third person stealth/action game where the player (Haiya,
 This is built in [Godot](https://godotengine.org/) engine.
 Download it at [itch.io](https://porthorisnaagu.itch.io/dungeon-raid)
 
+### Trailer
+
+[![IMAGE ALT TEXT HERE](https://i.ytimg.com/vi/DxGLiOMpHFA/hqdefault.jpg?sqp=-oaymwEnCOADEI4CSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLA8AkOaqT_V2rZUiqfBw6TOggT_Lw)](https://www.youtube.com/watch?v=DxGLiOMpHFA)
+
 ## Inspirition
 This game is inspired from games like metal gear solid, tenchu and zelda.
 
